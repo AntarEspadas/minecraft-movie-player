@@ -13,11 +13,19 @@ class StructureBlocksTest(unittest.TestCase):
         self.assertTupleEqual((size[0].value, size[1].value, size[2].value),self._sizes)
 
     def test_setblock(self):
-        block_id = "minecraft:air"
-        coordinates = (10,10,10)
-        self._structure.setblock(coordinates,block_id)
-        self.assertTrue(block_id in self._structure._palette)
-        self.assertEqual(self._structure._blocks[(10,10,10)], self._structure._palette[block_id])
+        inputs = [
+            ((10,10,10), "minecraft:redstone_block"),
+            ((19,12,13), "minecraft:dirt"),
+            ((8,5,7), "minecraft:air"),
+            ((10,10,10), "minecraft:stone"),
+            ((10,10,11), "minecraft:stone"),
+            ((10,11,10), "minecraft:air"),
+            ((11,10,10), "minecraft:dirt"),
+        ]
+        for coordinates, block_id in inputs:
+            self._structure.setblock(coordinates,block_id)
+            self.assertTrue(block_id in self._structure._palette)
+            self.assertEqual(self._structure._blocks[coordinates], self._structure._palette[block_id])
 
 if __name__ == "__main__":
     unittest.main()
