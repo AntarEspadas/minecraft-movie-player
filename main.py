@@ -9,6 +9,7 @@ video_parser.add_argument("path_to_output_file", type=str, help="The path to whi
 video_parser.add_argument("-f", "--ticks-per-frame", default="2", type=int, dest="ticks_per_frame",help="How many game ticks between every frame. Can be any integer from 1 to 20. Default is 2. 20 = 1 fps, 2 = 10 fps, 1 = 20 fps, etc...")
 video_parser.add_argument("-x", "--width", default=-1, type=int, dest="width", help="The width of the output video, measured in blocks or maps")
 video_parser.add_argument("-y", "--height",default=-1, type=int, dest="height", help="The height of the output video, measured in blocks or maps")
+video_parser.add_argument("-n", "--name-prefix", default="frame", type=str, dest="name", help="Specifies the name that will be prefixed to every generated frame")
 video_parser.add_argument("-u","--unoptimized", action="store_true", dest="unoptimized", help="By default, when converting to blocks, every frame contains only the blocks that differ from the previous frame in an attempt to save resources. Using this option will disable this feature. Will be ignored if converting to maps")
 type_group = video_parser.add_mutually_exclusive_group(required = True)
 type_group.add_argument("-m","--maps", action="store_const", const="item-frame", dest="type", help="Tells the program to convert the video into maps")
