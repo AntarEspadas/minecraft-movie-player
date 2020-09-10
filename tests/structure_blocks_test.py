@@ -26,6 +26,9 @@ class StructureBlocksTest(unittest.TestCase):
             self._structure.setblock(coordinates,block_id)
             self.assertTrue(block_id in self._structure._palette)
             self.assertEqual(self._structure._blocks[coordinates], self._structure._palette[block_id])
+        
+        self._structure.save("D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\nbt-test.dat")
 
 if __name__ == "__main__":
     unittest.main()
+
