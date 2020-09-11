@@ -30,7 +30,7 @@ class StructureBlocksTest(unittest.TestCase):
             x, y , z = coordinates
             self._structure.setblock(coordinates,block_id)
             self.assertTrue(block_id in self._structure._palette)
-            self.assertEqual(self._structure._blocks[x][y][z], self._structure._palette[block_id])
+            self.assertEqual(self._structure._blocks[x][y][z]["state"], self._structure._palette[block_id])
 
     def test_save_file(self):
         blocks = [

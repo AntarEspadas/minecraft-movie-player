@@ -18,7 +18,8 @@ class StructureBlock():
         if block_id not in self._palette:
             self._palette[block_id] = len(self._palette)
         x, y, z = coordinates
-        self._blocks[x][y][z] = self._palette[block_id]
+        self._blocks[x][y][z] = nbt.NBTTagCompound()
+        self._blocks[x][y][z]["state"] = nbt.NBTTagInt(self._palette[block_id])
 
     def save(self, file_path: str, empty_block: str = None):
         root = nbt.NBTTagCompound()
@@ -43,23 +44,21 @@ class StructureBlock():
         blocks = nbt.NBTTagList(tag_type=nbt.NBTTagCompound)
         for x, slice2d in enumerate(self._blocks):
             for y, slice1d in enumerate(slice2d):
-                for z, state in enumerate(slice1d):
-                    generate_block((x,y,z), state, blocks)
+                for z, block in enumerate(slice1d):
+                    generate_block((x,y,z), block, blocks)
         return blocks
 
     def __get_block_generator(self, empty_block):
 
-        def append_block(coordinates: tuple, state: int, block_list: list):
+        def append_block(coordinates: tuple, block: nbt.NBTTagCompound, block_list: list):
             pos = nbt.TagList(tag_type=nbt.NBTTagInt, value=[nbt.NBTTagInt(i) for i in coordinates])
-            compound = nbt.NBTTagCompound()
-            compound["pos"]     = pos
-            compound["state"]   = nbt.NBTTagInt(value=int(state))
-            block_list.append(compound)
+            block["pos"] = pos
+            block_list.append(block)
         
-        def  no_empty_block_generator(coordinates: tuple, state: int, block_list: list):
-            if state == None:
+        def  no_empty_block_generator(coordinates: tuple, block: nbt.NBTTagCompound, block_list: list):
+            if block is None:
                 return
-            append_block(coordinates, state, block_list)
+            append_block(coordinates, block, block_list)
         
         if empty_block is None:
             return no_empty_block_generator
@@ -67,10 +66,12 @@ class StructureBlock():
             self._palette[empty_block] = len(self._palette)
         empty_block_index = self._palette[empty_block]
         
-        def empty_block_generator(coordinates: tuple, state: int, block_list: list):
-            if state == None:
-                state = empty_block_index
-            append_block(coordinates, state, block_list)
+        def empty_block_generator(coordinates: tuple, block: nbt.NBTTagCompound, block_list: list):
+            if block is None:
+                block = nbt.NBTTagCompound({
+                    "state": nbt.NBTTagInt(empty_block_index)
+                })
+            append_block(coordinates, block, block_list)
 
         return empty_block_generator
 
