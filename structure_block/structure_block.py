@@ -1,5 +1,4 @@
 import python_nbt.nbt as nbt
-import numpy
 
 class StructureBlock():
     data_version = nbt.NBTTagInt(value=2578)
@@ -8,8 +7,8 @@ class StructureBlock():
 
         self._size = nbt.NBTTagList(tag_type=nbt.NBTTagInt, value=[nbt.NBTTagInt(i) for i in dimentions])
 
-        self._blocks = numpy.empty(dimentions)
-        self._blocks.fill(-1)
+        x, y, z = dimentions
+        self._blocks = [[[None for k in range(z)] for j in range(y)] for i in range(x)]
 
         self._entities = nbt.TAG_List(tag_type=nbt.NBTTagCompound)
 
@@ -18,7 +17,8 @@ class StructureBlock():
     def setblock(self, coordinates: tuple, block_id: str, block_state: str = None, tile_entity_nbt: str = None):
         if block_id not in self._palette:
             self._palette[block_id] = len(self._palette)
-        self._blocks[coordinates] = self._palette[block_id]
+        x, y, z = coordinates
+        self._blocks[x][y][z] = self._palette[block_id]
 
     def save(self, file_path: str, empty_block: str = None):
         root = nbt.NBTTagCompound()
@@ -57,7 +57,7 @@ class StructureBlock():
             block_list.append(compound)
         
         def  no_empty_block_generator(coordinates: tuple, state: int, block_list: list):
-            if state == -1:
+            if state == None:
                 return
             append_block(coordinates, state, block_list)
         
@@ -68,7 +68,7 @@ class StructureBlock():
         empty_block_index = self._palette[empty_block]
         
         def empty_block_generator(coordinates: tuple, state: int, block_list: list):
-            if state == -1:
+            if state == None:
                 state = empty_block_index
             append_block(coordinates, state, block_list)
 
