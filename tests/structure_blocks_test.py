@@ -27,10 +27,11 @@ class StructureBlocksTest(unittest.TestCase):
             ((11,10,10), self.dirt),
         ]
         for coordinates, block_id in inputs:
-            x, y , z = coordinates
+            x, y, z = coordinates
+            block_identifier = block_id, None
             self._structure.setblock(coordinates,block_id)
-            self.assertTrue(block_id in self._structure._palette)
-            self.assertEqual(self._structure._blocks[x][y][z]["state"], self._structure._palette[block_id])
+            self.assertTrue(block_identifier in self._structure._palette)
+            self.assertEqual(self._structure._blocks[x][y][z]["state"], self._structure._palette[block_identifier])
 
     def test_save_file(self):
         blocks = [

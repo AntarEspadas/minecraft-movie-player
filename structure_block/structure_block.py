@@ -15,7 +15,7 @@ class StructureBlock():
         self._palette = {}
 
     def setblock(self, coordinates: tuple, block_id: str, block_state: str = None, tile_entity_nbt: str = None):
-        block_identifier = block_id + (tile_entity_nbt or "")
+        block_identifier = block_id , tile_entity_nbt
         if block_identifier not in self._palette:
             self._palette[block_identifier] = len(self._palette)
         x, y, z = coordinates
@@ -33,9 +33,9 @@ class StructureBlock():
     
     def __get_palette(self):
         values = [None] * len(self._palette)
-        for block_id, index in self._palette.items():
+        for block_identifier, index in self._palette.items():
             compound = nbt.NBTTagCompound()
-            compound["name"] = nbt.NBTTagString(value=block_id)
+            compound["Name"] = nbt.NBTTagString(value=block_identifier[0])
             values[index] = compound
         palette = nbt.NBTTagList(tag_type=nbt.NBTTagCompound,value=values)
         return palette
@@ -63,9 +63,10 @@ class StructureBlock():
         
         if empty_block is None:
             return no_empty_block_generator
-        if empty_block not in self._palette:
-            self._palette[empty_block] = len(self._palette)
-        empty_block_index = self._palette[empty_block]
+        empty_block_identifier = empty_block, None
+        if empty_block_identifier not in self._palette:
+            self._palette[empty_block_identifier] = len(self._palette)
+        empty_block_index = self._palette[empty_block_identifier]
         
         def empty_block_generator(coordinates: tuple, block: nbt.NBTTagCompound, block_list: list):
             if block is None:
