@@ -15,11 +15,12 @@ class StructureBlock():
         self._palette = {}
 
     def setblock(self, coordinates: tuple, block_id: str, block_state: str = None, tile_entity_nbt: str = None):
-        if block_id not in self._palette:
-            self._palette[block_id] = len(self._palette)
+        block_identifier = block_id + (tile_entity_nbt or "")
+        if block_identifier not in self._palette:
+            self._palette[block_identifier] = len(self._palette)
         x, y, z = coordinates
         self._blocks[x][y][z] = nbt.NBTTagCompound()
-        self._blocks[x][y][z]["state"] = nbt.NBTTagInt(self._palette[block_id])
+        self._blocks[x][y][z]["state"] = nbt.NBTTagInt(self._palette[block_identifier])
 
     def save(self, file_path: str, empty_block: str = None):
         root = nbt.NBTTagCompound()
