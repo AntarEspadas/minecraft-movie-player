@@ -1,72 +1,59 @@
-from nbt import nbt
+import python_nbt.nbt as nbt
 import numpy
 
 class StructureBlock():
-
-    data_version = nbt.TAG_Int(2578,"DataVersion")
+    data_version = nbt.NBTTagInt(value=2578)
 
     def __init__(self, dimentions: tuple):
 
-        self._file = nbt.NBTFile()
-
-        self._size = nbt.TAG_List(type=nbt.TAG_Int, name="size")
-        for dimention in dimentions:
-            self._size.tags.append(nbt.TAG_Int(dimention))
+        self._size = nbt.NBTTagList(tag_type=nbt.NBTTagInt, value=[nbt.NBTTagInt(i) for i in dimentions])
 
         self._blocks = numpy.empty(dimentions)
         self._blocks.fill(-1)
 
-        self._entities = nbt.TAG_List(type=nbt.TAG_Compound, name="entities")
+        self._entities = nbt.TAG_List(tag_type=nbt.NBTTagCompound)
 
         self._palette = {}
 
-    def setblock(self, coordinates: tuple, block_id: str):
+    def setblock(self, coordinates: tuple, block_id: str, block_state: str = None, tile_entity_nbt: str = None):
         if block_id not in self._palette:
             self._palette[block_id] = len(self._palette)
         self._blocks[coordinates] = self._palette[block_id]
 
     def save(self, file_path: str, empty_block: str = None):
-        self._file.tags = [
-            self.__get_blocks(empty_block),
-            self._entities,
-            self.__get_palette(),
-            self._size,
-            self.data_version
-        ]
-        """,
-            
-            """
-        self._file.write_file(file_path)
+        root = nbt.NBTTagCompound()
+        root["blocks"]          = self.__get_blocks(empty_block)
+        root["entities"]        = self._entities
+        root["palette"]         = self.__get_palette()
+        root["size"]            = self._size
+        root["data_version"]    = self.data_version
+        nbt.write_to_nbt_file(file_path,root)
     
     def __get_palette(self):
-        palette = nbt.TAG_List(type=nbt.TAG_Compound, name="palette")
-        palette.tags = [None] * len(self._palette)
+        values = [None] * len(self._palette)
         for block_id, index in self._palette.items():
-            compound = nbt.TAG_Compound()
-            compound.tags.append(nbt.TAG_String(value=block_id, name="Name"))
-            palette.tags[index] = compound
+            compound = nbt.NBTTagCompound()
+            compound["name"] = nbt.NBTTagString(value=block_id)
+            values[index] = compound
+        palette = nbt.NBTTagList(tag_type=nbt.NBTTagCompound,value=values)
         return palette
 
     def __get_blocks(self, empty_block):
         generate_block = self.__get_block_generator(empty_block)
-        blocks = nbt.TAG_List(type=nbt.TAG_Compound, name="blocks")
+        blocks = nbt.NBTTagList(tag_type=nbt.NBTTagCompound)
         for x, slice2d in enumerate(self._blocks):
             for y, slice1d in enumerate(slice2d):
                 for z, state in enumerate(slice1d):
-                    generate_block((x,y,z), state, blocks.tags)
+                    generate_block((x,y,z), state, blocks)
         return blocks
 
     def __get_block_generator(self, empty_block):
 
         def append_block(coordinates: tuple, state: int, block_list: list):
-            pos = nbt.TAG_List(name="pos", type=nbt.TAG_Int)
-            pos.tags = [nbt.TAG_Int(value=i) for i in coordinates]
-            compound = nbt.TAG_Compound()
-            compound.tags = [
-                #nbt.TAG_List(value=[nbt.TAG_Int(20)], type=nbt.TAG_Int, name="pos"),
-                pos,
-                nbt.TAG_Int(value=int(state), name="state")
-            ]
+            pos = nbt.TagList(tag_type=nbt.NBTTagInt, value=[nbt.NBTTagInt(i) for i in coordinates])
+            compound = nbt.NBTTagCompound()
+            compound["pos"]     = pos
+            compound["state"]   = nbt.NBTTagInt(value=int(state))
             block_list.append(compound)
         
         def  no_empty_block_generator(coordinates: tuple, state: int, block_list: list):
@@ -88,4 +75,4 @@ class StructureBlock():
         return empty_block_generator
 
 if __name__ == "__main__":
-    pass
+    structure = StructureBlock((5,5,5))
