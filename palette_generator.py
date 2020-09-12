@@ -34,7 +34,7 @@ def __generate_palette_from_index(source_directory: str, destination_file: str, 
 
 def generate_palette(source_directory: str, destination_file: str, index_file: str = None):
     if index_file is not None:
-        __generate_palette_from_index(source_directory,destination_file,index)
+        __generate_palette_from_index(source_directory,destination_file,index_file)
         return
 
     palette_file = open(destination_file, "w+")
@@ -60,8 +60,26 @@ def generate_index_template(source_directory: str, destination_file: str, filena
     file.close
 
 if __name__ == "__main__":
-    folder = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\FilteredBlocks"
-    index = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\FilteredBlocks\\index.txt"
-    generate_palette(folder,"D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\FilteredBlocks\\palette.txt", index)
-    #generate_index_template(folder,index)
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parsers = parser.add_subparsers(help="commands",dest="command")
+
+    parser.add_argument("path_to_images_folder", type=str, help="Path to the folder containing the images that are to be used")
+    parser.add_argument("destination_file_path",type=str, help="Path where the generated file will be saved")
+
+    index_parser = parsers.add_parser("generate-index", help="Generate a basic index file. Refer to the script's instructions for more information about this file")
+    index_parser.add_argument("--filename-is-id", action="store_true", default=None, dest="filename_is_id", help="In a lot of cases, the filenames of the images correspond to their block IDs. Using this option will fill the column for block IDs with the filenames of the images")
+
+    palette_parser = parsers.add_parser("generate-palette", help="Calculate the average color for the images in the specified folder")
+    palette_parser.add_argument("-i","--index", type=str, default=None, dest="path_to_index", help="Path to the index file. If not specified, will process all image files in the folder and use the filenames as block IDs. Refer to the script's instructions for more information about this file")
+
+    args = parser.parse_args()
     
+    print("Working...")
+    if args.command == "generate-index":
+        generate_index_template(args.path_to_images_folder, args.destination_file_path, args.filename_is_id)
+        print(f"Index saved to {args.destination_file_path}")
+    elif args.command == "generate-palette":
+        generate_palette(args.path_to_images_folder, args.destination_file_path, args.path_to_index)
+        print(f"Palette saved to {args.destination_file_path}")
