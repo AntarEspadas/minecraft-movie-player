@@ -15,12 +15,25 @@ class StructureBlock():
         self._palette = {}
 
     def setblock(self, coordinates: tuple, block_id: str, block_state: str = None, tile_entity_nbt: str = None):
-        block_identifier = block_id , tile_entity_nbt
+        block_identifier = block_id , block_state
         if block_identifier not in self._palette:
             self._palette[block_identifier] = len(self._palette)
         x, y, z = coordinates
-        self._blocks[x][y][z] = nbt.Compound()
-        self._blocks[x][y][z]["state"] = nbt.Int(self._palette[block_identifier])
+        block = self._blocks[x][y][z] = nbt.Compound()
+        block["state"] = nbt.Int(self._palette[block_identifier])
+        if tile_entity_nbt is not None:
+            block["nbt"] = nbt.parse_nbt(tile_entity_nbt)
+
+    def summon(self, coordinates: tuple, entity_id: str, entity_nbt: str = None):
+        entity = nbt.Compound()
+        if entity_nbt is None:
+            entity["nbt"] = nbt.Compound()
+        else:
+            entity["nbt"] = nbt.parse_nbt(entity_nbt)
+        entity["nbt"]["id"] = nbt.String(entity_id)
+        entity["blockPos"] = nbt.List[nbt.Int]([int(i) for i in coordinates])
+        entity["pos"] = nbt.List[nbt.Double](list(coordinates))
+        self._entities.append(entity)
 
     def save(self, file_path: str, empty_block: str = None):
         root = nbt.Compound()
@@ -37,6 +50,8 @@ class StructureBlock():
         for block_identifier, index in self._palette.items():
             compound = nbt.Compound()
             compound["Name"] = nbt.String(block_identifier[0])
+            if block_identifier[1] is not None:
+                compound["Properties"] = nbt.parse_nbt(block_identifier[1])
             values[index] = compound
         palette = nbt.List[nbt.Compound](values)
         return palette
