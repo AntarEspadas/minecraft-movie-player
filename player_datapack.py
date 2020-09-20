@@ -2,7 +2,7 @@
 import math
 import os
 
-def generate_structure_functions(output_folder: str, datapack_name:str, filename_prefix:str, first_index: int, final_index: int, max_commands):
+def generate_structure_functions(output_folder: str, datapack_name:str, filename_prefix:str, first_index: int, final_index: int, max_commands: int = 25, ticks_per_frame: int = 2):
     command_amount = final_index - first_index + 1
 
     layers = [max_commands ** i for i in range(math.ceil(math.log(command_amount, max_commands)))]
@@ -19,14 +19,34 @@ def generate_structure_functions(output_folder: str, datapack_name:str, filename
             last_index = (file_number + 1) * step *max_commands - 1
             _write_secondary_function(output_folder, datapack_name, first_index, min(last_index, final_index), step, file_amount == 1)
 
+    _write_setup_function(output_folder, datapack_name)
+    _write_main_function(output_folder, datapack_name, ticks_per_frame)
 
-    """#Divide loop into two
-    for depth, files in enumerate(layers):
-        interval = max_commands * layers[-depth -1]
-        for file in range(files):
-            first = file * interval
-            last = min((file +  1) * interval - 1, final_index)
-            _write_function(output_folder, first, last, datapack_name, filename_prefix, layers, depth, interval)"""
+def _write_setup_function(output_folder: str, datapack_name: str):
+    function = open(os.path.join(output_folder, "setup.mcfunction"), "w+")
+    
+    commands = []
+
+    commands += f"scoreboard objectives add {datapack_name}_master dummy",
+    commands += f"scoreboard objectives add {datapack_name}_ticks dummy",
+    commands += 'setblock ~ ~ ~ minecraft:structure_block{mode: "LOAD", showboundingbox: 0b, posX: 1, posY: 0}',
+    commands += 'summon minecraft:armor_stand ~ ~1 ~ {CustomName:\'{"text":"%s_screen"}\'}' % datapack_name,
+
+    function.write("\n".join(commands))
+    function.close()
+
+def _write_main_function(output_folder: str, datapack_name: str, ticks_per_frame: int):
+    function = open(os.path.join(output_folder, "main.mcfunction"), "w+")
+
+    commands = []
+
+    commands += f'scoreboard players add @e[type=armor_stand, name={datapack_name}_screen] {datapack_name}_master 1',
+    commands += 'scoreboard players set @e[type=armor_stand, name=%s_screen, scores={%s_master=%d..}] %s_master 0' % (datapack_name, datapack_name, ticks_per_frame, datapack_name),
+    commands += 'scoreboard players add @e[type=armor_stand, name=%s_screen, scores={%s_master=0}] %s_ticks 1' % ((datapack_name,) * 3),
+    commands += f'function {datapack_name}:root',
+
+    function.writelines("\n".join(commands))
+    function.close()
 
 def _write_primary_function(folder: str, datapack_name: str, filename_prefix: str, first_index: int, last_index: int, is_root = False):
     filename = "root.mcfunction" if is_root else f"animation_{first_index}-{last_index}.mcfunction"
@@ -52,7 +72,7 @@ def _get_structure_command(datapack_name: str, filename_prefix: str, index: int)
 def _get_secondary_command(datapack_name: str, first_index: int, last_index: int):
     execute = f'execute as @e[type=armor_stand, name="{datapack_name}_screen"]'
     condition = f'if score @s {datapack_name}_ticks matches {first_index}..{last_index}'
-    command = f'run function {datapack_name}:animations/animation_{first_index}-{last_index}'
+    command = f'run function {datapack_name}:animation_{first_index}-{last_index}'
     return f"{execute} {condition} {command}\n"
 
 if __name__ == "__main__":
