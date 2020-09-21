@@ -22,7 +22,7 @@ def split_and_convert(input_file: str, output_folder: str, name_prefix: str, seg
         i += 1
     return i
 
-def create_sounds_json(out_file: str, subfolder_name: str, sound_files_amount: int, name_prefix: str, merge_contents = True):
+def create_sounds_json(out_file: str, sound_files_amount: int, name_prefix: str, merge_contents = True):
     if merge_contents:
         sounds_file = open(out_file, "r")
         sounds_json = json.load(sounds_file)
@@ -31,8 +31,8 @@ def create_sounds_json(out_file: str, subfolder_name: str, sound_files_amount: i
         sounds_json = {}
     
     for i in range(sound_files_amount):
-        name = f"{subfolder_name}%s{name_prefix}{i}"
-        sounds_json[name % "."] = {"sounds":[{"name": name % "/", "stream": True}]}
+        name = name_prefix + str(i)
+        sounds_json[name] = {"sounds":[{"name": name, "stream": True}]}
 
     sounds_file = open(out_file, "w+")
     json.dump(sounds_json, sounds_file, indent = 2)
@@ -40,4 +40,4 @@ def create_sounds_json(out_file: str, subfolder_name: str, sound_files_amount: i
 
 if __name__ == "__main__":
     out_file = "test-io\\sounds.json"
-    create_sounds_json(out_file, "testpack", 22, "rickroll_", False)
+    create_sounds_json(out_file, 22, "rickroll_", False)
