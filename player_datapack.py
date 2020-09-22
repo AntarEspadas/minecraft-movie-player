@@ -37,8 +37,18 @@ def generate_audio_functions(output_folder: str, datapack_name: str, sound_name_
     
     _write_setup_audio_function(output_folder, datapack_name)
     _write_main_audio_function(output_folder, datapack_name, sound_duration)
+    _write_stopsound(output_folder, sound_name_prefix, first_index, final_index)
 
 
+def _write_stopsound(output_folder: str, sound_name_prefix: str, first_index: int, last_index: int):
+    function = open(os.path.join(output_folder, "stopsound.mcfunction"), "w+")
+
+    command = 'stopsound @a * %s'
+
+    for i in range(first_index, last_index + 1):
+        function.write(command % f'{sound_name_prefix}{i}\n')
+
+    function.close()
 
 def _write_setup_audio_function(output_folder: str, datapack_name: str):
     function = open(os.path.join(output_folder, "setup_audio.mcfunction"), "w+")
@@ -58,7 +68,7 @@ def _write_main_audio_function(output_folder: str, datapack_name: str, sound_dur
 
     commands = []
 
-    commands += 'scoreboard players add @e[type=armor_stand, name=%s_screen, scores={%s_am=0..}] %s_am 1' % ((datapack_name,) * 3),
+    commands += 'scoreboard players add @e[type=armor_stand, name=%s_screen, scores={%s_am=-1..}] %s_am 1' % ((datapack_name,) * 3),
     commands += 'scoreboard players set @e[type=armor_stand, name=%s_screen, scores={%s_am=%d..}] %s_am 0' % (datapack_name, datapack_name, ticks, datapack_name),
     commands += 'scoreboard players add @e[type=armor_stand, name=%s_screen, scores={%s_am=0}] %s_at 1' % ((datapack_name,) * 3),
     commands += 'execute at @e[type=armor_stand, name=%s_screen, scores={%s_am=0}] run function %s:audio_root' % ((datapack_name,) * 3),
@@ -85,7 +95,7 @@ def _write_main_video_function(output_folder: str, datapack_name: str, ticks_per
 
     commands = []
 
-    commands += 'scoreboard players add @e[type=armor_stand, name=%s_screen, scores={%s_vm=0..}] %s_vm 1' % ((datapack_name,) * 3),
+    commands += 'scoreboard players add @e[type=armor_stand, name=%s_screen, scores={%s_vm=-1..}] %s_vm 1' % ((datapack_name,) * 3),
     commands += 'scoreboard players set @e[type=armor_stand, name=%s_screen, scores={%s_vm=%d..}] %s_vm 0' % (datapack_name, datapack_name, ticks_per_frame, datapack_name),
     commands += 'scoreboard players add @e[type=armor_stand, name=%s_screen, scores={%s_vm=0}] %s_vt 1' % ((datapack_name,) * 3),
     commands += 'execute at @e[type=armor_stand, name=%s_screen, scores={%s_vm=0}] run function %s:video_root' % ((datapack_name,) * 3),
@@ -130,7 +140,7 @@ def _write_secondary_video_function(folder: str, datapack_name: str, first_index
 def _get_primary_audio_command(datapack_name: str, sound_name_prefix: str, index: int):
     execute = f'execute as @e[type = armor_stand, name="{datapack_name}_screen"] at @s'
     condition = f'if score @s {datapack_name}_at matches {index}'
-    command = f'run playsound {sound_name_prefix}{index} record @a ~ ~ ~'
+    command = f'run playsound {sound_name_prefix}{index} record @a ~ ~ ~ 10'
     return f"{execute} {condition} {command}\n"
 
 def _get_secondary_audio_command(datapack_name: str, first_index: int, last_index: int):
@@ -159,4 +169,4 @@ def _calculate_layers(first_index: int, final_index: int, max_commands: int) -> 
 if __name__ == "__main__":
     output_folder = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\function_testing"
     #generate_structure_functions(output_folder,"testpack","rickroll_", 0, 847, 10, 5)
-    generate_audio_functions(output_folder, "testpack", "testpack:rickroll_", 10, 0, 21, 10)
+    generate_audio_functions(output_folder, "testpack", "testpack.rickroll_", 10, 0, 21, 10)
