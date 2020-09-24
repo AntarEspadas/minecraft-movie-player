@@ -31,7 +31,6 @@ def video_to_structure(path_to_video: str, destination_folder: str, name_prefix:
     else:
         base = None
 
-    process = None
     count = 0
     while success:
         start = time.time()
