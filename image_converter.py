@@ -5,8 +5,10 @@ import os
 import csv
 import kdtree
 import time
+import multiprocessing
 
-def video_to_structure(path_to_video: str, destination_folder: str, name_prefix: str, path_to_palette: str = None, ticks_per_frame:int = 2, starting_frame: int = 0,  starting_number: int = None, width: int = None, height: int = None, adjust_mode: str = None):
+
+def video_to_structure(path_to_video: str, destination_folder: str, name_prefix: str, path_to_palette: str = None, ticks_per_frame:int = 2, starting_frame: int = 0,  starting_number: int = None, width: int = None, height: int = None, adjust_mode: str = None, optimize = True):
     video = cv2.VideoCapture(path_to_video)
     palette = _get_palette(path_to_palette or os.path.join(os.path.dirname(__name__),"palette.txt"))
     
@@ -22,11 +24,20 @@ def video_to_structure(path_to_video: str, destination_folder: str, name_prefix:
     size = _get_image_size(image, width, height, adjust_mode)
     adjust = _get_adjuster(image, width, height, adjust_mode)
 
+    if optimize:
+        x = image.shape[1]
+        y = image.shape[0]
+        base = [[None for _ in range(x)] for _ in range(y)]
+    else:
+        base = None
+
+    process = None
     count = 0
     while success:
         start = time.time()
         image = adjust(image, size)
-        array_to_structure(image, palette).save(os.path.join(destination_folder, f"{name_prefix}{starting_number + count}.nbt"))
+        structure = array_to_structure(image, palette, base)
+        structure.save(os.path.join(destination_folder, f"{name_prefix}{starting_number + count}.nbt"))
         print(f"{count} done in {time.time() - start} seconds")
         count += 1
         video.set(cv2.CAP_PROP_POS_FRAMES, int(frame_skip * (starting_frame + count)) - 1)
@@ -49,12 +60,16 @@ def image_to_structure(path_to_image: str, out_structure: str, path_to_palette: 
     structure.save(out_structure)
     print(time.time() - start)
 
-def array_to_structure(image: numpy.ndarray, palette):
+def array_to_structure(image: numpy.ndarray, palette: kdtree.KDNode, base = None):
     structure = structure_block.StructureBlock((len(image[0]), len(image), 1))
-
     for y, row in enumerate(numpy.flip(image, 0)):
         for x, pixel in enumerate(row):
             block = palette.search_nn(tuple(numpy.flip(pixel)))[0].data
+            if base is not None:
+                if base[x][y] == (block.block_id, block.block_state):
+                    continue
+                else:
+                    base[x][y] = (block.block_id, block.block_state)
             structure.setblock((x,y,0), block.block_id, block.block_state)
 
     return structure
@@ -155,15 +170,16 @@ class _Block:
 
 
 if __name__ == "__main__":
-    #path_to_video = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\rickroll_cut.mp4"
-    path_to_video = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\bbb_sunflower_1080p_30fps_normal.mp4"
-    output_folder = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\big_buck_bunny"
+    path_to_video = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\rickroll.mp4"
+    #path_to_video = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\bbb_sunflower_1080p_30fps_normal.mp4"
+    output_folder = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\rickroll"
+    #output_folder = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\big_buck_bunny"
     palette = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\palette.txt"
     #path_to_image = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\carved_pumpkin.png"
     path_to_image = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\test.jpg"
     #path_to_structure = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\carved_pumpkin.nbt"
     path_to_structure = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\test.nbt"
-    name_prefix = "big_buck_bunny_"
+    name_prefix = "rickroll_"
     #image_to_structure(path_to_image, path_to_structure, palette, 75)
-    video_to_structure(path_to_video, output_folder, name_prefix, path_to_palette= palette, width= 50, starting_frame=200)
+    video_to_structure(path_to_video, output_folder, name_prefix, path_to_palette= palette, width= 50, starting_frame=0)
     #__get_palette(palette)
