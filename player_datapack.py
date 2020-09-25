@@ -166,7 +166,3 @@ def _calculate_layers(first_index: int, final_index: int, max_commands: int) -> 
     command_amount = final_index - first_index + 1
     return [math.ceil(command_amount / max_commands ** (i+1)) for i in range(math.ceil(math.log(command_amount, max_commands)))]
 
-if __name__ == "__main__":
-    output_folder = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\function_testing"
-    #generate_structure_functions(output_folder,"testpack","rickroll_", 0, 847, 10, 5)
-    generate_audio_functions(output_folder, "testpack", "testpack.rickroll_", 10, 0, 21, 10)

@@ -92,6 +92,3 @@ class StructureBlock():
             append_block(coordinates, block, block_list)
 
         return empty_block_generator
-
-if __name__ == "__main__":
-    structure = StructureBlock((5,5,5))

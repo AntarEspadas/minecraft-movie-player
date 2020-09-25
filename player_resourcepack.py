@@ -37,7 +37,3 @@ def create_sounds_json(out_file: str, subfolder_name: str, sound_files_amount: i
     sounds_file = open(out_file, "w+")
     json.dump(sounds_json, sounds_file, indent = 2)
     sounds_file.close()
-
-if __name__ == "__main__":
-    out_file = "test-io\\sounds.json"
-    create_sounds_json(out_file, "testpack", 22, "rickroll_", False)

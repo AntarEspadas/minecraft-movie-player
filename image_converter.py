@@ -214,18 +214,3 @@ class _Block:
     def __getitem__(self, i):
         return self.color[i]
 
-
-if __name__ == "__main__":
-    path_to_video = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\rickroll.mp4"
-    #path_to_video = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\bbb_sunflower_1080p_30fps_normal.mp4"
-    output_folder = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\rickroll"
-    #output_folder = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\big_buck_bunny"
-    palette = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\palette.txt"
-    #path_to_image = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\carved_pumpkin.png"
-    path_to_image = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\test.jpg"
-    #path_to_structure = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\carved_pumpkin.nbt"
-    path_to_structure = "D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\test.nbt"
-    name_prefix = "rickroll_"
-    #image_to_structure(path_to_image, path_to_structure, palette, 75)
-    video_to_structure(path_to_video, output_folder, name_prefix, path_to_palette= palette, width= 50, starting_frame=0)
-    #__get_palette(palette)
