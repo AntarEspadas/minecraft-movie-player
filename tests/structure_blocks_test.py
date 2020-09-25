@@ -1,4 +1,5 @@
 import unittest
+import os
 from context import structure_block
 
 class StructureBlocksTest(unittest.TestCase):
@@ -58,12 +59,12 @@ class StructureBlocksTest(unittest.TestCase):
         ]
         for coordinates, block_id, state, nbt in blocks:
             self._structure.setblock(coordinates, block_id, state, nbt)
-        self._structure.save("D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\nbt-test.nbt")
+        self._structure.save(os.path.join("tests","io","out_nbt-test.nbt"))
 
     def test_summon(self):
         self._structure = structure_block.StructureBlock((1,1,1))
         self._structure.summon((0.5,0.5,0.5),"minecraft:armor_stand")
-        self._structure.save("D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\nbt-entity-test.nbt")
+        self._structure.save(os.path.join("tests","io","out_nbt-entity-test.nbt"))
 
 
 if __name__ == "__main__":

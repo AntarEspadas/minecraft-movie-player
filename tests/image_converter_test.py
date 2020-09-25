@@ -7,7 +7,7 @@ from context import image_converter
 class ImageConverterTests(unittest.TestCase):
 
     def test_get_tree(self):
-        image_converter._get_palette("D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\palette.txt")
+        image_converter._get_palette("palette.txt")
     
     def test_resize(self):
         image = numpy.zeros((90,160))
@@ -51,9 +51,8 @@ class ImageConverterTests(unittest.TestCase):
         self.assertEqual(adjuster.__name__, "resize_and_crop")
 
     def test_adjust(self):
-        folder = os.path.dirname(__file__)
-        io_folder = os.path.join(folder, "..", "test-io")
-        image_path = os.path.join(io_folder, "test.jpg")
+        io_folder = os.path.join("tests","io")
+        image_path = os.path.join(io_folder, "test_0.png")
         print(image_path)
         image = cv2.imread(image_path)
 
@@ -62,23 +61,22 @@ class ImageConverterTests(unittest.TestCase):
         size = image_converter._get_image_size(image, width = 100)
         adjust = image_converter._get_adjuster(image, width = 100)
         self.assertEqual(adjust.__name__, "resize_only")
-        cv2.imwrite(os.path.join(io_folder, "test_adjust_1.png"), adjust(image, size))
+        cv2.imwrite(os.path.join(io_folder, "out_test_adjust_1.png"), adjust(image, size))
 
         size = image_converter._get_image_size(image, height = 100)
         adjust = image_converter._get_adjuster(image, height = 100)
         self.assertEqual(adjust.__name__, "resize_only")
-        cv2.imwrite(os.path.join(io_folder, "test_adjust_2.png"), adjust(image, size))
+        cv2.imwrite(os.path.join(io_folder, "out_test_adjust_2.png"), adjust(image, size))
 
         size = image_converter._get_image_size(image, 100, 100, "fit")
         adjust = image_converter._get_adjuster(image, 100, 100, "fit")
         self.assertEqual(adjust.__name__, "resize_and_pad")
-        cv2.imwrite(os.path.join(io_folder, "test_adjust_3.png"), adjust(image, size))
+        cv2.imwrite(os.path.join(io_folder, "out_test_adjust_3.png"), adjust(image, size))
 
         size = image_converter._get_image_size(image, 100, 100, "fill")
         adjust = image_converter._get_adjuster(image, 100, 100, "fill")
         self.assertEqual(adjust.__name__, "resize_and_crop")
-        cv2.imwrite(os.path.join(io_folder, "test_adjust_4.png"), adjust(image, size))
+        cv2.imwrite(os.path.join(io_folder, "out_test_adjust_4.png"), adjust(image, size))
 
 if __name__ == "__main__":
     unittest.main()
-    #print(image_converter._get_palette)

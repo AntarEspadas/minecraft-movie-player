@@ -1,4 +1,6 @@
-/test-io
+/test-io/
+
+/tests/io/out*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
