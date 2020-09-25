@@ -60,21 +60,14 @@ def video_to_structure(path_to_video: str, destination_folder: str, name_prefix:
     [process.terminate() for process in row_processors]
 
 def image_to_structure(path_to_image: str, out_structure: str, path_to_palette: str = "palette.txt", width: int = None, height: int = None, adjust_mode = None):
-    start = time.time()
     palette = _get_palette(path_to_palette)
     image = cv2.imread(path_to_image)
 
     size = _get_image_size(image, width, height, adjust_mode)
     image = _get_adjuster(image, width, height, adjust_mode)(image, size)
-    print(time.time() - start)
-
-    start = time.time()
     structure = array_to_structure(image, palette)
-    print(time.time() - start)
 
-    start = time.time()
     structure.save(out_structure)
-    print(time.time() - start)
 
 def array_to_structure(image: numpy.ndarray, palette: kdtree.KDNode, base = None):
     structure = structure_block.StructureBlock((len(image[0]), len(image), 1))
