@@ -59,7 +59,7 @@ def generate_index_template(source_directory: str, destination_file: str, filena
             file.write(f"{image},{filename if filename_is_id else ''},\n")
     file.close
 
-if __name__ == "__main__":
+def main():
     import argparse
 
     parser = argparse.ArgumentParser()
@@ -83,3 +83,6 @@ if __name__ == "__main__":
     elif args.command == "generate-palette":
         generate_palette(args.path_to_images_folder, args.destination_file_path, args.path_to_index)
         print(f"Palette saved to {args.destination_file_path}")
+
+if __name__ == "__main__":
+    main()
