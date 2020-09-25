@@ -6,6 +6,7 @@ import csv
 import kdtree
 import time
 import multiprocessing
+import datetime
 
 
 def video_to_structure(path_to_video: str, destination_folder: str, name_prefix: str, path_to_palette: str = None, ticks_per_frame:int = 2, starting_frame: int = 0,  starting_number: int = None, width: int = None, height: int = None, adjust_mode: str = None, optimize = True, processes: int = None):
@@ -36,17 +37,26 @@ def video_to_structure(path_to_video: str, destination_folder: str, name_prefix:
     else:
         base = None
 
+    total_frames = video.get(cv2.CAP_PROP_FRAME_COUNT) / frame_skip
+    total_frames = round(total_frames)
     count = 0
+    total_time = 0
     while success:
         start = time.time()
         image = adjust(image, size)
         structure = _array_to_structure(image, in_q, out_q, base)
         structure.save(os.path.join(destination_folder, f"{name_prefix}{starting_number + count}.nbt"))
-        print(f"{count} done in {time.time() - start} seconds")
+        elapsed = time.time() - start
+        total_time += elapsed
+        average = total_time / (count + 1)
+        eta = (total_frames - count - 1) * average
+        eta = datetime.timedelta(seconds=round(eta))
+        print(f"{starting_frame + count + 1}/{total_frames} (Elapsed: {datetime.timedelta(seconds=round(total_time, 5))}, Average: {round(average, 5)}s, ETA: {eta})" + " "*10, end="\r")
         count += 1
         video.set(cv2.CAP_PROP_POS_FRAMES, int(frame_skip * (starting_frame + count)) - 1)
         success, image = video.read()
-
+    print("")
+    print("done!")
     [process.terminate() for process in row_processors]
 
 def image_to_structure(path_to_image: str, out_structure: str, path_to_palette: str = "palette.txt", width: int = None, height: int = None, adjust_mode = None):
