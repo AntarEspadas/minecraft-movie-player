@@ -1,10 +1,10 @@
-acacia_planks.png,acacia_planks,{}
-andesite.png,andesite,{}
-bedrock.png,bedrock,{}
-birch_planks.png,birch_planks,{}
-black_concrete.png,black_concrete,{}
-black_concrete_powder.png,black_concrete_powder,{}
-black_glazed_terracotta.png,black_glazed_terracotta,{}
+acacia_planks.png,acacia_planks,
+andesite.png,andesite,
+bedrock.png,bedrock,
+birch_planks.png,birch_planks,
+black_concrete.png,black_concrete,
+black_concrete_powder.png,black_concrete_powder,
+black_glazed_terracotta.png,black_glazed_terracotta,
 black_terracotta.png,black_terracotta,
 black_wool.png,black_wool,
 blue_concrete.png,blue_concrete,
