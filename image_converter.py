@@ -9,7 +9,8 @@ import multiprocessing
 import datetime
 
 
-def video_to_structure(path_to_video: str, destination_folder: str, name_prefix: str, path_to_palette: str = None, ticks_per_frame:int = 2, starting_frame: int = 0,  starting_number: int = None, width: int = None, height: int = None, adjust_mode: str = None, optimize = True, processes: int = None):
+def video_to_structure(path_to_video: str, destination_folder: str, name_prefix: str, path_to_palette: str = "palette.txt", ticks_per_frame:int = 2, starting_frame: int = 0,  starting_number: int = None, width: int = None, height: int = None, adjust_mode: str = None, optimize = True, processes: int = None):
+    
     video = cv2.VideoCapture(path_to_video)
     
     starting_number = starting_number or starting_frame
@@ -23,6 +24,8 @@ def video_to_structure(path_to_video: str, destination_folder: str, name_prefix:
     
     size = _get_image_size(image, width, height, adjust_mode)
     adjust = _get_adjuster(image, width, height, adjust_mode)
+
+    path_to_palette = os.path.abspath(path_to_palette)
 
     processes = processes if processes is not None else multiprocessing.cpu_count()
     in_q = multiprocessing.Queue()
