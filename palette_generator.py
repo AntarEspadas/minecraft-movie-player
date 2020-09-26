@@ -57,7 +57,7 @@ def generate_index_template(source_directory: str, destination_file: str, filena
         filename, extension = os.path.splitext(image)
         if extension[1:].lower() == "png":
             file.write(f"{image},{filename if filename_is_id else ''},\n")
-    file.close
+    file.close()
 
 def main():
     import argparse
