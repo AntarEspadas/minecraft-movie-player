@@ -31,13 +31,36 @@ def generate_audio_functions(output_folder: str, datapack_name: str, sound_name_
             last_index = (file_number + 1) * step * max_commands - 1
             last_index = min(last_index, final_index)
             if power == 0:
-                _write_primary_audio_function(output_folder, datapack_name, sound_name_prefix, first_index, last_index)
+                _write_primary_audio_function(output_folder, datapack_name, sound_name_prefix, first_index, last_index, file_amount == 1)
             else:
                 _write_secondary_audio_function(output_folder, datapack_name, first_index, last_index, step, file_amount == 1)
     
     _write_setup_audio_function(output_folder, datapack_name)
     _write_main_audio_function(output_folder, datapack_name, sound_duration)
     _write_stopsound(output_folder, sound_name_prefix, first_index, final_index)
+
+def generate_playback_control_functions(output_folder: str, datapack_name: str, control_audio: bool = False):
+        play = open(os.path.join(output_folder, "play.mcfunction"),"w+")
+        play.write(f"tag @e[name={datapack_name}_screen] add play")
+        play.close()
+
+        pause = open(os.path.join(output_folder, "pause.mcfunction"),"w+")
+        if control_audio:
+            pause.write(f"function {datapack_name}:stopsound\n")
+        pause.write(f"tag @e[name={datapack_name}_screen] remove play")
+        pause.close()
+
+        restart = open(os.path.join(output_folder, "restart.mcfunction"),"w+")
+        commands = []
+        if control_audio:
+            commands += f"function {datapack_name}:stopsound",
+            commands += f"scoreboard players set @e[name={datapack_name}_screen] {datapack_name}_am -1",
+            commands += f"scoreboard players set @e[name={datapack_name}_screen] {datapack_name}_at -1",
+        commands += f"scoreboard players set @e[name={datapack_name}_screen] {datapack_name}_vm -1",
+        commands += f"scoreboard players set @e[name={datapack_name}_screen] {datapack_name}_vt -1",
+        commands += f"tag @e[name={datapack_name}_screen] add play",
+        restart.write("\n".join(commands))
+        restart.close()
 
 
 def _write_stopsound(output_folder: str, sound_name_prefix: str, first_index: int, last_index: int):
@@ -68,10 +91,12 @@ def _write_main_audio_function(output_folder: str, datapack_name: str, sound_dur
 
     commands = []
 
-    commands += 'scoreboard players add @e[type=armor_stand, name=%s_screen, scores={%s_am=-1..}] %s_am 1' % ((datapack_name,) * 3),
+    commands += f'#{datapack_name}',
+    commands += '#Do not change the first line of this file',
+    commands += 'scoreboard players add @e[type=armor_stand, name=%s_screen, tag=play] %s_am 1' % ((datapack_name,) * 2),
     commands += 'scoreboard players set @e[type=armor_stand, name=%s_screen, scores={%s_am=%d..}] %s_am 0' % (datapack_name, datapack_name, ticks, datapack_name),
-    commands += 'scoreboard players add @e[type=armor_stand, name=%s_screen, scores={%s_am=0}] %s_at 1' % ((datapack_name,) * 3),
-    commands += 'execute at @e[type=armor_stand, name=%s_screen, scores={%s_am=0}] run function %s:audio_root' % ((datapack_name,) * 3),
+    commands += 'scoreboard players add @e[type=armor_stand, name=%s_screen, scores={%s_am=0}, tag=play] %s_at 1' % ((datapack_name,) * 3),
+    commands += 'execute as @e[type=armor_stand, name=%s_screen, scores={%s_am=0}, tag=play] at @s run function %s:audio_root' % ((datapack_name,) * 3),
 
     function.writelines("\n".join(commands))
     function.close()
@@ -95,12 +120,14 @@ def _write_main_video_function(output_folder: str, datapack_name: str, ticks_per
 
     commands = []
 
-    commands += 'scoreboard players add @e[type=armor_stand, name=%s_screen, scores={%s_vm=-1..}] %s_vm 1' % ((datapack_name,) * 3),
+    commands += f'#{datapack_name}',
+    commands += '#Do not change the first line of this file',
+    commands += 'scoreboard players add @e[type=armor_stand, name=%s_screen, tag=play] %s_vm 1' % ((datapack_name,) * 2),
     commands += 'scoreboard players set @e[type=armor_stand, name=%s_screen, scores={%s_vm=%d..}] %s_vm 0' % (datapack_name, datapack_name, ticks_per_frame, datapack_name),
-    commands += 'scoreboard players add @e[type=armor_stand, name=%s_screen, scores={%s_vm=0}] %s_vt 1' % ((datapack_name,) * 3),
-    commands += 'execute at @e[type=armor_stand, name=%s_screen, scores={%s_vm=0}] run function %s:video_root' % ((datapack_name,) * 3),
-    commands += 'execute at @e[type=armor_stand, name=%s_screen, scores={%s_vm=0}] run setblock ~ ~ ~ stone' % ((datapack_name,) * 2),
-    commands += 'execute at @e[type=armor_stand, name=%s_screen, scores={%s_vm=0}] run setblock ~ ~ ~ redstone_block' % ((datapack_name,) * 2),
+    commands += 'scoreboard players add @e[type=armor_stand, name=%s_screen, scores={%s_vm=0}, tag=play] %s_vt 1' % ((datapack_name,) * 3),
+    commands += 'execute as @e[type=armor_stand, name=%s_screen, scores={%s_vm=0}, tag=play] at @s run function %s:video_root' % ((datapack_name,) * 3),
+    commands += 'execute at @e[type=armor_stand, name=%s_screen, scores={%s_vm=0}, tag=play] run setblock ~ ~ ~ stone' % ((datapack_name,) * 2),
+    commands += 'execute at @e[type=armor_stand, name=%s_screen, scores={%s_vm=0}, tag=play] run setblock ~ ~ ~ redstone_block' % ((datapack_name,) * 2),
 
     function.writelines("\n".join(commands))
     function.close()
@@ -138,25 +165,25 @@ def _write_secondary_video_function(folder: str, datapack_name: str, first_index
 
 
 def _get_primary_audio_command(datapack_name: str, sound_name_prefix: str, index: int):
-    execute = f'execute as @e[type = armor_stand, name="{datapack_name}_screen"] at @s'
+    execute = f'execute'
     condition = f'if score @s {datapack_name}_at matches {index}'
     command = f'run playsound {sound_name_prefix}{index} record @a ~ ~ ~ 10'
     return f"{execute} {condition} {command}\n"
 
 def _get_secondary_audio_command(datapack_name: str, first_index: int, last_index: int):
-    execute = f'execute as @e[type=armor_stand, name="{datapack_name}_screen"]'
+    execute = f'execute'
     condition = f'if score @s {datapack_name}_at matches {first_index}..{last_index}'
     command = f'run function {datapack_name}:audio_{first_index}-{last_index}'
     return f"{execute} {condition} {command}\n"
 
 def _get_primary_video_command(datapack_name: str, filename_prefix: str, index: int):
-    execute = f'execute as @e[type = armor_stand, name="{datapack_name}_screen"] at @s'
+    execute = f'execute'
     condition = f'if score @s {datapack_name}_vt matches {index}'
     command = 'run data merge block ~ ~-1 ~ {name:"%s:%s%s"}' % (datapack_name, filename_prefix, index)
     return f"{execute} {condition} {command}\n"
 
 def _get_secondary_video_command(datapack_name: str, first_index: int, last_index: int):
-    execute = f'execute as @e[type=armor_stand, name="{datapack_name}_screen"]'
+    execute = f'execute'
     condition = f'if score @s {datapack_name}_vt matches {first_index}..{last_index}'
     command = f'run function {datapack_name}:video_{first_index}-{last_index}'
     return f"{execute} {condition} {command}\n"
@@ -165,4 +192,3 @@ def _get_secondary_video_command(datapack_name: str, first_index: int, last_inde
 def _calculate_layers(first_index: int, final_index: int, max_commands: int) -> list:
     command_amount = final_index - first_index + 1
     return [math.ceil(command_amount / max_commands ** (i+1)) for i in range(math.ceil(math.log(command_amount, max_commands)))]
-
