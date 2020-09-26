@@ -18,12 +18,15 @@ def split_and_convert(input_file: str, output_folder: str, name_prefix: str, seg
     i = 0
     while i * segment_duration < audio.duration_seconds:
         segment = audio[i * segment_duration * 1000: (i + 1) * segment_duration * 1000]
-        segment.export(os.path.join(output_folder, name_prefix + str(i)), "ogg", "vorbis")
+        file_handle = segment.export(os.path.join(output_folder, name_prefix + str(i) + ".ogg"), "ogg", "libvorbis")
+        file_handle.close()
         i += 1
     return i
 
-def create_sounds_json(out_file: str, subfolder_name: str, sound_files_amount: int, name_prefix: str, merge_contents = True):
-    if merge_contents:
+def create_sounds_json(out_folder: str, subfolder_name: str, sound_files_amount: int, name_prefix: str, merge_contents = True):
+    out_file = os.path.join(out_folder, "sounds.json")
+    
+    if merge_contents and os.path.exists(out_file):
         sounds_file = open(out_file, "r")
         sounds_json = json.load(sounds_file)
         sounds_file.close()
