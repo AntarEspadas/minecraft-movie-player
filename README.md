@@ -7,7 +7,7 @@ The most important part of the script is that which analyses an image pixel by p
 The script is able to analyse a folder containing minecraft texture images (obtained by extracting .minecraft/versions/[version number]/[version number].jar with any tool such as Winrar or 7Zip) in order to find their average colours and put them on a file, the palette. However, average colour is not all the information the program needs, it also has to know which block IDs go with which colours, and in some cases some NBT data indicating the direction a block is facing.
 This information is stored in a file formatted with tab separated values called the index, which tells the script the filenames of different Minecraft blocks, their block IDs and, optionally, the NBT data required to make the block face the right direction.
 For example, the following is the file containing the texture for dirt:
-![images/dirt.png](placeholder)
+![images/dirt.png](images/dirt.png)
 The name of this image is dirt.png.
 This block is simple enough, as its filename is the same as its block ID and looks the same on all sides. Its corresponding entry on the index would look something like this:
 
@@ -17,7 +17,7 @@ However, it is not so simple for other blocks. Consider the following image:
 ![oak_log_top.png](images/oak_log_top.png)
 The name of this image is oak_log_top.png, however its block ID is simply oak_log. Moreover, this block is placed upright by default, meaning we need to add information about its orientation to be able to see the top when standing in front of it. More precisely, the script wants the information required to make its blocks face north.
 So, what do we do? We go into Minecraft an place down an oak log facing north with the help of the debug menu (f3), like so:
-![oak_log_top.png](images/oak_log_top.png)
+![oak_1.png](images/oak_1.png)
 Then, we point at the block and look at the right of the debug menu, there, we will find its block ID, as well as information regarding its orientation
 ![oak_2.png](images/oak_2.png)
 The first highlighted line, minecraft:oark_log, is the block ID, the second, axis: z, is the information we need about the orientation, meaning the index would now look like this:
