@@ -140,14 +140,13 @@ red_wool,160,39,34,||
 sand,219,207,163,||
 sandstone,216,203,155,||
 smooth_stone,158,158,158,||
-snow,249,254,254,||
+snow_block,249,254,254,||
 sponge,195,192,74,||
 spruce_planks,114,84,48,||
 stone,125,125,125,||
 stone_bricks,122,121,122,||
 terracotta,152,94,67,||
 tube_coral_block,49,87,206,||
-wet_sponge,171,181,70,||
 white_concrete,207,213,214,||
 white_concrete_powder,225,227,227,||
 white_glazed_terracotta,188,212,202,||
