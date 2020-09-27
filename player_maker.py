@@ -137,3 +137,8 @@ def _move_sounds(containing_folder: str, resourcepack_subfolder: str, ogg: list)
         shutil.move(os.path.join(containing_folder, f), os.path.join(containing_folder, "resources", "assets", "minecraft", "sounds", resourcepack_subfolder))
     shutil.move(os.path.join(containing_folder, "sounds.json"), os.path.join(containing_folder, "resources", "assets", "minecraft"))
 
+def main():
+    import argparse
+
+if __name__ == "__main__":
+    main()
