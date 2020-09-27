@@ -1,5 +1,5 @@
 
-import minecraft_movie_player_controller as controller
+import controller
 import argparse
 
 def wrap(function):
