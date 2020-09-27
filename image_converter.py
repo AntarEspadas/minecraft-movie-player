@@ -9,11 +9,9 @@ import multiprocessing
 import datetime
 
 
-def video_to_structure(path_to_video: str, destination_folder: str, name_prefix: str, path_to_palette: str = "palette.txt", ticks_per_frame:int = 2, starting_frame: int = 0,  starting_number: int = None, width: int = None, height: int = None, adjust_mode: str = None, optimize = True, processes: int = None):
+def video_to_structure(path_to_video: str, destination_folder: str, name_prefix: str, path_to_palette: str = "palette.txt", ticks_per_frame:int = 2, starting_frame: int = 0, width: int = None, height: int = None, adjust_mode: str = None, optimize = True, processes: int = None):
     
     video = cv2.VideoCapture(path_to_video)
-    
-    starting_number = starting_number or starting_frame
 
     output_fps = 20 / ticks_per_frame
     video_fps = video.get(cv2.CAP_PROP_FPS)
@@ -48,11 +46,11 @@ def video_to_structure(path_to_video: str, destination_folder: str, name_prefix:
         start = time.time()
         image = adjust(image, size)
         structure = _array_to_structure(image, in_q, out_q, base)
-        structure.save(os.path.join(destination_folder, f"{name_prefix}{starting_number + count}.nbt"))
+        structure.save(os.path.join(destination_folder, f"{name_prefix}{starting_frame + count}.nbt"))
         elapsed = time.time() - start
         total_time += elapsed
         average = total_time / (count + 1)
-        eta = (total_frames - count - 1) * average
+        eta = (total_frames - starting_frame - count - 1) * average
         eta = datetime.timedelta(seconds=round(eta))
         print(f"{starting_frame + count + 1}/{total_frames} (Elapsed: {datetime.timedelta(seconds=round(total_time, 5))}, Average: {round(average, 5)}s, ETA: {eta})" + " "*10, end="\r")
         count += 1
