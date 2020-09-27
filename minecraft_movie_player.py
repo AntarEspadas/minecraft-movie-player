@@ -15,7 +15,7 @@ def main():
     video_parser.add_argument("-y", "--height", default=None, type=int, dest="height", help="The height of the output frames, measured in blocks")
     video_parser.add_argument("-m", "--adjust-mode", default="fit", type=str, dest="adjust_mode", choices=["fit", "fill"], help="If 'fit' is selected, the black bars will be added to make the image fit the specified with and height. If set to 'fill', the image will be cropped in order to fit the width and height specified. Only used if both with and height are specified")
     video_parser.add_argument("-u","--unoptimized", action="store_true", dest="unoptimized", help="By default, every frame contains only the blocks that differ from the previous frame in an attempt to save resources. Using this option will disable this feature")
-
+    video_parser.add_argument("-s", "--subprocesses", default=None, type=int, dest="subprocesses", help="The amount of subprocesses that should be used when generating the frames. Defaults to the amount of cores on your PC")
 
     resourcepak_parser = parsers.add_parser("resourcepack", help="Generate sound files and sounds.json")
     resourcepack_parsers = resourcepak_parser.add_subparsers(help="subcommands", dest="subcommand")
@@ -67,7 +67,7 @@ def main():
 
     elif args.command == "video":
         #(path_to_video: str, path_to_output_folder: str, path_to_palette: str, name_prefix: str, ticks_per_frame: str, width: int, height: int, unoptimized: bool)
-        controller.video(args.path_to_video, args.path_to_output_folder, args.path_to_palette, args.name_prefix, args.ticks_per_frame, args.width, args.height, args.adjust_mode, args.unoptimized)
+        controller.video(args.path_to_video, args.path_to_output_folder, args.path_to_palette, args.name_prefix, args.ticks_per_frame, args.width, args.height, args.adjust_mode, args.unoptimized, args.subprocesses)
 
     elif args.command == "resourcepack":
         if args.subcommand is None:

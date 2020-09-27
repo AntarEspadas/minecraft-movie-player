@@ -1,6 +1,7 @@
 
-def video(path_to_video: str, path_to_output_folder: str, path_to_palette: str, name_prefix: str, ticks_per_frame: str, width: int, height: int, adjust_mode: str, unoptimized: bool):
-    print(path_to_video, path_to_output_folder, path_to_palette, name_prefix, ticks_per_frame, width, height, adjust_mode, unoptimized, sep=", ")
+def video(path_to_video: str, path_to_output_folder: str, path_to_palette: str, name_prefix: str, ticks_per_frame: str, width: int, height: int, adjust_mode: str, unoptimized: bool, subprocesses: int):
+    import image_converter as ic
+    print(path_to_video, path_to_output_folder, path_to_palette, name_prefix, ticks_per_frame, width, height, adjust_mode, unoptimized, subprocesses, sep=", ")
 
 def resourcepack_audio(path_to_audio: str, path_to_output_folder: str, split_size: float, name_prefix: str):
     print(path_to_audio, path_to_output_folder, split_size, name_prefix, sep=", ")
