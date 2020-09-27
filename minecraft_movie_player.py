@@ -1,5 +1,6 @@
 def main():
     import argparse
+    import minecraft_movie_player_controller as controller
 
     parser = argparse.ArgumentParser()
     parsers = parser.add_subparsers(help="commands", dest="command")
@@ -10,8 +11,8 @@ def main():
     video_parser.add_argument("-p", "--palette", default="palette.txt", type=str, dest="path_to_palette",help="The path to the block palette file to be used when convertnig")
     video_parser.add_argument("-n", "--name-prefix", default="video_", type=str, dest="name_prefix", help="Specifies the name that will be prefixed to every generated frame")
     video_parser.add_argument("-t", "--ticks-per-frame", default="2", type=int, dest="ticks_per_frame",help="How many game ticks between every frame. Can be any integer from 1 to 20. Default is 2. 20 = 1 fps, 2 = 10 fps, 1 = 20 fps, etc...")
-    video_parser.add_argument("-x", "--width", default=-1, type=int, dest="width", help="The width of the output frames, measured in blocks")
-    video_parser.add_argument("-y", "--height",default=-1, type=int, dest="height", help="The height of the output frames, measured in blocks")
+    video_parser.add_argument("-x", "--width", default=None, type=int, dest="width", help="The width of the output frames, measured in blocks")
+    video_parser.add_argument("-y", "--height",default=None, type=int, dest="height", help="The height of the output frames, measured in blocks")
     video_parser.add_argument("-u","--unoptimized", action="store_true", dest="unoptimized", help="By default, every frame contains only the blocks that differ from the previous frame in an attempt to save resources. Using this option will disable this feature")
 
 
@@ -64,25 +65,26 @@ def main():
         parser.print_usage()
 
     elif args.command == "video":
-        pass
+        #(path_to_video: str, path_to_output_folder: str, path_to_palette: str, name_prefix: str, ticks_per_frame: str, width: int, height: int, unoptimized: bool)
+        controller.video(args.path_to_video, args.path_to_output_folder, args.path_to_palette, args.name_prefix, args.ticks_per_frame, args.width, args.height, args.unoptimized)
 
     elif args.command == "resourcepack":
         if args.subcommand is None:
             resourcepak_parser.print_usage()
         elif args.subcommand == "audio":
-            pass
+            controller.resourcepack_audio(args.path_to_audio, args.path_to_output_folder, args.split_size, args.name_prefix)
         elif args.subcommand == "json":
-            pass
+            controller.resourcepack_json(args.output_folder, args.amount_of_sound_files, args.name_prefix, args.subfolder_name)
 
     elif args.command == "functions":
         if args.subcommand is None:
             functions_parser.print_usage()
         elif args.subcommand == "video":
-            pass
+            controller.functions_video(args.output_folder, args.amount_of_frames, args.datapack_name, args.name_prefix, args.max_commands, args.ticks_per_frame)
         elif args.subcommand == "audio":
-            pass
+            controller.functions_audio(args.output_folder, args.amount_of_sound_files, args.datapack_name, args.name_prefix, args.sound_duration, args.max_commands)
         elif args.subcommand == "playback-control":
-            pass
+            controller.functions_playback_control(args.output_folder, args.datapack_name, args.control_audio)
 
 if __name__ == "__main__":
     main()
