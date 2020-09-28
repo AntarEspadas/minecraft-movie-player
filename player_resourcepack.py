@@ -1,6 +1,7 @@
 import warnings
 import os
 import json
+from math import ceil
 
 
 def split_and_convert(input_file: str, output_folder: str, name_prefix: str, segment_duration: float) -> int:
@@ -13,15 +14,19 @@ def split_and_convert(input_file: str, output_folder: str, name_prefix: str, seg
     finally:
         warnings.filterwarnings("default")
 
-
+    print("reading file...")
     audio = pydub.AudioSegment.from_file(input_file)
+    print("converting...")
     parameters = ["-ac", "2"] if audio.channels > 2 else []
+    total_files = ceil(audio.duration_seconds / segment_duration)
     i = 0
     while i * segment_duration < audio.duration_seconds:
         segment = audio[i * segment_duration * 1000: (i + 1) * segment_duration * 1000]
         file_handle = segment.export(os.path.join(output_folder, name_prefix + str(i) + ".ogg"), "ogg", "libvorbis", parameters=parameters)
         file_handle.close()
         i += 1
+        print(f"{i}/{total_files}     ", end="\r")
+    print("")
     return i
 
 def create_sounds_json(out_folder: str, subfolder_name: str, sound_files_amount: int, name_prefix: str, merge_contents = True):
