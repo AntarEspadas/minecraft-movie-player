@@ -2,7 +2,7 @@ import os
 import shutil
 import json
 
-def pack(containing_folder: str, resourcepack_subfolder: str = None):
+def make(containing_folder: str, resourcepack_subfolder: str = None):
     
     mcfunction, nbt, ogg = _get_file_lists(containing_folder)
 
