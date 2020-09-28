@@ -63,6 +63,7 @@ def video_to_structure(path_to_video: str, destination_folder: str, name_prefix:
     print("")
     print("done!")
     [process.terminate() for process in row_processors]
+    return count
 
 def image_to_structure(path_to_image: str, out_structure: str, path_to_palette: str = "palette.txt", width: int = None, height: int = None, adjust_mode = None):
     palette = _get_palette(path_to_palette)
