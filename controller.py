@@ -183,7 +183,7 @@ def generate_all(path_to_video: str, path_to_output_folder: str):
         progress["current_step"] = "_make"
         _write_json()
         import player_maker as pm
-        pm.make(path_to_output_folder, datapack_name)
+        pm.make(path_to_output_folder, datapack_name, datapack_name)
         try:
             os.remove(os.path.join(path_to_output_folder, "progress.txt"))
         except OSError:

@@ -1,23 +1,27 @@
 import os
 import shutil
 import json
+import pathlib
 
-def make(containing_folder: str, resourcepack_subfolder: str = None):
+def make(containing_folder: str, resourcepack_subfolder: str = None, datapack_name: str = None):
     
     mcfunction, nbt, ogg = _get_file_lists(containing_folder)
 
-    if len(mcfunction):
-        datapack_name = _get_datapack_name(containing_folder)
-        _make_datapack_folder_structure(containing_folder, datapack_name)
+    if len(mcfunction) or len(nbt):
+        datapack_name = _get_datapack_name(containing_folder) if datapack_name is None else datapack_name
+        _ensure_datapack_folder_structure(containing_folder, datapack_name)
         _create_datapack_files(containing_folder, datapack_name)
         _move_functions(containing_folder, datapack_name, mcfunction)
         _move_structures(containing_folder, datapack_name, nbt)
     if len(ogg):
         resourcepack_subfolder = _get_resourcepack_subfolder(containing_folder, ogg[0]) if resourcepack_subfolder is None else resourcepack_subfolder
-        _make_resourcepack_folder_structure(containing_folder, resourcepack_subfolder)
+        _ensure_resourcepack_folder_structure(containing_folder, resourcepack_subfolder)
         _create_resourcepack_files(containing_folder)
         _move_sounds(containing_folder, resourcepack_subfolder, ogg)
-        
+    if os.path.isfile(containing_folder, "sounds.json"):
+        shutil.move(os.path.join(containing_folder, "sounds.json"), os.path.join(containing_folder, "resources", "assets", "minecraft", "sounds.json"))
+
+    shutil.make_archive(os.path.join(containing_folder,"resources"), "zip", os.path.join(containing_folder, "resources"))
 
 def _get_file_lists(containing_folder: str):
     files = [f for f in os.listdir(containing_folder) if os.path.isfile(os.path.join(containing_folder, f))]
@@ -59,30 +63,17 @@ def _get_resourcepack_subfolder(containing_folder: str, sound_name: str):
             return name[:-len(sound_name)]
     return None
 
-def _make_datapack_folder_structure(containing_folder: str, datapack_name: str):
+def _ensure_datapack_folder_structure(containing_folder: str, datapack_name: str):
     join = os.path.join
     datapack_folder = join(containing_folder, datapack_name)
-    if os.path.exists(datapack_folder):
-        shutil.rmtree(datapack_folder)
-    os.mkdir(datapack_folder)
-    os.mkdir(join(datapack_folder, "data"))
-    os.mkdir(join(datapack_folder, "data", "minecraft"))
-    os.mkdir(join(datapack_folder, "data", "minecraft", "tags"))
-    os.mkdir(join(datapack_folder, "data", "minecraft", "tags", "functions"))
-    os.mkdir(join(datapack_folder, "data", datapack_name))
-    os.mkdir(join(datapack_folder, "data", datapack_name, "functions"))
-    os.mkdir(join(datapack_folder, "data", datapack_name, "structures"))
+    pathlib.Path(join(datapack_folder, "data", "minecraft", "tags", "functions")).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(join(datapack_folder, "data", datapack_name, "functions")).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(join(datapack_folder, "data", datapack_name, "structures")).mkdir(parents=True, exist_ok=True)
 
-def _make_resourcepack_folder_structure(containing_folder: str, resourcepack_name:str):
+def _ensure_resourcepack_folder_structure(containing_folder: str, resourcepack_name:str):
     join = os.path.join
     resourcepack_folder = join(containing_folder, "resources")
-    if os.path.exists(resourcepack_folder):
-        shutil.rmtree(resourcepack_folder)
-    os.mkdir(resourcepack_folder)
-    os.mkdir(join(resourcepack_folder, "assets"))
-    os.mkdir(join(resourcepack_folder, "assets", "minecraft"))
-    os.mkdir(join(resourcepack_folder, "assets", "minecraft", "sounds"))
-    os.mkdir(join(resourcepack_folder, "assets", "minecraft", "sounds", resourcepack_name))
+    pathlib.Path(join(resourcepack_folder, "assets", "minecraft", "sounds", resourcepack_name)).mkdir(parents=True, exist_ok=True)
 
 def _create_datapack_files(containing_folder, datapack_name):
     join = os.path.join
@@ -126,16 +117,16 @@ def _create_resourcepack_files(containing_folder):
 
 def _move_functions(containing_folder: str, datapack_name: str, mcfunction: list):
     for f in mcfunction:
-        shutil.move(os.path.join(containing_folder, f), os.path.join(containing_folder, datapack_name, "data", datapack_name, "functions"))
+        shutil.move(os.path.join(containing_folder, f), os.path.join(containing_folder, datapack_name, "data", datapack_name, "functions", f))
 
 def _move_structures(containing_folder: str, datapack_name: str, nbt: list):
     for f in nbt:
-        shutil.move(os.path.join(containing_folder, f), os.path.join(containing_folder, datapack_name, "data", datapack_name, "structures"))
+        shutil.move(os.path.join(containing_folder, f), os.path.join(containing_folder, datapack_name, "data", datapack_name, "structures", f))
 
 def _move_sounds(containing_folder: str, resourcepack_subfolder: str, ogg: list):
     for f in ogg:
-        shutil.move(os.path.join(containing_folder, f), os.path.join(containing_folder, "resources", "assets", "minecraft", "sounds", resourcepack_subfolder))
-    shutil.move(os.path.join(containing_folder, "sounds.json"), os.path.join(containing_folder, "resources", "assets", "minecraft"))
+        shutil.move(os.path.join(containing_folder, f), os.path.join(containing_folder, "resources", "assets", "minecraft", "sounds", resourcepack_subfolder, f))
+
 
 def main():
     import argparse
