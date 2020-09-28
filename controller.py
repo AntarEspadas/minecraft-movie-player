@@ -84,9 +84,9 @@ def resourcepack_audio(path_to_audio: str, path_to_output_folder: str, split_siz
     import player_resourcepack as pr
     pr.split_and_convert(path_to_audio, path_to_output_folder, name_prefix, split_size)
 
-def resourcepack_json(output_folder: str, amount_of_sound_files: int, name_prefix: str, subfolder_name: str):
+def resourcepack_json(output_folder: str, amount_of_sound_files: int, name_prefix: str, subfolder_name: str, merge: bool):
     import player_resourcepack as pr
-    pr.create_sounds_json(output_folder, subfolder_name, amount_of_sound_files, name_prefix)
+    pr.create_sounds_json(output_folder, subfolder_name, amount_of_sound_files, name_prefix, merge)
 
 def functions_video(output_folder: str, amount_of_frames: int, datapack_name: str, name_prefix: str, max_commands: int, ticks_per_frame: int):
     import player_functions as pf

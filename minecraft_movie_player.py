@@ -52,6 +52,7 @@ def main():
     resourcepack_json_parser.add_argument("amount_of_sound_files", type=mint(0), help="The amount of sound files that should be added to sonds.json")
     resourcepack_json_parser.add_argument("-p", "--name-prefix", type=filename, default="audio_", dest="name_prefix", help="The name that was prefixed to every sound file")
     resourcepack_json_parser.add_argument("-f","--subfolder-name", type=filename, default="player", dest="subfolder_name", help="The name of the resourcepack subfolder where the audio files should be moved to")
+    resourcepack_json_parser.add_argument("-m", "--merge", action="store_true", default=False, dest="merge", help="If present, the contents of the generated sounds.json will be merged with those of any existent sounds.json file in the destination folder")
 
     functions_parser = parsers.add_parser("functions", help="generates movie player functions")
     functions_parsers = functions_parser.add_subparsers(help="subcommands", dest="subcommand")
@@ -100,7 +101,7 @@ def main():
         elif args.subcommand == "audio":
             controller.resourcepack_audio(args.path_to_audio, args.path_to_output_folder, args.split_size, args.name_prefix)
         elif args.subcommand == "json":
-            controller.resourcepack_json(args.output_folder, args.amount_of_sound_files, args.name_prefix, args.subfolder_name)
+            controller.resourcepack_json(args.output_folder, args.amount_of_sound_files, args.name_prefix, args.subfolder_name, args.merge)
 
     elif args.command == "functions":
         if args.subcommand is None:
