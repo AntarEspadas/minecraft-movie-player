@@ -106,10 +106,9 @@ def make(containing_folder: str, subflder_name: str):
     import player_maker as pm
     pm.make(containing_folder, subflder_name)
 
-def generate_all(path_to_video: str, path_to_output_folder: str):
+def generate_all(path_to_video: str, path_to_output_folder: str, datapack_name: str):
     import json
     
-    datapack_name = "player"
     vid_preifx = "video_"
     aud_prefix = "audio_"
     width = 75

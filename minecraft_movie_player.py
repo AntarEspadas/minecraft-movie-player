@@ -89,8 +89,10 @@ def _get_parsers():
 
 
     all_parser = parsers.add_parser("all", help="Generates all the necessary files in one command")
-    all_parser.add_argument("-v", "--video", type=nvid, default=None, dest="path_to_video", help="The path to the video that will be converted")
     all_parser.add_argument("path_to_output_folder", type=fold, help="The path to the folder where all the generated files will be witten")
+    all_parser.add_argument("-v", "--video", type=nvid, default=None, dest="path_to_video", help="The path to the video that will be converted")
+    all_parser.add_argument("-d", "--datapack-name", type=mfilename(13), default="player", dest="datapack_name", help="The name that will be assigned to the generated datapack")
+    
 
     return parser, resourcepak_parser, functions_parser, all_parser
 
@@ -132,7 +134,7 @@ def main():
         from os.path import isfile, join
         if args.path_to_video is None and not isfile(join(args.path_to_output_folder, "progress.txt")):
             all_parser.error("No progress.txt file was found at destination folder, please specify a video using -v/--video")
-        controller.generate_all(args.path_to_video, args.path_to_output_folder)
+        controller.generate_all(args.path_to_video, args.path_to_output_folder, args.datapack_name)
 
 if __name__ == "__main__":
     main()

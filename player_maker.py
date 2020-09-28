@@ -18,7 +18,7 @@ def make(containing_folder: str, resourcepack_subfolder: str = None, datapack_na
         _ensure_resourcepack_folder_structure(containing_folder, resourcepack_subfolder)
         _create_resourcepack_files(containing_folder)
         _move_sounds(containing_folder, resourcepack_subfolder, ogg)
-    if os.path.isfile(containing_folder, "sounds.json"):
+    if os.path.isfile(os.path.join(containing_folder, "sounds.json")):
         shutil.move(os.path.join(containing_folder, "sounds.json"), os.path.join(containing_folder, "resources", "assets", "minecraft", "sounds.json"))
 
     shutil.make_archive(os.path.join(containing_folder,"resources"), "zip", os.path.join(containing_folder, "resources"))
