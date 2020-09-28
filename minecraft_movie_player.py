@@ -71,7 +71,7 @@ def main():
     audio_functions_parser.add_argument("output_folder", type=fold, help="The path to the folder in which the audio functions will be written")
     audio_functions_parser.add_argument("amount_of_sound_files", type=mint(0), help="The amount of previously generated sound files")
     audio_functions_parser.add_argument("-n","--datapack-name", type=mfilename(13), default="player", dest="datapack_name", help="The name you wish to give to your datapack, should remain consistent across all functions and be less than 13 alphabetic lowercase characters")
-    audio_functions_parser.add_argument("-p","--name-prefix", type=filename, default="audio_", dest="name_prefix", help="The name prefix of the audio files that should have been generated beforehand")
+    audio_functions_parser.add_argument("-p","--name-prefix", type=filename, default="player.audio_", dest="name_prefix", help="The name prefix of the audio files that should have been generated beforehand")
     audio_functions_parser.add_argument("-d","--sound-duration", type=mfloat(0), default=60, dest="sound_duration", help="The duration in seconds of the previously generated sound files")
     audio_functions_parser.add_argument("-m","--max-commands", type=mint(0), default=25, dest="max_commands", help="The maximum amount of commands per generated function file, too many commands in a single function may impact performance. The less commands per function file, the more files will be generated")
 
