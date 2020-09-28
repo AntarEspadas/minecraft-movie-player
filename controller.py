@@ -105,3 +105,23 @@ def functions_playback_control(output_folder: str, datapack_name: str, control_a
 def make(containing_folder: str, subflder_name: str):
     import player_maker as pm
     pm.make(containing_folder, subflder_name)
+
+def generate_all(path_to_video: str, path_to_output_folder: str):
+    import json
+    
+    datapack_name = "player"
+    vid_preifx = "video_"
+    aud_prefix = "audio_"
+    width = 75
+
+    import image_converter as ic
+    frame_amount = ic.video_to_structure(path_to_video, path_to_output_folder, vid_preifx, width=width)
+    import player_resourcepack as pr
+    sound_amount = pr.split_and_convert(path_to_video, path_to_output_folder, aud_prefix, 60)
+    pr.create_sounds_json(path_to_output_folder, datapack_name, sound_amount, aud_prefix)
+    import player_functions as pf
+    pf.generate_structure_functions(path_to_output_folder, datapack_name, vid_preifx, 0, frame_amount - 1)
+    pf.generate_audio_functions(path_to_output_folder,datapack_name, datapack_name+"."+aud_prefix, 60, 0, sound_amount - 1)
+    pf.generate_playback_control_functions(path_to_output_folder, datapack_name, True)
+    import player_maker as pm
+    pm.make(path_to_output_folder, datapack_name)

@@ -12,8 +12,6 @@ def wrap(function):
 
 fold = wrap(controller.fold)
 fil = wrap(controller.fil)
-nfold = lambda val: val if val is None else fold(val)
-nfil = lambda val: val if val is None else fil(val)
 palette = wrap(controller.palette)
 vid = wrap(controller.vid)
 nvid = lambda val: val if val is None else vid(val)
@@ -90,10 +88,9 @@ def _get_parsers():
 
 
 
-    all_parser = parsers.add_parser("all", usage="all [-h] ( [-v PATH_TO_VIDEO] | ([-f PATH_TO_OUTPUT_FOLDER] [-p PROGRESS]) )", help="Generates all the necessary files in one command")
+    all_parser = parsers.add_parser("all", help="Generates all the necessary files in one command")
     all_parser.add_argument("-v", "--video", type=nvid, default=None, dest="path_to_video", help="The path to the video that will be converted")
-    all_parser.add_argument("-f", "--folder", type=nfold, default=None, dest="path_to_output_folder", help="The path to the folder where all the generated files will be witten")
-    all_parser.add_argument("-p", "--progess", type=nfil, default=None, dest="progress", help="If you wish to continue from where a previoius conversion left off, find the progress.txt file in the conversion folder and specify its path here")
+    all_parser.add_argument("path_to_output_folder", type=fold, help="The path to the folder where all the generated files will be witten")
 
     return parser, resourcepak_parser, functions_parser, all_parser
 
@@ -132,13 +129,10 @@ def main():
         controller.make(args.containing_folder, args.subfolder_name)
 
     elif args.command == "all":
-        group1 = args.path_to_video is not None or args.path_to_output_folder is not None
-        group2 = args.progress is not None
-        if not group1 ^ group2:
-            all_parser.error("You must specify -v/--video and -f/--folder, or -p/--progress")
-        group1 = args.path_to_video is not None and args.path_to_output_folder is not None
-        if not group1 ^ group2:
-            all_parser.error("You must specify -v/--video and -f/--folder, or -p/--progress")
+        from os.path import isfile, join
+        if args.path_to_video is None and not isfile(join(args.path_to_output_folder, "progress.txt")):
+            all_parser.error("No progress.txt file was found at destination folder, please specify a video using -v/--video")
+        controller.generate_all(args.path_to_video, args.path_to_output_folder)
 
 if __name__ == "__main__":
     main()
