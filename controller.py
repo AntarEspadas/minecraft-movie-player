@@ -114,14 +114,88 @@ def generate_all(path_to_video: str, path_to_output_folder: str):
     aud_prefix = "audio_"
     width = 75
 
-    import image_converter as ic
-    frame_amount = ic.video_to_structure(path_to_video, path_to_output_folder, vid_preifx, width=width)
-    import player_resourcepack as pr
-    sound_amount = pr.split_and_convert(path_to_video, path_to_output_folder, aud_prefix, 60)
-    pr.create_sounds_json(path_to_output_folder, datapack_name, sound_amount, aud_prefix)
-    import player_functions as pf
-    pf.generate_structure_functions(path_to_output_folder, datapack_name, vid_preifx, 0, frame_amount - 1)
-    pf.generate_audio_functions(path_to_output_folder,datapack_name, datapack_name+"."+aud_prefix, 60, 0, sound_amount - 1)
-    pf.generate_playback_control_functions(path_to_output_folder, datapack_name, True)
-    import player_maker as pm
-    pm.make(path_to_output_folder, datapack_name)
+    
+
+    progress_path = os.path.join(path_to_output_folder, "progress.txt")
+    
+    try:
+        with open(progress_path, "r") as f:
+            progress = json.load(f)
+            path_to_video = progress["path_to_video"]
+    except (OSError, json.JSONDecodeError):
+        progress = {}
+        progress["current_step"] = "_generate_structures"
+        progress["last_frame"] = 0
+        progress["path_to_video"] = path_to_video
+
+
+
+    def _generate_structures():
+        progress["current_step"] = "_generate_structures"
+        _write_json()
+        import image_converter as ic
+        ic.video_to_structure(path_to_video, path_to_output_folder, vid_preifx, starting_frame= progress["last_frame"], width=width, on_progress=_on_progress("last_frame"))
+        _generate_structure_functions()
+
+    def _generate_structure_functions():
+        progress["current_step"] = "_generate_structure_functions"
+        _write_json()
+        import player_functions as pf
+        pf.generate_structure_functions(path_to_output_folder, datapack_name, vid_preifx, 0, progress["last_frame"] - 1)
+        _generate_audio()
+
+    def _generate_audio():
+        progress["current_step"] = "_generate_audio"
+        _write_json()
+        try:
+            import player_resourcepack as pr
+            progress["total_audio"] = pr.split_and_convert(path_to_video, path_to_output_folder, aud_prefix, 60)
+        except Exception:
+            progress["has_audio"] = False
+            _generate_playback_control()
+        else:
+            progress["has_audio"] = True
+            _generate_audio_functions()
+
+    def _generate_audio_functions():
+        progress["current_step"] = "_generate_audio_functions"
+        _write_json()
+        import player_functions as pf
+        pf.generate_audio_functions(path_to_output_folder, datapack_name, datapack_name+"."+aud_prefix, 60, 0, progress["total_sounds"] - 1)
+        _generate_sounds_json()
+
+    def _generate_sounds_json():
+        progress["current_step"] = "_generate_sounds_json"
+        _write_json()
+        import player_resourcepack as pr
+        pr.create_sounds_json(path_to_output_folder, datapack_name, progress["total_sounds"], aud_prefix)
+        _generate_playback_control()
+
+    def _generate_playback_control():
+        progress["current_step"] = "_generate_playback_control"
+        _write_json()
+        import player_functions as pf
+        pf.generate_playback_control_functions(path_to_output_folder, datapack_name, progress["has_audio"])
+        _make()
+
+    def _make():
+        progress["current_step"] = "_make"
+        _write_json()
+        import player_maker as pm
+        pm.make(path_to_output_folder, datapack_name)
+        try:
+            os.remove(os.path.join(path_to_output_folder, "progress.txt"))
+        except OSError:
+            pass
+
+    def _write_json():
+        with open(progress_path, "w") as f:
+            json.dump(progress, f)
+
+    def _on_progress(key):
+        def on_progress(value):
+            progress[key] = value
+            _write_json()
+        return on_progress
+
+    locals()[progress["current_step"]]()

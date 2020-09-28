@@ -50,7 +50,7 @@ def video_to_structure(path_to_video: str, destination_folder: str, name_prefix:
         structure = _array_to_structure(image, in_q, out_q, base)
         structure.save(os.path.join(destination_folder, f"{name_prefix}{starting_frame + count}.nbt"))
         if on_progress is not None:
-            on_progress(count)
+            on_progress(starting_frame + count)
         count += 1
         elapsed = time.time() - start
         total_time += elapsed
