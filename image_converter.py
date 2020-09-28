@@ -7,9 +7,10 @@ import kdtree
 import time
 import multiprocessing
 import datetime
+from math import ceil
 
 
-def video_to_structure(path_to_video: str, destination_folder: str, name_prefix: str, path_to_palette: str = "palette.txt", ticks_per_frame:int = 2, starting_frame: int = 0, width: int = None, height: int = None, adjust_mode: str = None, optimize = True, processes: int = None):
+def video_to_structure(path_to_video: str, destination_folder: str, name_prefix: str, path_to_palette: str = "palette.txt", ticks_per_frame:int = 2, starting_frame: int = 0, width: int = None, height: int = None, adjust_mode: str = None, optimize = True, processes: int = None, on_progress = None):
     
     video = cv2.VideoCapture(path_to_video)
 
@@ -39,21 +40,22 @@ def video_to_structure(path_to_video: str, destination_folder: str, name_prefix:
         base = None
 
     total_frames = video.get(cv2.CAP_PROP_FRAME_COUNT) / frame_skip
-    total_frames = round(total_frames)
+    total_frames = ceil(total_frames)
     count = 0
     total_time = 0
+    print("converting video...")
     while success:
         start = time.time()
         image = adjust(image, size)
         structure = _array_to_structure(image, in_q, out_q, base)
         structure.save(os.path.join(destination_folder, f"{name_prefix}{starting_frame + count}.nbt"))
+        count += 1
         elapsed = time.time() - start
         total_time += elapsed
-        average = total_time / (count + 1)
-        eta = (total_frames - starting_frame - count - 1) * average
+        average = total_time / (count)
+        eta = (total_frames - starting_frame - count) * average
         eta = datetime.timedelta(seconds=round(eta))
-        print(f"{starting_frame + count + 1}/{total_frames} (Elapsed: {datetime.timedelta(seconds=round(total_time, 5))}, Average: {round(average, 5)}s, ETA: {eta})" + " "*10, end="\r")
-        count += 1
+        print(f"{starting_frame + count}/{total_frames} (Elapsed: {datetime.timedelta(seconds=round(total_time, 5))}, Average: {round(average, 5)}s, ETA: {eta})" + " "*10, end="\r")
         video.set(cv2.CAP_PROP_POS_FRAMES, int(frame_skip * (starting_frame + count)) - 1)
         success, image = video.read()
     print("")
