@@ -12,16 +12,18 @@ def wrap(function):
 
 fold = wrap(controller.fold)
 fil = wrap(controller.fil)
+nfold = lambda val: val if val is None else fold(val)
+nfil = lambda val: val if val is None else fil(val)
 palette = wrap(controller.palette)
 vid = wrap(controller.vid)
+nvid = lambda val: val if val is None else vid(val)
 filename = wrap(controller.filename)
 nfilename = lambda val: val if val is None else filename(val)
 mfilename = lambda max_chars: wrap(controller.mfilename(max_chars))
 mint = lambda minimum, nullable=False: wrap(controller.mint(minimum, nullable))
 mfloat = lambda minimum, nullable=False: wrap(controller.mfloat(minimum, nullable))
 
-def main():
-
+def _get_parsers():
     parser = argparse.ArgumentParser()
     parsers = parser.add_subparsers(help="commands", dest="command")
 
@@ -86,6 +88,19 @@ def main():
     maker_parser.add_argument("containing_folder", type=fold, help="The path to the folder containing all the generated files")
     maker_parser.add_argument("-f", "--audio-subfolder", type=nfilename, default=None, dest="subfolder_name", help="Specify in case the script has trouble detecting automatically")
 
+
+
+    all_parser = parsers.add_parser("all", usage="all [-h] ( [-v PATH_TO_VIDEO] | ([-f PATH_TO_OUTPUT_FOLDER] [-p PROGRESS]) )", help="Generates all the necessary files in one command")
+    all_parser.add_argument("-v", "--video", type=nvid, default=None, dest="path_to_video", help="The path to the video that will be converted")
+    all_parser.add_argument("-f", "--folder", type=nfold, default=None, dest="path_to_output_folder", help="The path to the folder where all the generated files will be witten")
+    all_parser.add_argument("-p", "--progess", type=nfil, default=None, dest="progress", help="If you wish to continue from where a previoius conversion left off, find the progress.txt file in the conversion folder and specify its path here")
+
+    return parser, resourcepak_parser, functions_parser, all_parser
+
+def main():
+
+    parser, resourcepak_parser, functions_parser, all_parser = _get_parsers()
+
     args = parser.parse_args()
 
     if args.command is None:
@@ -115,6 +130,15 @@ def main():
 
     elif args.command == "make":
         controller.make(args.containing_folder, args.subfolder_name)
+
+    elif args.command == "all":
+        group1 = args.path_to_video is not None or args.path_to_output_folder is not None
+        group2 = args.progress is not None
+        if not group1 ^ group2:
+            all_parser.error("You must specify -v/--video and -f/--folder, or -p/--progress")
+        group1 = args.path_to_video is not None and args.path_to_output_folder is not None
+        if not group1 ^ group2:
+            all_parser.error("You must specify -v/--video and -f/--folder, or -p/--progress")
 
 if __name__ == "__main__":
     main()
