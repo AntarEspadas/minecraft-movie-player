@@ -101,3 +101,7 @@ def functions_audio(output_folder: str, amount_of_sound_files: int, datapack_nam
 def functions_playback_control(output_folder: str, datapack_name: str, control_audio: bool):
     import player_functions as pf
     pf.generate_playback_control_functions(output_folder, datapack_name, control_audio)
+
+def make(containing_folder: str, subflder_name: str):
+    import player_maker as pm
+    pm.make(containing_folder, subflder_name)

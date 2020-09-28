@@ -15,6 +15,7 @@ fil = wrap(controller.fil)
 palette = wrap(controller.palette)
 vid = wrap(controller.vid)
 filename = wrap(controller.filename)
+nfilename = lambda val: val if val is None else filename(val)
 mfilename = lambda max_chars: wrap(controller.mfilename(max_chars))
 mint = lambda minimum, nullable=False: wrap(controller.mint(minimum, nullable))
 mfloat = lambda minimum, nullable=False: wrap(controller.mfloat(minimum, nullable))
@@ -50,7 +51,7 @@ def main():
     resourcepack_json_parser.add_argument("output_folder", type=fold, help="The path to the folder in which the sounds.json file will be written")
     resourcepack_json_parser.add_argument("amount_of_sound_files", type=mint(0), help="The amount of sound files that should be added to sonds.json")
     resourcepack_json_parser.add_argument("-p", "--name-prefix", type=filename, default="audio_", dest="name_prefix", help="The name that was prefixed to every sound file")
-    resourcepack_json_parser.add_argument("-s","--subfolder-name", type=filename, default="player", dest="subfolder_name", help="The name of the resourcepack subfolder where the audio files should be moved to")
+    resourcepack_json_parser.add_argument("-f","--subfolder-name", type=filename, default="player", dest="subfolder_name", help="The name of the resourcepack subfolder where the audio files should be moved to")
 
     functions_parser = parsers.add_parser("functions", help="generates movie player functions")
     functions_parsers = functions_parser.add_subparsers(help="subcommands", dest="subcommand")
@@ -79,7 +80,11 @@ def main():
     playback_control_functions_parser.add_argument("-d","--datapack-name", type=filename, default="player", dest="datapack_name", help="The name you wish to give to your datapack, should remain consistent across all functions and be less than 13 alphabetic lowercase characters")
     playback_control_functions_parser.add_argument("-a","--control-audio", action="store_true", default=False, dest="control_audio", help="If present, the functions will be able to control the audio playback aswell, if the datapack uses no audio, enabling this option will break the playback control")
 
-    #parser.add_argument("-nv", "--no-video", help="doesn't convert the video to any format", action="store_true")
+    
+    maker_parser = parsers.add_parser("make", help="puts together all the generated files, creating a datapack folder and resourcepack folder")
+    maker_parser.add_argument("containing_folder", type=fold, help="The path to the folder containing all the generated files")
+    maker_parser.add_argument("-f", "--audio-subfolder", type=nfilename, default=None, dest="subfolder_name", help="Specify in case the script has trouble detecting automatically")
+
     args = parser.parse_args()
 
     if args.command is None:
@@ -106,6 +111,9 @@ def main():
             controller.functions_audio(args.output_folder, args.amount_of_sound_files, args.datapack_name, args.name_prefix, args.sound_duration, args.max_commands)
         elif args.subcommand == "playback-control":
             controller.functions_playback_control(args.output_folder, args.datapack_name, args.control_audio)
+
+    elif args.command == "make":
+        controller.make(args.containing_folder, args.subfolder_name)
 
 if __name__ == "__main__":
     main()
