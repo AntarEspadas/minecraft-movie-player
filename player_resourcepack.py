@@ -12,7 +12,7 @@ def split_and_convert(input_file: str, output_folder: str, name_prefix: str, seg
         print("Could not find ffmpeg or avconv installation, either of them is required for this part of the script to work")
         return None
     finally:
-        warnings.filterwarnings("default")
+        warnings.filterwarnings("ignore")
 
     print("reading file...")
     audio = pydub.AudioSegment.from_file(input_file)
