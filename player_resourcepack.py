@@ -4,7 +4,7 @@ import json
 from math import ceil
 
 
-def split_and_convert(input_file: str, output_folder: str, name_prefix: str, segment_duration: float) -> int:
+def split_and_convert(input_file: str, output_folder: str, name_prefix: str, segment_duration: float, starting_segment: int = 0, on_progress = None) -> int:
     warnings.filterwarnings("error")
     try:
         import pydub
@@ -19,11 +19,13 @@ def split_and_convert(input_file: str, output_folder: str, name_prefix: str, seg
     print("converting...")
     parameters = ["-ac", "2"] if audio.channels > 2 else []
     total_files = ceil(audio.duration_seconds / segment_duration)
-    i = 0
+    i = starting_segment
     while i * segment_duration < audio.duration_seconds:
         segment = audio[i * segment_duration * 1000: (i + 1) * segment_duration * 1000]
         file_handle = segment.export(os.path.join(output_folder, name_prefix + str(i) + ".ogg"), "ogg", "libvorbis", parameters=parameters)
         file_handle.close()
+        if on_progress is not None:
+            on_progress(i)
         i += 1
         print(f"{i}/{total_files}     ", end="\r")
     print("")

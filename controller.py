@@ -126,6 +126,7 @@ def generate_all(path_to_video: str, path_to_output_folder: str):
         progress = {}
         progress["current_step"] = "_generate_structures"
         progress["last_frame"] = 0
+        progress["last_segment"] = 0
         progress["path_to_video"] = path_to_video
 
 
@@ -149,7 +150,7 @@ def generate_all(path_to_video: str, path_to_output_folder: str):
         _write_json()
         try:
             import player_resourcepack as pr
-            progress["total_audio"] = pr.split_and_convert(path_to_video, path_to_output_folder, aud_prefix, 60)
+            progress["total_audio"] = pr.split_and_convert(path_to_video, path_to_output_folder, aud_prefix, 60, progress["last_segment"], _on_progress("last_segment"))
         except Exception:
             progress["has_audio"] = False
             _generate_playback_control()
@@ -161,14 +162,14 @@ def generate_all(path_to_video: str, path_to_output_folder: str):
         progress["current_step"] = "_generate_audio_functions"
         _write_json()
         import player_functions as pf
-        pf.generate_audio_functions(path_to_output_folder, datapack_name, datapack_name+"."+aud_prefix, 60, 0, progress["total_sounds"] - 1)
+        pf.generate_audio_functions(path_to_output_folder, datapack_name, datapack_name+"."+aud_prefix, 60, 0, progress["last_segment"])
         _generate_sounds_json()
 
     def _generate_sounds_json():
         progress["current_step"] = "_generate_sounds_json"
         _write_json()
         import player_resourcepack as pr
-        pr.create_sounds_json(path_to_output_folder, datapack_name, progress["total_sounds"], aud_prefix)
+        pr.create_sounds_json(path_to_output_folder, datapack_name, progress["last_segment"] + 1, aud_prefix)
         _generate_playback_control()
 
     def _generate_playback_control():
