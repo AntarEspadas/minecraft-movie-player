@@ -22,7 +22,6 @@ brown_mushroom_block,149,111,81,||
 brown_terracotta,77,51,35,||
 brown_wool,114,71,40,||
 bubble_coral_block,165,26,162,||
-carved_pumpkin,150,84,17,||
 chiseled_quartz_block,231,226,218,||
 chiseled_red_sandstone,183,96,27,||
 chiseled_sandstone,216,202,155,||
