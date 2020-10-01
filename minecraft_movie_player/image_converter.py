@@ -10,8 +10,10 @@ import datetime
 from math import ceil
 
 
-def video_to_structure(path_to_video: str, destination_folder: str, name_prefix: str, path_to_palette: str = "palette.txt", ticks_per_frame:int = 2, starting_frame: int = 0, width: int = None, height: int = None, adjust_mode: str = None, optimize = True, processes: int = None, on_progress = None):
+def video_to_structure(path_to_video: str, destination_folder: str, name_prefix: str, path_to_palette: str = None, ticks_per_frame:int = 2, starting_frame: int = 0, width: int = None, height: int = None, adjust_mode: str = None, optimize = True, processes: int = None, on_progress = None):
     
+    path_to_palette = path_to_palette if path_to_palette is not None else os.path.join(os.path.dirname(__file__), "palette.txt")
+
     video = cv2.VideoCapture(path_to_video)
 
     output_fps = 20 / ticks_per_frame
@@ -65,7 +67,10 @@ def video_to_structure(path_to_video: str, destination_folder: str, name_prefix:
     [process.terminate() for process in row_processors]
     return count
 
-def image_to_structure(path_to_image: str, out_structure: str, path_to_palette: str = "palette.txt", width: int = None, height: int = None, adjust_mode = None):
+def image_to_structure(path_to_image: str, out_structure: str, path_to_palette: str = None, width: int = None, height: int = None, adjust_mode = None):
+    
+    path_to_palette = path_to_palette if path_to_palette is not None else os.path.join(os.path.dirname(__file__), "palette.txt")
+    
     palette = _get_palette(path_to_palette)
     image = cv2.imread(path_to_image)
 

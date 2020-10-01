@@ -1,6 +1,7 @@
 
 from . import controller
 import argparse
+import os
 
 def wrap(function):
     def validate(value):
@@ -29,7 +30,7 @@ def _get_parsers():
     video_parser = parsers.add_parser("video", help="convert video to structure files")
     video_parser.add_argument("path_to_video", type=vid, help="The path to the video file that will be converted to structure files")
     video_parser.add_argument("path_to_output_folder", type=fold, help="The path to the folder in which the frames will be written")
-    video_parser.add_argument("-p", "--palette", default="palette.txt", type=palette, dest="path_to_palette",help="The path to the block palette file to be used when convertnig")
+    video_parser.add_argument("-p", "--palette", default=os.path.join(os.path.dirname(__file__), "palette.txt"), type=palette, dest="path_to_palette",help="The path to the block palette file to be used when convertnig")
     video_parser.add_argument("-n", "--name-prefix", default="video_", type=filename, dest="name_prefix", help="Specifies the name that will be prefixed to every generated frame")
     video_parser.add_argument("-t", "--ticks-per-frame", default="2", type=mint(0), dest="ticks_per_frame",help="How many game ticks between every frame. Can be any integer from 1 to 20. Default is 2. 20 = 1 fps, 2 = 10 fps, 1 = 20 fps, etc...")
     video_parser.add_argument("-x", "--width", default=None, type=mint(0, True), dest="width", help="The width of the output frames, measured in blocks")
