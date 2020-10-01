@@ -1,5 +1,5 @@
 
-import controller
+from . import controller
 import argparse
 
 def wrap(function):

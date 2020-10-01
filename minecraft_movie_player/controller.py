@@ -12,7 +12,7 @@ def fold(value):
 
 def palette(value):
     pvalue = fil(value)
-    from image_converter import _get_palette
+    from .image_converter import _get_palette
     try:
         _get_palette(pvalue)
     except Exception:
@@ -75,35 +75,35 @@ def vid(value):
     return fvalue
 
 def video(path_to_video: str, path_to_output_folder: str, path_to_palette: str, name_prefix: str, ticks_per_frame: str, width: int, height: int, adjust_mode: str, unoptimized: bool, subprocesses: int):
-    import image_converter as ic
+    from . import image_converter as ic
     if width is None and height is None:
         width = 75
     ic.video_to_structure(path_to_video, path_to_output_folder, name_prefix, path_to_palette, ticks_per_frame, 0, width, height, adjust_mode, not unoptimized, subprocesses)
 
 def resourcepack_audio(path_to_audio: str, path_to_output_folder: str, split_size: float, name_prefix: str):
-    import player_resourcepack as pr
+    from . import player_resourcepack as pr
     pr.split_and_convert(path_to_audio, path_to_output_folder, name_prefix, split_size)
 
 def resourcepack_json(output_folder: str, amount_of_sound_files: int, name_prefix: str, subfolder_name: str, merge: bool):
-    import player_resourcepack as pr
+    from . import player_resourcepack as pr
     pr.create_sounds_json(output_folder, subfolder_name, amount_of_sound_files, name_prefix, merge)
 
 def functions_video(output_folder: str, amount_of_frames: int, datapack_name: str, name_prefix: str, max_commands: int, ticks_per_frame: int):
-    import player_functions as pf
+    from . import player_functions as pf
     final_index = amount_of_frames - 1
     pf.generate_structure_functions(output_folder, datapack_name, name_prefix, 0, final_index, max_commands, ticks_per_frame)
 
 def functions_audio(output_folder: str, amount_of_sound_files: int, datapack_name: str, name_prefix: str, sound_duration: float, max_commands: int):
-    import player_functions as pf
+    from . import player_functions as pf
     final_index = amount_of_sound_files - 1
     pf.generate_audio_functions(output_folder, datapack_name, name_prefix, sound_duration, 0, final_index, max_commands)
 
 def functions_playback_control(output_folder: str, datapack_name: str, control_audio: bool):
-    import player_functions as pf
+    from . import player_functions as pf
     pf.generate_playback_control_functions(output_folder, datapack_name, control_audio)
 
 def make(containing_folder: str, subflder_name: str):
-    import player_maker as pm
+    from . import player_maker as pm
     pm.make(containing_folder, subflder_name)
 
 def generate_all(path_to_video: str, path_to_output_folder: str, datapack_name: str):
@@ -133,14 +133,14 @@ def generate_all(path_to_video: str, path_to_output_folder: str, datapack_name: 
     def _generate_structures():
         progress["current_step"] = "_generate_structures"
         _write_json()
-        import image_converter as ic
+        from . import image_converter as ic
         ic.video_to_structure(path_to_video, path_to_output_folder, vid_preifx, starting_frame= progress["last_frame"], width=width, on_progress=_on_progress("last_frame"))
         _generate_structure_functions()
 
     def _generate_structure_functions():
         progress["current_step"] = "_generate_structure_functions"
         _write_json()
-        import player_functions as pf
+        from . import player_functions as pf
         pf.generate_structure_functions(path_to_output_folder, datapack_name, vid_preifx, 0, progress["last_frame"] - 1)
         _generate_audio()
 
@@ -148,7 +148,7 @@ def generate_all(path_to_video: str, path_to_output_folder: str, datapack_name: 
         progress["current_step"] = "_generate_audio"
         _write_json()
         try:
-            import player_resourcepack as pr
+            from . import player_resourcepack as pr
             progress["total_audio"] = pr.split_and_convert(path_to_video, path_to_output_folder, aud_prefix, 60, progress["last_segment"], _on_progress("last_segment"))
         except Exception:
             progress["has_audio"] = False
@@ -160,28 +160,28 @@ def generate_all(path_to_video: str, path_to_output_folder: str, datapack_name: 
     def _generate_audio_functions():
         progress["current_step"] = "_generate_audio_functions"
         _write_json()
-        import player_functions as pf
+        from . import player_functions as pf
         pf.generate_audio_functions(path_to_output_folder, datapack_name, datapack_name+"."+aud_prefix, 60, 0, progress["last_segment"])
         _generate_sounds_json()
 
     def _generate_sounds_json():
         progress["current_step"] = "_generate_sounds_json"
         _write_json()
-        import player_resourcepack as pr
+        from . import player_resourcepack as pr
         pr.create_sounds_json(path_to_output_folder, datapack_name, progress["last_segment"] + 1, aud_prefix)
         _generate_playback_control()
 
     def _generate_playback_control():
         progress["current_step"] = "_generate_playback_control"
         _write_json()
-        import player_functions as pf
+        from . import player_functions as pf
         pf.generate_playback_control_functions(path_to_output_folder, datapack_name, progress["has_audio"])
         _make()
 
     def _make():
         progress["current_step"] = "_make"
         _write_json()
-        import player_maker as pm
+        from . import player_maker as pm
         pm.make(path_to_output_folder, datapack_name, datapack_name)
         try:
             os.remove(os.path.join(path_to_output_folder, "progress.txt"))

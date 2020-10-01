@@ -1,6 +1,6 @@
 import numpy
 import cv2
-import structure_block
+from . import structure_block
 import os
 import csv
 import kdtree
