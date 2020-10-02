@@ -11,6 +11,8 @@ A command line program that generates a datapack that plays videos in vanilla Mi
  - [ffmpeg](https://ffmpeg.org/download.html) or [libav](https://libav.org/download/)
  - Minecraft java edition 1.6 (May work on earlier versions but is untested)
 
+Make sure both python and ffmpeg/libav are present in your system's PATH environment variable
+
 **Installation**
 the installatin can be done through [pip](https://pypi.org/project/pip/)
 
