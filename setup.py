@@ -3,8 +3,11 @@ import os
 
 HERE = os.path.abspath(".")
 
-with open("readme.md", "r") as readme:
-    long_description = readme.read()
+try:
+    with open("readme.md", "r") as readme:
+        long_description = readme.read()
+except OSError:
+    long_description = "For more information, see [https://github.com/Naratna/minecraft-movie-player](https://github.com/Naratna/minecraft-movie-player#readme)"
     
 install_requires ='''kdtree>=0.16
 nbtlib>=1.8.1
