@@ -35,7 +35,7 @@ def _get_parsers():
     video_parser.add_argument("-t", "--ticks-per-frame", default="2", type=mint(0), dest="ticks_per_frame",help="How many game ticks between every frame. Can be any integer from 1 to 20. Default is 2. 20 = 1 fps, 2 = 10 fps, 1 = 20 fps, etc...")
     video_parser.add_argument("-x", "--width", default=None, type=mint(0, True), dest="width", help="The width of the output frames, measured in blocks")
     video_parser.add_argument("-y", "--height", default=None, type=mint(0, True), dest="height", help="The height of the output frames, measured in blocks")
-    video_parser.add_argument("-m", "--adjust-mode", default="fit", type=str, dest="adjust_mode", choices=["fit", "fill"], help="If 'fit' is selected, the black bars will be added to make the image fit the specified with and height. If set to 'fill', the image will be cropped in order to fit the width and height specified. Only used if both with and height are specified")
+    video_parser.add_argument("-m", "--adjust-mode", default="fit", type=str, dest="adjust_mode", choices=["fit", "fill"], help="If 'fit' is selected, black bars will be added to make the image fit the specified with and height. If set to 'fill', the image will be cropped in order to fit the width and height specified. Only used if both with and height are specified")
     video_parser.add_argument("-u","--unoptimized", action="store_true", dest="unoptimized", help="By default, every frame contains only the blocks that differ from the previous frame in an attempt to save resources. Using this option will disable this feature")
     video_parser.add_argument("-s", "--subprocesses", default=None, type=mint(0, True), dest="subprocesses", help="The amount of subprocesses that should be used when generating the frames. Defaults to the amount of cores on your PC")
 
@@ -93,6 +93,11 @@ def _get_parsers():
     all_parser.add_argument("path_to_output_folder", type=fold, help="The path to the folder where all the generated files will be witten")
     all_parser.add_argument("-v", "--video", type=nvid, default=None, dest="path_to_video", help="The path to the video that will be converted")
     all_parser.add_argument("-d", "--datapack-name", type=mfilename(13), default="player", dest="datapack_name", help="The name that will be assigned to the generated datapack")
+    all_parser.add_argument("-p", "--palette", default=os.path.join(os.path.dirname(__file__), "palette.txt"), type=palette, dest="path_to_palette",help="The path to the block palette file to be used when convertnig")
+    all_parser.add_argument("-t", "--ticks-per-frame", default="2", type=mint(0), dest="ticks_per_frame",help="How many game ticks between every frame. Can be any integer from 1 to 20. Default is 2. 20 = 1 fps, 2 = 10 fps, 1 = 20 fps, etc...")
+    all_parser.add_argument("-x", "--width", default=None, type=mint(0, True), dest="width", help="The width of the output frames, measured in blocks")
+    all_parser.add_argument("-y", "--height", default=None, type=mint(0, True), dest="height", help="The height of the output frames, measured in blocks")
+    all_parser.add_argument("-m", "--adjust-mode", default="fit", type=str, dest="adjust_mode", choices=["fit", "fill"], help="If 'fit' is selected, black bars will be added to make the image fit the specified with and height. If set to 'fill', the image will be cropped in order to fit the width and height specified. Only used if both with and height are specified")
     
 
     return parser, resourcepak_parser, functions_parser, all_parser
@@ -135,7 +140,7 @@ def main():
         from os.path import isfile, join
         if args.path_to_video is None and not isfile(join(args.path_to_output_folder, "progress.txt")):
             all_parser.error("No progress.txt file was found at destination folder, please specify a video using -v/--video")
-        controller.generate_all(args.path_to_video, args.path_to_output_folder, args.datapack_name)
+        controller.generate_all(args.path_to_video, args.path_to_output_folder, args.datapack_name, args.path_to_palette, args.ticks_per_frame, args.width, args.height, args.adjust_mode)
 
 if __name__ == "__main__":
     main()

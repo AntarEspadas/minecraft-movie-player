@@ -106,13 +106,11 @@ def make(containing_folder: str, subflder_name: str):
     from . import player_maker as pm
     pm.make(containing_folder, subflder_name)
 
-def generate_all(path_to_video: str, path_to_output_folder: str, datapack_name: str):
+def generate_all(path_to_video: str, path_to_output_folder: str, datapack_name: str, path_to_palette: str, ticks_per_frame: int, width: int, height: int, adjust_mode: str):
     import json
     
     vid_preifx = "video_"
     aud_prefix = "audio_"
-    width = 75
-
     
 
     progress_path = os.path.join(path_to_output_folder, "progress.txt")
@@ -120,21 +118,35 @@ def generate_all(path_to_video: str, path_to_output_folder: str, datapack_name: 
     try:
         with open(progress_path, "r") as f:
             progress = json.load(f)
-            path_to_video = progress["path_to_video"]
+        path_to_video = progress["path_to_video"]
+        datapack_name = progress["datapack_name"]
+        path_to_palette = progress["path_to_palette"]
+        width = progress["width"]
+        height = progress["height"]
+        ticks_per_frame = progress["ticks_per_frame"]
+        adjust_mode = progress["adjust_mode"]
     except (OSError, json.JSONDecodeError):
         progress = {}
         progress["current_step"] = "_generate_structures"
         progress["last_frame"] = 0
         progress["last_segment"] = 0
         progress["path_to_video"] = path_to_video
+        progress["datapack_name"] = datapack_name
+        progress["path_to_palette"] = path_to_palette
+        progress["width"] = width
+        progress["height"] = height
+        progress["ticks_per_frame"] = ticks_per_frame
+        progress["adjust_mode"] = adjust_mode
 
+    if width is None and height is None:
+        width = 75
 
 
     def _generate_structures():
         progress["current_step"] = "_generate_structures"
         _write_json()
         from . import image_converter as ic
-        ic.video_to_structure(path_to_video, path_to_output_folder, vid_preifx, starting_frame= progress["last_frame"], width=width, on_progress=_on_progress("last_frame"))
+        ic.video_to_structure(path_to_video, path_to_output_folder, vid_preifx, path_to_palette=path_to_palette, ticks_per_frame=ticks_per_frame, starting_frame= progress["last_frame"], width=width, height=height, adjust_mode=adjust_mode, on_progress=_on_progress("last_frame"))
         _generate_structure_functions()
 
     def _generate_structure_functions():
