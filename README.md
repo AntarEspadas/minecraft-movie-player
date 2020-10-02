@@ -11,12 +11,12 @@ A command line program that generates a datapack that plays videos in vanilla Mi
  - [ffmpeg](https://ffmpeg.org/download.html) or [libav](https://libav.org/download/)
  - Minecraft java edition 1.6 (May work on earlier versions but is untested)
 
-  **Installation**
+**Installation**
 the installatin can be done through [pip](https://pypi.org/project/pip/)
 
     $ python -m pip install minecraft-movie-player
 
- **Basic usage**
+**Basic usage**
 The easiest way to generate the necessary files is through the sub command `all` provided by the cli, like so:
  
     $ mc-movie all OUTPUT_FOLDER -v VIDEO
