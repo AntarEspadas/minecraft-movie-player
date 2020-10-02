@@ -19,6 +19,14 @@ the installatin can be done through [pip](https://pypi.org/project/pip/)
     $ python -m pip install minecraft-movie-player
 
 **Basic usage**
+The program can be called from a command line with
+
+    $ mc-movie
+
+or, alternatively, with
+
+    $ python -m minecraft_movie_player
+
 The easiest way to generate the necessary files is through the sub command `all` provided by the cli, like so:
  
     $ mc-movie all OUTPUT_FOLDER -v VIDEO
