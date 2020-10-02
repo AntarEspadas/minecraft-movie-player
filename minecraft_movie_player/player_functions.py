@@ -194,5 +194,3 @@ def _calculate_layers(first_index: int, final_index: int, max_commands: int) -> 
     if command_amount == 1:
         return [1]
     return [math.ceil(command_amount / max_commands ** (i+1)) for i in range(math.ceil(math.log(command_amount, max_commands)))]
-
-generate_audio_functions("D:\\Desarrollo\\Python\\minecraft-movie-player\\test-io\\rickroll_cut", "test", "audio_", 60, 0, 0, 50)
