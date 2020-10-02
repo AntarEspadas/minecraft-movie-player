@@ -9,11 +9,11 @@ with open("readme.md", "r") as readme:
 install_requires ='''kdtree>=0.16
 nbtlib>=1.8.1
 opencv-python>=4.4.0.42
-pydub>=0.24.1'''
+pydub>=0.24.1'''.split("\n")
 
 setup(
     name="minecraft-movie-player",
-    version = "",
+    version = "0.1",
     author = "Naratna",
     author_email = "antar.espadas@hotmail.com",
     description = "A command line program that generates a datapack that plays videos in vanilla Minecraft",
