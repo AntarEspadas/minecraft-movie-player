@@ -23,6 +23,11 @@ def make(containing_folder: str, resourcepack_subfolder: str = None, datapack_na
 
     shutil.make_archive(os.path.join(containing_folder,"resources"), "zip", os.path.join(containing_folder, "resources"))
 
+    try:
+        shutil.rmtree(os.path.join(containing_folder,"resources"))
+    except OSError:
+        pass
+
 
 def _get_file_lists(containing_folder: str):
     files = [f for f in os.listdir(containing_folder) if os.path.isfile(os.path.join(containing_folder, f))]
