@@ -21,10 +21,10 @@ setup(
     long_description_content_type = "text/markdown",
     url = "https://github.com/Naratna/minecraft-movie-player",
     packages = find_packages(),
-    classifiers = [
-        "programming Language :: Python :: 3",
-        "License:: OSI Approved :: MIT License",
-        "Operating System :: OS Independent"
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
     ],
     python_requires = ">=3.8",
     install_requires = install_requires,
