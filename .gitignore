@@ -2,7 +2,7 @@
 
 /test-io/
 
-/tests/io/out*
+/tests/output/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
