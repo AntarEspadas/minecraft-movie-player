@@ -151,6 +151,12 @@ def main():
     elif args.command == "make":
         controller.make(args.containing_folder, args.subfolder_name)
 
+    elif args.command == "index":
+        controller.index(args.path_to_block_folder, args.destination_file, args.filename_is_id)
+
+    elif args.command == "palette":
+        controller.palette(args.path_to_block_folder, args.destination_file, args.path_to_index)
+
     elif args.command == "all":
         from os.path import isfile, join
         if args.path_to_video is None and not isfile(join(args.path_to_output_folder, "progress.txt")):
