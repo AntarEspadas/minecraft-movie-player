@@ -93,7 +93,7 @@ def _get_parsers():
     index_parser = parsers.add_parser("index", help="Helps generate a template for the index file")
     index_parser.add_argument("path_to_block_folder", type=fold, help="The path to the folder containing all the block textures that are to be used")
     index_parser.add_argument("destination_file", type=str, help="The path where the file that will be generated")
-    index_parser.add_argument("-f", "--filename-is-id", action="store_true", default=False, dest="filename_is,id", help="Uses the filenames of the images as block IDs in the generated file")
+    index_parser.add_argument("-f", "--filename-is-id", action="store_true", default=False, dest="filename_is_id", help="Uses the filenames of the images as block IDs in the generated file")
 
 
 
@@ -101,6 +101,8 @@ def _get_parsers():
     palette_parser.add_argument("path_to_block_folder", type=fold, help="The path to the folder containing all the block textures that are to be used")
     palette_parser.add_argument("destination_file", type=str, help="The path where the file that will be generated")
     palette_parser.add_argument("-i", "--index", type=nfil, default=None, dest="path_to_index", help="The path to the block index file. If not specified, all the blocks within the block folder will be used and their filenames will be taken as their IDs")
+
+
 
     all_parser = parsers.add_parser("all", help="Generates all the necessary files in one command")
     all_parser.add_argument("path_to_output_folder", type=fold, help="The path to the folder where all the generated files will be witten")
