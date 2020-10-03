@@ -106,6 +106,15 @@ def make(containing_folder: str, subflder_name: str):
     from . import player_maker as pm
     pm.make(containing_folder, subflder_name)
 
+def index(path_to_block_folder: str, destination_file: str, filename_is_id: bool):
+    from . import palette_generator as pg
+    pg.generate_index_template(path_to_block_folder, destination_file, filename_is_id)
+
+def palette(path_to_block_folder: str, destination_file: str, path_to_index: str):
+    from . import palette_generator as pg
+    pg.generate_palette(path_to_block_folder, destination_file, path_to_index)
+
+
 def generate_all(path_to_video: str, path_to_output_folder: str, datapack_name: str, path_to_palette: str, ticks_per_frame: int, width: int, height: int, adjust_mode: str):
     import json
     
