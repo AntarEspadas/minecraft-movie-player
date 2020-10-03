@@ -1,15 +1,20 @@
 import unittest
-import os
+from os.path import join
 import minecraft_movie_player.palette_generator as palette_generator
 
 class PaletteGeneratorTest(unittest.TestCase):
      
-     def test_generate_index_template(self):
-         pass
+    out_folder = join("tests", "output")
+    data_folder = join("tests", "data")
+    block_folder = join(data_folder, "block")
+
+    def test_generate_index_template(self):
+        palette_generator.generate_index_template(self.block_folder, join(self.out_folder, "index.txt"))
+        palette_generator.generate_index_template(self.block_folder, join(self.out_folder, "index_no_ids.txt"), False)
 
 def main():
     import pathlib
-    pathlib.Path(os.path.join("tests", "output")).mkdir(exist_ok=True)
+    pathlib.Path(join("tests", "output")).mkdir(exist_ok=True)
     unittest.main()
 
 if __name__ == "__main__":
