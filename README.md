@@ -3,7 +3,7 @@
 
 A command line program that generates a datapack that plays videos in vanilla Minecraft
 
-The goal of this program is to take a video file and convert its frames into structure block files so that it can be played insde a Minecraft world through the use of a datapack and a resourcepack
+The goal of this program is to take a video file and convert its frames into structure block files so that it can be played inside a Minecraft world through the use of a datapack and a resourcepack
 
 ## Getting started
 
@@ -16,7 +16,7 @@ The goal of this program is to take a video file and convert its frames into str
 Make sure both python and ffmpeg/libav are present in your system's PATH environment variable
 
 **Installation**
-the installatin can be done through [pip](https://pypi.org/project/pip/)
+the installation can be done through [pip](https://pypi.org/project/pip/)
 
     $ python -m pip install minecraft-movie-player
 
@@ -68,11 +68,11 @@ Additionally, the following commands should be available to pause/play the video
 
 ## How it works
 
-The most important part of the program is that which analyses an image pixel by pixel and finds which Minecraft block is the closest in colour. In order to so, the program requires a list of of Minecraft blocks and their average RGB value, this list is known as a palette. The larger the palette, the better the image
+The most important part of the program is that which analyses an image pixel by pixel and finds which Minecraft block is the closest in color. In order to so, the program requires a list of of Minecraft blocks and their average RGB value, this list is known as a palette. The larger the palette, the better the image
 
 **How to create a palette**
 
-The script is able to analyse a folder containing minecraft texture images (obtained by extracting .minecraft/versions/[version number]/[version number].jar with any tool such as Winrar or 7Zip) in order to find their average colours and put them on a file, the palette. However, average colour is not all the information the program needs, it also has to know which block IDs go with which colours, and in some cases some NBT data indicating the direction a block is facing.
+The script is able to analyze a folder containing Minecraft texture images (obtained by extracting .minecraft/versions/[version number]/[version number].jar with any tool such as WinRAR or 7Zip) in order to find their average colors and put them on a file, the palette. However, average color is not all the information the program needs, it also has to know which block IDs go with which colors, and in some cases some NBT data indicating the direction a block is facing.
 
 This information is stored in a file formatted with tab separated values called the index, which tells the script the filenames of different Minecraft blocks, their block IDs and, optionally, the NBT data required to make the block face the right direction.
 
@@ -100,7 +100,7 @@ Then, we point at the block and look at the right of the debug menu, there, we w
 
 ![oak_2.png](images/oak_2.png)
 
-The first highlighted line, minecraft:oark_log, is the block ID, the second, axis: z, is the information we need about the orientation, meaning the index would now look like this:
+The first highlighted line, minecraft:oak_log, is the block ID, the second, axis: z, is the information we need about the orientation, meaning the index would now look like this:
 
   
 
