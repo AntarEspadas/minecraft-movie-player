@@ -13,6 +13,7 @@ def wrap(function):
 
 fold = wrap(controller.fold)
 fil = wrap(controller.fil)
+nfil = lambda val: val if val is None else fil(val)
 palette = wrap(controller.palette)
 vid = wrap(controller.vid)
 nvid = lambda val: val if val is None else vid(val)
@@ -83,11 +84,23 @@ def _get_parsers():
     playback_control_functions_parser.add_argument("-a","--control-audio", action="store_true", default=False, dest="control_audio", help="If present, the functions will be able to control the audio playback aswell, if the datapack uses no audio, enabling this option will break the playback control")
 
     
-    maker_parser = parsers.add_parser("make", help="puts together all the generated files, creating a datapack folder and resourcepack folder")
+    maker_parser = parsers.add_parser("make", help="Puts together all the generated files, creating a datapack folder and resourcepack folder")
     maker_parser.add_argument("containing_folder", type=fold, help="The path to the folder containing all the generated files")
     maker_parser.add_argument("-f", "--audio-subfolder", type=nfilename, default=None, dest="subfolder_name", help="Specify in case the script has trouble detecting automatically")
 
 
+
+    index_parser = parsers.add_parser("index", help="Helps generate a template for the index file")
+    index_parser.add_argument("path_to_block_folder", type=fold, help="The path to the folder containing all the block textures that are to be used")
+    index_parser.add_argument("destination_file", type=str, help="The path where the file that will be generated")
+    index_parser.add_argument("-f", "--filename-is-id", action="store_true", default=False, dest="filename_is,id", help="Uses the filenames of the images as block IDs in the generated file")
+
+
+
+    palette_parser = parsers.add_parser("palette", help="Generates a palette file based on the specified block textures")
+    palette_parser.add_argument("path_to_block_folder", type=fold, help="The path to the folder containing all the block textures that are to be used")
+    palette_parser.add_argument("destination_file", type=str, help="The path where the file that will be generated")
+    palette_parser.add_argument("-i", "--index", type=nfil, default=None, dest="path_to_index", help="The path to the block index file. If not specified, all the blocks within the block folder will be used and their filenames will be taken as their IDs")
 
     all_parser = parsers.add_parser("all", help="Generates all the necessary files in one command")
     all_parser.add_argument("path_to_output_folder", type=fold, help="The path to the folder where all the generated files will be witten")
