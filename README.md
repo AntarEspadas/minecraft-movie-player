@@ -128,6 +128,21 @@ Optional arguments:
 - `-s` or `--split-size`: the duration in seconds of of every generated audio chunk. Default is 60.
 - `-p` or `--name-prefix`: the name that is to be prefixed to every generated audio file. For instance, the option `-p bar_` yields files such as `bar_0.ogg`, `bar_1.ogg`, etc.
 
+**The `resourcepack json` subcommand**
+
+In order for the audio files to be recognized by a resourcepack, and therefor by the `/playsound` command, a `sounds.json` file containing all the audio filenames must be generated. That is the purpose of this subcommand.
+
+Required positional arguments:
+
+- `output_folder`: the path to the folder where the `sounds.json` file is to be dumped.
+- `amount_of_sound_files`: the amount of sound files that should be included inside `sounds.json`.
+
+Optional arguments:
+
+- `-p` or `--name_prefix`: the name that was used as a prefix for the audio files.
+- `-f` or `--subfolder-name`: the name of the subfolder inside the resourcepack where the game will look for the audio files.
+- `-m` or `--merge`: if another `sounds.json` file is found in the output folder and this argument is present, the contents of both `sounds.json` files will be merged. Otherwise, the old `sounds.json` file will be overwritten.
+
 ## How it works
 
 The most important part of the program is that which analyses an image pixel by pixel and finds which Minecraft block is the closest in color. In order to so, the program requires a list of of Minecraft blocks and their average RGB value, this list is known as a palette. The larger the palette, the better the image
