@@ -16,11 +16,13 @@ The goal of this program is to take a video file and convert its frames into str
 Make sure both python and ffmpeg/libav are present in your system's PATH environment variable
 
 **Installation**
+
 the installation can be done through [pip](https://pypi.org/project/pip/)
 
     $ python -m pip install minecraft-movie-player
 
 **Basic usage**
+
 The program can be called from a command line with
 
     $ mc-movie
@@ -69,6 +71,7 @@ Additionally, the following commands should be available to pause/play the video
 ## More advanced usage
 
 **the `all` subcommand**
+
 As explained above, this command easily generates all the required files without much hassle.
 
 Required positional arguments:
@@ -78,7 +81,7 @@ Optional arguments:
 - `-v` or `--video`: the path to the video that is to be used as a base for generating all the required files. The video's frames will be converted into structure block (nbt) files. The audio will be split into 60 seconds-long segments and saved as vorbis encoded .ogg files. If the video contains more than one audio track, the one marked as default within the file will be used. If the video has no sound, all of the steps pertaining to audio playback will be skipped.
 - `d` or `--datapack-name`: the name that will be assigned to the generated datapack, it must contain only legal characters, as explained in the [wiki](https://minecraft.gamepedia.com/Tutorials/Creating_a_data_pack#Legal_characters), and in this case, be no longer than 13 characters.
 - `p` or `--palette`: the path to a custom block palette file. More information about this file can be found below.
-- `t` or `--ticks-per-frame`: an integer above 0 that states the amount of game ticks in between every video frame. The lower this number, the higher the framerate. The lowest possible number, 1, yields a framerate of 20 fps, since Minecraft runs at 20 ticks per second.
+- `t` or `--ticks-per-frame`: an integer above 0 that states the amount of game ticks in between every video frame. The lower this number, the higher the framerate. The lowest possible number, 1, yields a framerate of 20 fps, since Minecraft runs at 20 ticks per second. The default is 2.
 - `x` or `--width`: the with in blocks of the structures that will be generated. Defaults to 75 if no width or height are given.
 - `y` or `--height`: the height in blocks of the structure that will be generated.
 
@@ -87,6 +90,29 @@ Note: if only one of `-x`/`width` or `-y`/`--height` is provided, the other one 
 - `-m` or `--adjust-mode`: can be one of either `fit` or `fill`. If both `-x`/`--width` and `-y`/`--height` are specified and their aspect ratio differs from that of the original video, this option tells the program how it should resize every frame. `fit` makes it so that black bars are added to the sides or to the top/bottom of the image in order to adjust it to the given dimensions. `fill` makes it so that the image is cropped in order to adjust to the given dimensions. This option is ignored unless both dimensions are specified.
 
 The `all` subcommand described above is merely a shortcut for a set of more complicated commands that are used to generate all of the individual parts of the datapack and resource pack. These commands can be used if more advanced options are required or if only one of the many parts needs to be generated, instead of all of them.
+
+**The `video` subcommand**
+
+This command takes the frames of a video and converts them to .nbt files that can be used to place structures inside minecraft. One file will be generated per frame.
+
+Required positional arguments:
+
+- `path_to_video`: the path to the video whose frames are to be converted to nbt files.
+- `path_to_output_folder`: the path to the folder where all the nbt files will be dumped.
+
+Optional arguments:
+
+- `-p` or `--paeltte`: the path to a custom block palette file. More information about this file can be found below.
+- `-n` or `--name-prefix`: the name that is to be prefixed to every generated file. For instance, the option `-n bar_` yields files such as `bar_0.nbt`, `bar_1.nbt`, etc.
+- `-t` or `--ticks-per-frame`: an integer above 0 that states the amount of game ticks in between every video frame. The lower this number, the higher the framerate. The lowest possible number, 1, yields a framerate of 20 fps, since Minecraft runs at 20 ticks per second. The default is 2.
+- `x` or `--width`: the with in blocks of the structures that will be generated. Defaults to 75 if no width or height are given.
+- `y` or `--height`: the height in blocks of the structure that will be generated.
+
+Note: if only one of `-x`/`width` or `-y`/`--height` is provided, the other one will be calculated automatically as to preserve the aspect ratio.
+
+- `-m` or `--adjust-mode`: can be one of either `fit` or `fill`. If both `-x`/`--width` and `-y`/`--height` are specified and their aspect ratio differs from that of the original video, this option tells the program how it should resize every frame. `fit` makes it so that black bars are added to the sides or to the top/bottom of the image in order to adjust it to the given dimensions. `fill` makes it so that the image is cropped in order to adjust to the given dimensions. This option is ignored unless both dimensions are specified.
+- `-u` or `--unoptimized`: by default, every generated frame contains only the blocks that differ from the previous frame in an attempt to save resources. If this argument is present, the optimization will be disabled.
+- `-s` or `--subprocesses`: in order to speed up the generation of frames, the work is done in parallel by different subprocesses. This option specifies the amount of subprocesses that are to be used to divide the workload. Defaults to the amount of cores on your CPU.
 
 ## How it works
 
