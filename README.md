@@ -103,7 +103,7 @@ Required positional arguments:
 Optional arguments:
 
 - `-p` or `--paeltte`: the path to a custom block palette file. More information about this file can be found below.
-- `-n` or `--name-prefix`: the name that is to be prefixed to every generated file. For instance, the option `-n bar_` yields files such as `bar_0.nbt`, `bar_1.nbt`, etc.
+- `-n` or `--name-prefix`: the name that is to be prefixed to every generated file. For instance, the option `-n foo_` yields files such as `foo_0.nbt`, `foo_1.nbt`, etc.
 - `-t` or `--ticks-per-frame`: an integer above 0 that states the amount of game ticks in between every video frame. The lower this number, the higher the framerate. The lowest possible number, 1, yields a framerate of 20 fps, since Minecraft runs at 20 ticks per second. The default is 2.
 - `x` or `--width`: the with in blocks of the structures that will be generated. Defaults to 75 if no width or height are given.
 - `y` or `--height`: the height in blocks of the structure that will be generated.
@@ -113,6 +113,20 @@ Note: if only one of `-x`/`width` or `-y`/`--height` is provided, the other one 
 - `-m` or `--adjust-mode`: can be one of either `fit` or `fill`. If both `-x`/`--width` and `-y`/`--height` are specified and their aspect ratio differs from that of the original video, this option tells the program how it should resize every frame. `fit` makes it so that black bars are added to the sides or to the top/bottom of the image in order to adjust it to the given dimensions. `fill` makes it so that the image is cropped in order to adjust to the given dimensions. This option is ignored unless both dimensions are specified.
 - `-u` or `--unoptimized`: by default, every generated frame contains only the blocks that differ from the previous frame in an attempt to save resources. If this argument is present, the optimization will be disabled.
 - `-s` or `--subprocesses`: in order to speed up the generation of frames, the work is done in parallel by different subprocesses. This option specifies the amount of subprocesses that are to be used to divide the workload. Defaults to the amount of cores on your CPU.
+
+**The `resourcepack audio` subcommand**
+
+This subcommand takes the audio track from a video or audio file and splits it up into chunks that are saved as vorbis encoded ogg files. These files can be used inside a resourcepack and played with Minecraft's `/playsound` command.
+
+Required positional arguments:
+
+- `path_to_audio`: the path to the file that is to be split into chunks and converted
+- `path_to_output_folder`: the path to the folder where all the files will be dumped
+
+Optional arguments:
+
+- `-s` or `--split-size`: the duration in seconds of of every generated audio chunk. Default is 60.
+- `-p` or `--name-prefix`: the name that is to be prefixed to every generated audio file. For instance, the option `-p bar_` yields files such as `bar_0.ogg`, `bar_1.ogg`, etc.
 
 ## How it works
 
