@@ -66,6 +66,17 @@ Additionally, the following commands should be available to pause/play the video
     /funtcion player:pause
     /function player:play
 
+## More advanced usage
+
+**the `all` subcommand**
+As explained above, this command easily generates all the required files without much hassle.
+
+Required positional arguments:
+- `path_to_output_folder`: The path to the folder where all the generated files will be dumped. Additionally, a `progress.txt` file will be created inside the folder, it helps the program pick up where it left off in case it is interrupted. If the file is present, all provided optional arguments will be ignored in favor of the values present inside `progress.txt`. If the file is not present, the argument `-v`/`--video` becomes obligatory.
+
+Optional arguments:
+- `-v` or `--video`: The path to the video that is to be used as a base for generating all the required files. The video's frames will be converted into structure block (nbt) files. The audio will be split into 60 seconds-long segments and saved as vorbis encoded .ogg files. If the video contains more than one audio track, the one marked as default within the file will be used. If the video has no sound, all of the steps pertaining to audio playback will be skipped.
+
 ## How it works
 
 The most important part of the program is that which analyses an image pixel by pixel and finds which Minecraft block is the closest in color. In order to so, the program requires a list of of Minecraft blocks and their average RGB value, this list is known as a palette. The larger the palette, the better the image
