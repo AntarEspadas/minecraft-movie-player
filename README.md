@@ -17,7 +17,7 @@ Make sure both python and ffmpeg/libav are present in your system's PATH environ
 
 **Installation**
 
-the installation can be done through [pip](https://pypi.org/project/pip/)
+the installation can be done through a command line terminal using [pip](https://pypi.org/project/pip/)
 
     $ python -m pip install minecraft-movie-player
 
