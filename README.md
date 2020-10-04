@@ -5,7 +5,7 @@ A command line program that generates a datapack that plays videos in vanilla Mi
 
 The goal of this program is to take a video file and convert its frames into structure block files so that it can be played inside a Minecraft world through the use of a datapack and a resourcepack
 
-## Getting started
+## Quick start tutorial
 
 **Prerequisites**
 
