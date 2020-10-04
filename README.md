@@ -203,7 +203,7 @@ Optional arguments:
 
 **The `index` subcommand**
 
-This command takes a folder containing Minecraft block textures and uses it to generate a template for an index file.
+This subcommand takes a folder containing Minecraft block textures and uses it to generate a template for an index file.
 
 Required positional arguments:
 
@@ -214,6 +214,18 @@ Optional arguments:
 
 - `-f` or `--filename-is-id`: if this option is present, the filenames of the images will be included in the index template as if they were their corresponding block's ID. This is useful since, in a lot of cases, the filename of a block is in fact its ID.
 
+**The `palette` subcommand**
+
+This subcommand will calculate the average color for all the specified block images and save them in a fila, along with their block IDs and any additional nbt data provided.
+
+Required positional arguments:
+
+- `path_to_block_folder`: the path to the folder containing all the block textures that are to be used.
+- `destination_file`: the path to the file that will be generated.
+
+Optional arguments:
+
+- `-i` or `--index`: the path to the index file that should be used to generate the palette. Alternatively, if this option is not provided, the program will calculate the average color for all  the blocks inside the given folder and use their filenames as block IDs.
 
 ## How it works
 
