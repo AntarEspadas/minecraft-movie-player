@@ -11,7 +11,7 @@ The goal of this program is to take a video file and convert its frames into str
 
  - [Python >= 3.8](https://www.python.org/downloads/) 
  - [ffmpeg](https://ffmpeg.org/download.html) or [libav](https://libav.org/download/)
- - Minecraft java edition 1.16 (May work on earlier versions but is untested)
+ - [Minecraft Java Edition](https://www.minecraft.net/en-us/store/minecraft-java-edition) 1.16 (May work on earlier versions but is untested)
 
 Make sure both python and ffmpeg/libav are present in your system's PATH environment variable
 
