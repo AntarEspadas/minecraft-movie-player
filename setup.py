@@ -16,7 +16,7 @@ pydub>=0.24.1'''.split("\n")
 
 setup(
     name="minecraft-movie-player",
-    version = "0.3.0",
+    version = "0.3.1",
     author = "Naratna",
     author_email = "antar.espadas@hotmail.com",
     description = "A command line program that generates a datapack that plays videos in vanilla Minecraft",
