@@ -175,6 +175,19 @@ Optional arguments:
 - `-d` or `--sound-duration`: the duration of the audio chunks. If this number differs from the actual duration, the audio will act up.
 - `-m` or `--max-commands`: the maximum amount of `execute` commands allowed for every file. Not as important as with the frames since much fewer files are expected
 
+**The `functions playback-control` subcommand**
+
+This subcommand generates the functions required to play, pause and restart the video.
+
+Required positional arguments:
+
+- `output_folder`: the folder where all the generated mcfunction files are to be dumped.
+
+Optional arguments:
+
+- `-d` or `--datapack-name`: the name that will be assigned to the generated datapack, it must contain only legal characters, as explained in the [wiki](https://minecraft.gamepedia.com/Tutorials/Creating_a_data_pack#Legal_characters), and in this case, be no longer than 13 characters. It must also remain consistent across the different generated files.
+- `-a` or `--control-audio`: if present, the program will include commands required to control audio playback. Playback control will break if this option is present but there is no audio.
+
 ## How it works
 
 The most important part of the program is that which analyses an image pixel by pixel and finds which Minecraft block is the closest in color. In order to so, the program requires a list of of Minecraft blocks and their average RGB value, this list is known as a palette. The larger the palette, the better the image
