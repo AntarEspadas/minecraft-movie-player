@@ -201,6 +201,20 @@ Optional arguments:
 - `-f` or `--audio-subfolder`: the program will try to automatically identify the name of the subfolder where it should put the sound files through the information present through the `sounds.json` file, however, this may fail in some cases, so it is a good idea to specify it manually.
 - `-d` or `--datapack-name`: the program will try to automatically detect what name was given to the datapack through the information present in the mcfunction files. It is a good idea to specify it, in case the automatic detection was to fail.
 
+**The `index` subcommand**
+
+This command takes a folder containing Minecraft block textures and uses it to generate a template for an index file.
+
+Required positional arguments:
+
+- `path_to_block_folder`: the path to the folder containing all the block textures that are to be used
+- `destination_file`: the path to the file that will be generated
+
+Optional arguments:
+
+- `-f` or `--filename-is-id`: if this option is present, the filenames of the images will be included in the index template as if they were their corresponding block's ID. This is useful since, in a lot of cases, the filename of a block is in fact its ID.
+
+
 ## How it works
 
 The most important part of the program is that which analyses an image pixel by pixel and finds which Minecraft block is the closest in color. In order to so, the program requires a list of of Minecraft blocks and their average RGB value, this list is known as a palette. The larger the palette, the better the image
