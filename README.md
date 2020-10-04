@@ -188,6 +188,19 @@ Optional arguments:
 - `-d` or `--datapack-name`: the name that will be assigned to the generated datapack, it must contain only legal characters, as explained in the [wiki](https://minecraft.gamepedia.com/Tutorials/Creating_a_data_pack#Legal_characters), and in this case, be no longer than 13 characters. It must also remain consistent across the different generated files.
 - `-a` or `--control-audio`: if present, the program will include commands required to control audio playback. Playback control will break if this option is present but there is no audio.
 
+**The `make` subcommand**
+
+This subcommand is in charge of taking all of the files generated through the previous commands an nicely bundling them together inside a folder (for the datapack), and a zip file (for the resourcepack), as well as generating a few other necessary files.
+
+Required positional arguments:
+
+- `containing_folder`: the path to the folder containing all of the files generated through the previous commands.
+
+Optional arguments:
+
+- `-f` or `--audio-subfolder`: the program will try to automatically identify the name of the subfolder where it should put the sound files through the information present through the `sounds.json` file, however, this may fail in some cases, so it is a good idea to specify it manually.
+- `-d` or `--datapack-name`: the program will try to automatically detect what name was given to the datapack through the information present in the mcfunction files. It is a good idea to specify it, in case the automatic detection was to fail.
+
 ## How it works
 
 The most important part of the program is that which analyses an image pixel by pixel and finds which Minecraft block is the closest in color. In order to so, the program requires a list of of Minecraft blocks and their average RGB value, this list is known as a palette. The larger the palette, the better the image
