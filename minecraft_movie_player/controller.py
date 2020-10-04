@@ -10,7 +10,7 @@ def fold(value):
         raise ValueError(f"the folder '{value}' dose not exist")
     return value
 
-def get_palette(value):
+def palette(value):
     pvalue = fil(value)
     from .image_converter import _get_palette
     try:

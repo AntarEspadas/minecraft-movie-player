@@ -14,7 +14,7 @@ def wrap(function):
 fold = wrap(controller.fold)
 fil = wrap(controller.fil)
 nfil = lambda val: val if val is None else fil(val)
-palette = wrap(controller.get_palette)
+palette = wrap(controller.palette)
 vid = wrap(controller.vid)
 nvid = lambda val: val if val is None else vid(val)
 filename = wrap(controller.filename)
