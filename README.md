@@ -120,8 +120,8 @@ This subcommand takes the audio track from a video or audio file and splits it u
 
 Required positional arguments:
 
-- `path_to_audio`: the path to the file that is to be split into chunks and converted
-- `path_to_output_folder`: the path to the folder where all the files will be dumped
+- `path_to_audio`: the path to the file that is to be split into chunks and converted.
+- `path_to_output_folder`: the path to the folder where all the files will be dumped.
 
 Optional arguments:
 
@@ -173,7 +173,7 @@ Optional arguments:
 - `-n` or `--datapack-name`: the name that will be assigned to the generated datapack, it must contain only legal characters, as explained in the [wiki](https://minecraft.gamepedia.com/Tutorials/Creating_a_data_pack#Legal_characters), and in this case, be no longer than 13 characters. It must also remain consistent across the different generated files.
 - `-p` or `--name-prefix`: the name that is prefixed to every sound file. For instance, if we had files such as `bar_0.ogg`, `bar_1.ogg`, etc. and their subfolder within the resource pack was `foo`, the prefix that should be given is `foo.bar_`.
 - `-d` or `--sound-duration`: the duration of the audio chunks. If this number differs from the actual duration, the audio will act up.
-- `-m` or `--max-commands`: the maximum amount of `execute` commands allowed for every file. Not as important as with the frames since much fewer files are expected
+- `-m` or `--max-commands`: the maximum amount of `execute` commands allowed for every file. Not as important as with the frames since much fewer files are expected.
 
 **The `functions playback-control` subcommand**
 
@@ -207,8 +207,8 @@ This subcommand takes a folder containing Minecraft block textures and uses it t
 
 Required positional arguments:
 
-- `path_to_block_folder`: the path to the folder containing all the block textures that are to be used
-- `destination_file`: the path to the file that will be generated
+- `path_to_block_folder`: the path to the folder containing all the block textures that are to be used.
+- `destination_file`: the path to the file that will be generated.
 
 Optional arguments:
 
@@ -229,7 +229,7 @@ Optional arguments:
 
 ## How it works
 
-The most important part of the program is that which analyses an image pixel by pixel and finds which Minecraft block is the closest in color. In order to so, the program requires a list of of Minecraft blocks and their average RGB value, this list is known as a palette. The larger the palette, the better the image
+The most important part of the program is that which analyses an image pixel by pixel and finds which Minecraft block is the closest in color. In order to so, the program requires a list of of Minecraft blocks and their average RGB value, this list is known as a palette. The larger the palette, the better the image.
 
 **How to create a palette**
 
