@@ -37,6 +37,7 @@ def datapack(value):
     for letter in value:
         if letter not in legal_characters:
             raise ValueError(f"The name '{value}' contains an illegal character, '{letter}'")
+    return value
 
 def mint(minimum, nullable: bool = False):
     def validate(value):
