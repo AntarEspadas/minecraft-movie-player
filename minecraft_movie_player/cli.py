@@ -86,8 +86,8 @@ def _get_parsers():
     
     maker_parser = parsers.add_parser("make", help="Puts together all the generated files, creating a datapack folder and resourcepack folder")
     maker_parser.add_argument("containing_folder", type=fold, help="The path to the folder containing all the generated files")
-    maker_parser.add_argument("-f", "--audio-subfolder", type=nfilename, default=None, dest="subfolder_name", help="Specify in case the script has trouble detecting automatically")
-
+    maker_parser.add_argument("-f", "--audio-subfolder", type=nfilename, default=None, dest="subfolder_name", help="Specify in case the script has trouble detecting it automatically")
+    maker_parser.add_argument("-d", "-datapack-name", type=nfilename, default=None, dest="datapack_name", help="Specify in case the script has trouble detecting it automatically")
 
 
     index_parser = parsers.add_parser("index", help="Helps generate a template for the index file")
@@ -149,7 +149,7 @@ def main():
             controller.functions_playback_control(args.output_folder, args.datapack_name, args.control_audio)
 
     elif args.command == "make":
-        controller.make(args.containing_folder, args.subfolder_name)
+        controller.make(args.containing_folder, args.subfolder_name, args.datapack_name)
 
     elif args.command == "index":
         controller.index(args.path_to_block_folder, args.destination_file, args.filename_is_id)

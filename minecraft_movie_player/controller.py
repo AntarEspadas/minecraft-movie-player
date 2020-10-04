@@ -102,9 +102,9 @@ def functions_playback_control(output_folder: str, datapack_name: str, control_a
     from . import player_functions as pf
     pf.generate_playback_control_functions(output_folder, datapack_name, control_audio)
 
-def make(containing_folder: str, subflder_name: str):
+def make(containing_folder: str, subflder_name: str, datapack_name: str):
     from . import player_maker as pm
-    pm.make(containing_folder, subflder_name)
+    pm.make(containing_folder, subflder_name, datapack_name)
 
 def index(path_to_block_folder: str, destination_file: str, filename_is_id: bool):
     from . import palette_generator as pg
