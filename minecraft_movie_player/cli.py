@@ -14,7 +14,7 @@ def wrap(function):
 fold = wrap(controller.fold)
 fil = wrap(controller.fil)
 nfil = lambda val: val if val is None else fil(val)
-palette = wrap(controller.palette)
+palette = wrap(controller.get_palette)
 vid = wrap(controller.vid)
 nvid = lambda val: val if val is None else vid(val)
 filename = wrap(controller.filename)
@@ -155,7 +155,7 @@ def main():
         controller.index(args.path_to_block_folder, args.destination_file, args.filename_is_id)
 
     elif args.command == "palette":
-        controller.palette(args.path_to_block_folder, args.destination_file, args.path_to_index)
+        controller.get_palette(args.path_to_block_folder, args.destination_file, args.path_to_index)
 
     elif args.command == "all":
         from os.path import isfile, join

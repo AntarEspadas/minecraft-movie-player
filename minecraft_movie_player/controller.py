@@ -10,7 +10,7 @@ def fold(value):
         raise ValueError(f"the folder '{value}' dose not exist")
     return value
 
-def palette(value):
+def get_palette(value):
     pvalue = fil(value)
     from .image_converter import _get_palette
     try:
@@ -110,7 +110,7 @@ def index(path_to_block_folder: str, destination_file: str, filename_is_id: bool
     from . import palette_generator as pg
     pg.generate_index_template(path_to_block_folder, destination_file, filename_is_id)
 
-def palette(path_to_block_folder: str, destination_file: str, path_to_index: str):
+def get_palette(path_to_block_folder: str, destination_file: str, path_to_index: str):
     from . import palette_generator as pg
     pg.generate_palette(path_to_block_folder, destination_file, path_to_index)
 
