@@ -68,7 +68,7 @@ Additionally, the following commands should be available to pause/play the video
     /funtcion player:pause
     /function player:play
 
-## More advanced usage
+## Complete usage instructions
 
 **the `all` subcommand**
 
