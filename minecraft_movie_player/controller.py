@@ -30,13 +30,13 @@ def filename(value):
                 raise ValueError(f"The name '{value}' contains invalida characters")
     return value
 
-def mfilename(max_chars):
-    def validate(value):
-        fvalue = filename(value)
-        if len(fvalue) > max_chars:
-            raise ValueError(f"the name {value} is {len(value)} characters long, should be at most {max_chars}")
-        return fvalue
-    return validate
+def datapack(value):
+    if len(value) > 13:
+        raise ValueError(f"The name '{value}' is longer than the allowed 13 characters")
+    legal_characters = "abcdefghijklmnopqrstuvwxyz0123456789-_."
+    for letter in value:
+        if letter not in legal_characters:
+            raise ValueError(f"The name '{value}' contains an illegal character, '{letter}'")
 
 def mint(minimum, nullable: bool = False):
     def validate(value):
