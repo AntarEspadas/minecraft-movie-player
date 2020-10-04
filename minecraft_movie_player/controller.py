@@ -162,7 +162,7 @@ def generate_all(path_to_video: str, path_to_output_folder: str, datapack_name: 
         progress["current_step"] = "_generate_structure_functions"
         _write_json()
         from . import player_functions as pf
-        pf.generate_structure_functions(path_to_output_folder, datapack_name, vid_preifx, 0, progress["last_frame"] - 1)
+        pf.generate_structure_functions(path_to_output_folder, datapack_name, vid_preifx, 0, progress["last_frame"] - 1, ticks_per_frame=ticks_per_frame)
         _generate_audio()
 
     def _generate_audio():
