@@ -159,6 +159,22 @@ Optional arguments:
 - `-m` or `--max-commands`: the program will have to generate at least one Minecraft `execute` command for every frame. Keeping all of these commands in a single file will cause the game to attempt to run all of them every tick. It is however possible to mitigate this by keeping fewer commands in every file. This option specifies the maximum amount of commands that will be allowed per file.
 - `-t` or `--ticks-per-frame`: the amount of game ticks in between every frame. If this number does not match the one the frames were generated with, the video will be sped up or slowed down.
 
+**The `functions audio` subcommand**
+
+Similar to the previous subcommand, this one generates the functions required to play the different audio chunks in order.
+
+Required positional arguments:
+
+- `output_folder`: the folder where all the generated mcfunction files are to be dumped.
+- `amount_of_sound_files`: the amount of sound (ogg) files that make up the video's audio track.
+
+Optional arguments:
+
+- `-n` or `--datapack-name`: the name that will be assigned to the generated datapack, it must contain only legal characters, as explained in the [wiki](https://minecraft.gamepedia.com/Tutorials/Creating_a_data_pack#Legal_characters), and in this case, be no longer than 13 characters. It must also remain consistent across the different generated files.
+- `-p` or `--name-prefix`: the name that is prefixed to every sound file. For instance, if we had files such as `bar_0.ogg`, `bar_1.ogg`, etc. the prefix `bar_` should be given.
+- `-d` or `--sound-duration`: the duration of the audio chunks. If this number differs from the actual duration, the audio will act up.
+- `-m` or `--max-commands`: the maximum amount of `execute` commands allowed for every file. Not as important as with the frames since much fewer files are expected
+
 ## How it works
 
 The most important part of the program is that which analyses an image pixel by pixel and finds which Minecraft block is the closest in color. In order to so, the program requires a list of of Minecraft blocks and their average RGB value, this list is known as a palette. The larger the palette, the better the image
