@@ -143,6 +143,19 @@ Optional arguments:
 - `-f` or `--subfolder-name`: the name of the subfolder inside the resourcepack where the game will look for the audio files.
 - `-m` or `--merge`: if another `sounds.json` file is found in the output folder and this argument is present, the contents of both `sounds.json` files will be merged. Otherwise, the old `sounds.json` file will be overwritten.
 
+**The `functions video` subcommand**
+
+In order for the structures to be placed sequentially in the world, producing the video, a series of functions is required and can be generated using this subcommand.
+
+Required positional arguments:
+
+-   `output_folder`: the folder where all the generated mcfunction files are to be dumped.
+- `amount_of_frames`: the amount of frames (nbt files) that make up the video.
+- `-d` or `-datapack-name`: the name that will be assigned to the generated datapack, it must contain only legal characters, as explained in the [wiki](https://minecraft.gamepedia.com/Tutorials/Creating_a_data_pack#Legal_characters), and in this case, be no longer than 13 characters. It must also remain consistent across the different generated files.
+- `-p` or `--name-prefix`: the name that is prefixed to every frame (nbt file). For instance, if we had files such as `foo_0.nbt`, `foo_1.nbt`, etc. the prefix `foo_` should be given.
+- `-m` or `--max-commands`: the program will have to generate at least one Minecraft `execute` command for every frame. Keeping all of these commands in a single file will cause the game to attempt to run all of them every tick. It is however possible to mitigate this by keeping fewer commands in every file. This option specifies the maximum amount of commands that will be allowed per file.
+- `-t` or `--ticks-per-frame`: the amount of game ticks in between every frame. If this number does not match the one the frames were generated with, the video will be sped up or slowed down.
+
 ## How it works
 
 The most important part of the program is that which analyses an image pixel by pixel and finds which Minecraft block is the closest in color. In order to so, the program requires a list of of Minecraft blocks and their average RGB value, this list is known as a palette. The larger the palette, the better the image
