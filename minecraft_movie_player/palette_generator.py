@@ -26,7 +26,7 @@ def __generate_palette_from_index(source_directory: str, destination_file: str, 
             image = cv2.imread(os.path.join(source_directory,row[0]))
             if image is not None:
                 color = __get_average_color(image)
-                writer.writerow(row[1:2] + list(color) + row[2:3])
+                writer.writerow(row[1:2] + [round(v) for v in color] + row[2:3])
             else:
                 print(f"Unable to read {row[0]}. File may not exist or not be an image")
         index.close()
@@ -44,7 +44,7 @@ def generate_palette(source_directory: str, destination_file: str, index_file: s
             if image is not None:
                 try:
                     color = __get_average_color(image)
-                    writer.writerow([file] + list(color)) 
+                    writer.writerow([file] + [round(v) for v in color]) 
                 except Exception:
                     print(f"An unknown error ocurred reading file {file}")
             else:
