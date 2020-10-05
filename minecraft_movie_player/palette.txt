@@ -1,158 +1,241 @@
+acacia_log;103;97;87;{'axis': 'y'}
+acacia_log;151;89;55;{'axis': 'z'}
 acacia_planks;168;90;50;
-andesite;136;136;136;
+ancient_debris;96;64;56;
+andesite;136;136;137;
+barrel;122;90;52;{'facing':'north'}
+barrel;108;81;50;{'facing':'up'}
+barrel;135;101;58;{'facing':'south'}
+barrel;93;68;34;{'facing':'south', 'open':'true'}
+basalt;73;73;78;{'axis': 'y'}
+basalt;81;81;86;{'axis': 'z'}
 bedrock;85;85;85;
+beehive;159;128;78;{'facing':'south'}
+beehive;167;132;74;{'facing':'south', 'honey_level':'5'}
+beehive;157;126;76;{'facing':'north'}
+bee_nest;183;142;76;{'facing':'south'}
+bee_nest;195;152;76;{'facing':'south', 'honey_level':'5'}
+bee_nest;196;151;77;{'facing':'north'}
+birch_log;217;215;210;{'axis': 'y'}
+birch_log;193;179;135;{'axis': 'z'}
 birch_planks;192;175;121;
+blackstone;42;35;41;
 black_concrete;8;10;15;
-black_concrete_powder;25;26;31;
-black_glazed_terracotta;67;30;32;
-black_terracotta;37;22;16;
-black_wool;20;21;25;
-blue_concrete;44;46;143;
-blue_concrete_powder;70;73;166;
-blue_glazed_terracotta;47;64;139;
-blue_ice;116;167;253;
-blue_terracotta;74;59;91;
+black_terracotta;37;23;16;
+black_wool;21;21;26;
+blast_furnace;108;108;107;{'facing':'south'}
+blast_furnace;108;107;108;{'facing':'north'}
+blue_concrete;45;47;143;
+blue_glazed_terracotta;47;65;139;
+blue_ice;116;168;253;
+blue_terracotta;74;60;91;
 blue_wool;53;57;157;
-bookshelf;117;94;59;
-bricks;150;97;83;
-brown_concrete;96;59;31;
-brown_concrete_powder;125;84;53;
-brown_glazed_terracotta;119;106;85;
-brown_mushroom_block;149;111;81;
-brown_terracotta;77;51;35;
-brown_wool;114;71;40;
-bubble_coral_block;165;26;162;
-chiseled_quartz_block;231;226;218;
-chiseled_red_sandstone;183;96;27;
-chiseled_sandstone;216;202;155;
-chiseled_stone_bricks;119;118;119;
-clay;160;166;179;
-coal_block;16;15;15;
+bone_block;229;226;208;{'axis': 'y'}
+bone_block;210;206;179;{'axis': 'z'}
+bookshelf;117;95;60;
+bricks;151;98;83;
+brown_concrete;96;60;32;
+brown_glazed_terracotta;120;106;86;
+brown_mushroom_block;149;112;81;{'south':'true'}
+brown_terracotta;77;51;36;
+brown_wool;114;72;41;
+chain_command_block;130;157;145;{'facing':'north'}
+chain_command_block;130;162;147;{'facing':'east', 'conditional':'true'}
+chain_command_block;132;165;151;{'facing':'south'}
+chain_command_block;131;161;147;{'facing':'east'}
+chiseled_nether_bricks;47;24;28;
+chiseled_polished_blackstone;54;49;57;
+chiseled_quartz_block;232;227;218;
+chiseled_red_sandstone;183;97;28;
+chiseled_sandstone;216;203;155;
+chiseled_stone_bricks;120;119;120;
+clay;161;166;179;
+coal_block;16;16;16;
 coal_ore;116;116;116;
-coarse_dirt;119;85;59;
-cobblestone;127;127;127;
-cracked_stone_bricks;118;117;118;
-cut_red_sandstone;189;101;31;
-cut_sandstone;217;206;159;
+coarse_dirt;119;86;59;
+cobblestone;128;127;128;
+command_block;174;131;107;{'facing':'north'}
+command_block;179;133;106;{'facing':'east', 'conditional':'true'}
+command_block;181;136;108;{'facing':'south'}
+command_block;177;133;108;{'facing':'east'}
+cracked_nether_bricks;40;20;24;
+cracked_polished_blackstone_bricks;44;38;44;
+cracked_stone_bricks;118;118;118;
+crimson_nylium;107;27;27;
+crimson_planks;101;49;71;
+crimson_stem;93;26;30;{'axis': 'y'}
+crimson_stem;108;52;75;{'axis': 'z'}
+cut_red_sandstone;189;102;32;
+cut_sandstone;218;206;160;
 cyan_concrete;21;119;136;
-cyan_concrete_powder;36;147;157;
-cyan_glazed_terracotta;52;118;125;
-cyan_terracotta;86;91;91;
-cyan_wool;21;137;145;
-dark_prismarine;51;91;75;
-dead_brain_coral_block;124;117;114;
-dead_bubble_coral_block;131;123;119;
-dead_fire_coral_block;131;123;119;
-dead_horn_coral_block;133;126;122;
-dead_tube_coral_block;130;123;119;
+cyan_glazed_terracotta;52;119;125;
+cyan_terracotta;87;91;91;
+cyan_wool;21;138;145;
+dark_oak_log;60;47;26;{'axis': 'y'}
+dark_oak_log;65;43;21;{'axis': 'z'}
+dark_oak_planks;67;43;20;
+dark_prismarine;52;92;76;
 diamond_block;98;237;228;
-diamond_ore;125;142;141;
-diorite;188;188;188;
+diamond_ore;125;143;141;
+diorite;189;188;189;
 dirt;134;96;67;
-emerald_block;42;203;87;
-emerald_ore;117;136;124;
-end_stone;219;222;158;
+dispenser;122;122;122;{'facing':'south'}
+dried_kelp_block;38;49;30;
+dropper;122;122;122;{'facing':'south'}
+emerald_block;42;203;88;
+emerald_ore;117;137;124;
+end_stone;220;223;158;
 end_stone_bricks;218;224;162;
-fire_coral_block;163;35;46;
-glowstone;171;131;84;
-gold_block;246;208;61;
-gold_ore;143;140;125;
-granite;149;103;85;
-gray_concrete;54;57;61;
-gray_concrete_powder;76;81;84;
-gray_glazed_terracotta;83;90;93;
-gray_terracotta;57;42;35;
-gray_wool;62;68;71;
+furnace;92;91;91;{'facing':'south'}
+furnace;121;120;120;{'facing':'north'}
+gold_block;246;208;62;
+gold_ore;144;140;125;
+granite;149;103;86;
+gray_concrete;55;58;62;
+gray_glazed_terracotta;83;90;94;
+gray_terracotta;58;42;36;
+gray_wool;63;68;72;
 green_concrete;73;91;36;
-green_concrete_powder;97;119;44;
 green_glazed_terracotta;117;142;67;
 green_terracotta;76;83;42;
-honeycomb_block;229;148;29;
-horn_coral_block;216;199;66;
+green_wool;85;110;28;
+hay_block;166;136;38;{'axis': 'y'}
+hay_block;166;139;12;{'axis': 'z'}
+honeycomb_block;229;148;30;
 iron_block;220;220;220;
-iron_ore;136;130;127;
-jack_o_lantern;214;152;52;
-jungle_planks;160;115;80;
-lapis_block;30;67;140;
-lapis_ore;99;110;132;
-light_blue_concrete;35;137;198;
-light_blue_concrete_powder;74;180;213;
-light_blue_glazed_terracotta;94;164;208;
-light_blue_terracotta;113;108;137;
+iron_ore;136;131;127;
+jukebox;89;59;41;
+jungle_log;85;68;25;{'axis': 'y'}
+jungle_log;150;109;71;{'axis': 'z'}
+jungle_planks;160;115;81;
+lapis_block;31;67;140;
+lapis_ore;99;111;133;
+light_blue_concrete;36;137;199;
+light_blue_glazed_terracotta;95;165;209;
+light_blue_terracotta;113;109;138;
 light_blue_wool;58;175;217;
 light_gray_concrete;125;125;115;
-light_gray_concrete_powder;154;154;148;
-light_gray_glazed_terracotta;144;166;167;
-light_gray_terracotta;135;106;97;
-light_gray_wool;142;142;134;
-lime_concrete;94;168;24;
-lime_concrete_powder;125;189;41;
-lime_glazed_terracotta;162;197;55;
-lime_terracotta;103;117;52;
-lime_wool;112;185;25;
+light_gray_glazed_terracotta;144;166;168;
+light_gray_terracotta;135;107;98;
+light_gray_wool;142;142;135;
+lime_concrete;94;169;24;
+lime_glazed_terracotta;163;198;55;
+lime_terracotta;104;118;53;
+lime_wool;112;185;26;
+lodestone;119;120;123;
+loom;148;119;82;{'facing':'south'}
+loom;146;101;72;{'facing':'north'}
 magenta_concrete;169;48;159;
-magenta_concrete_powder;192;83;184;
-magenta_glazed_terracotta;208;100;191;
-magenta_terracotta;149;88;108;
-magenta_wool;189;68;179;
-mossy_cobblestone;110;118;94;
+magenta_glazed_terracotta;208;100;192;
+magenta_terracotta;150;88;109;
+magenta_wool;190;69;180;
+melon;114;146;30;
+mossy_cobblestone;110;118;95;
 mossy_stone_bricks;115;121;105;
-netherrack;97;38;38;
-nether_bricks;44;21;26;
-nether_quartz_ore;117;65;62;
-nether_wart_block;114;3;2;
-note_block;88;58;40;
-oak_planks;162;130;78;
-obsidian;15;10;24;
-orange_concrete;224;97;0;
-orange_concrete_powder;227;131;31;
-orange_glazed_terracotta;154;147;91;
-orange_terracotta;161;83;37;
-orange_wool;240;118;19;
-packed_ice;141;180;250;
-pink_concrete;213;101;142;
-pink_concrete_powder;228;153;181;
-pink_glazed_terracotta;235;154;181;
-pink_terracotta;161;78;78;
-pink_wool;237;141;172;
-polished_andesite;132;134;133;
-polished_diorite;192;193;194;
-polished_granite;154;106;89;
-prismarine_bricks;99;171;158;
-purple_concrete;100;31;156;
-purple_concrete_powder;131;55;177;
-purple_glazed_terracotta;109;48;152;
+brown_mushroom_block;202;170;120;{'south':'false'}
+mushroom_stem;203;197;186;
+netherite_block;67;61;64;
+netherrack;98;38;38;
+nether_bricks;44;22;26;
+nether_gold_ore;115;55;42;
+nether_quartz_ore;118;66;62;
+nether_wart_block;115;3;2;
+note_block;89;59;41;
+oak_log;109;85;51;{'axis': 'y'}
+oak_log;151;122;73;{'axis': 'z'}
+oak_planks;162;131;79;
+obsidian;15;11;25;
+orange_concrete;224;97;1;
+orange_glazed_terracotta;155;147;92;
+orange_terracotta;162;84;38;
+orange_wool;241;118;20;
+packed_ice;142;180;250;
+pink_concrete;214;101;143;
+pink_glazed_terracotta;235;155;182;
+pink_terracotta;162;78;79;
+pink_wool;238;141;172;
+piston;97;97;97;{'facing':'north'}
+piston;110;105;97;{'facing':'east'}
+piston;154;128;88;{'facing':'south'}
+sticky_piston;123;150;93;{'facing':'south'}
+podzol;123;88;57;
+polished_andesite;132;135;134;
+polished_basalt;89;88;92;{'axis': 'y'}
+polished_basalt;99;99;101;{'axis': 'z'}
+polished_blackstone;53;49;57;
+polished_blackstone_bricks;47;41;48;
+polished_diorite;193;193;195;
+polished_granite;154;107;89;
+prismarine;99;156;151;
+prismarine_bricks;99;172;158;
+pumpkin;196;115;24;
+purple_concrete;100;32;156;
+purple_glazed_terracotta;110;48;152;
 purple_terracotta;118;70;86;
-purple_wool;121;42;172;
-purpur_block;169;125;169;
-redstone_block;175;24;5;
-redstone_lamp;95;54;30;
-redstone_ore;133;107;107;
-red_concrete;142;32;32;
-red_concrete_powder;168;54;50;
-red_glazed_terracotta;181;59;53;
-red_nether_bricks;69;7;9;
-red_sand;190;102;33;
-red_sandstone;186;99;29;
-red_terracotta;143;61;46;
-red_wool;160;39;34;
-sand;219;207;163;
-sandstone;216;203;155;
-smooth_stone;158;158;158;
+purple_wool;122;42;173;
+purpur_block;170;126;170;
+purpur_pillar;172;130;172;{'axis': 'y'}
+purpur_pillar;172;128;171;{'axis': 'z'}
+quartz_block;236;230;223;
+quartz_bricks;235;229;222;
+quartz_pillar;236;231;224;{'axis': 'y'}
+quartz_pillar;235;230;223;{'axis': 'z'}
+redstone_lamp;95;55;30;
+redstone_ore;133;108;108;
+red_concrete;142;33;33;
+red_glazed_terracotta;182;60;53;
+red_mushroom_block;200;47;45;{'south':'true'}
+red_nether_bricks;70;7;9;
+red_sandstone;187;99;29;
+red_terracotta;143;61;47;
+red_wool;161;39;35;
+repeating_command_block;128;110;167;{'facing':'north'}
+repeating_command_block;127;109;172;{'facing':'east', 'conditional':'true'}
+repeating_command_block;129;111;176;{'facing':'south'}
+repeating_command_block;129;110;171;{'facing':'east'}
+respawn_anchor;40;24;63;
+sandstone;216;203;156;
+smoker;88;75;58;{'facing':'south'}
+smoker;103;92;76;{'facing':'north'}
+smooth_stone;159;159;159;
+smooth_stone_slab;168;168;168;{'type':double}
 snow_block;249;254;254;
-sponge;195;192;74;
-spruce_planks;114;84;48;
-stone;125;125;125;
-stone_bricks;122;121;122;
-terracotta;152;94;67;
-tube_coral_block;49;87;206;
+soul_sand;81;62;51;
+soul_soil;76;58;47;
+sponge;196;192;75;
+spruce_log;59;38;17;{'axis': 'y'}
+spruce_log;109;80;47;{'axis': 'z'}
+spruce_planks;115;85;49;
+stone;126;126;126;
+stone_bricks;122;122;122;
+stripped_acacia_log;175;93;60;{'axis': 'y'}
+stripped_acacia_log;166;91;52;{'axis': 'z'}
+stripped_birch_log;197;176;118;{'axis': 'y'}
+stripped_birch_log;191;172;116;{'axis': 'z'}
+stripped_crimson_stem;137;57;90;{'axis': 'y'}
+stripped_crimson_stem;122;56;83;{'axis': 'z'}
+stripped_dark_oak_log;97;76;50;{'axis': 'y'}
+stripped_dark_oak_log;66;44;23;{'axis': 'z'}
+stripped_jungle_log;171;133;85;{'axis': 'y'}
+stripped_jungle_log;166;123;82;{'axis': 'z'}
+stripped_oak_log;177;144;86;{'axis': 'y'}
+stripped_oak_log;160;130;77;{'axis': 'z'}
+stripped_spruce_log;116;90;52;{'axis': 'y'}
+stripped_spruce_log;106;80;47;{'axis': 'z'}
+stripped_warped_stem;58;151;148;{'axis': 'y'}
+stripped_warped_stem;52;129;124;{'axis': 'z'}
+target;229;176;168;
+terracotta;152;94;68;
+warped_nylium;73;62;60;
+warped_planks;43;105;99;
+warped_stem;58;59;78;{'axis': 'y'}
+warped_stem;57;104;104;{'axis': 'z'}
+warped_wart_block;23;120;121;
 white_concrete;207;213;214;
-white_concrete_powder;225;227;227;
-white_glazed_terracotta;188;212;202;
-white_terracotta;209;178;161;
-white_wool;233;236;236;
-yellow_concrete;240;175;21;
-yellow_concrete_powder;232;199;54;
-yellow_glazed_terracotta;234;192;88;
+white_glazed_terracotta;188;212;203;
+white_terracotta;210;178;161;
+white_wool;234;236;237;
+yellow_concrete;241;175;21;
+yellow_glazed_terracotta;234;192;89;
 yellow_terracotta;186;133;35;
-yellow_wool;248;197;39;
+yellow_wool;249;198;40;
