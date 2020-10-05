@@ -68,6 +68,105 @@ Additionally, the following commands should be available to pause/play the video
     /funtcion player:pause
     /function player:play
 
+## Using a custom block palette
+
+In order to use a custom set of blocks for the creation of the video, we will need to provide our own custom block palette. The program provides some of the tools necessary for creating this file.
+
+The palette is a file that contains information about the blocks we wish to use and their average RGB color. The program then uses this palette to find the most appropriate block for each pixel on the video.
+
+Creating the palette can be done through two main steps. First, we create an index file, this file lists all the blocks that are to be used in the palette, along with the filenames of their corresponding textures. Secondly, we feed this palette into the program, which will look for the specified textures, calculate their average RGB color then store them in a palette file.
+
+In this guide, we will be creating an index file from scratch. Note however that an index file is already bundled along the program's files, so it is probably a good idea to modify it to suit your needs instead of creating one from scratch.
+
+The first thing wee need is a folder containing all the block textures we wish to use. If we wanted to use the vanilla Minecraft textures, then we would head to [.minecraft](https://minecraft.gamepedia.com/.minecraft#Locating_.minecraft)/versions/[version number] and extract the contents of the file [version number].jar with a tool such as 7zip or WinRAR. Then, along the files we just extracted, we would locate the folder assets/minecraft/textures/block. This is the folder containing all of the block textures.
+
+It is also possible to want to create a custom block palette to use along a resource pack, since the colors of the blocks may differ from those in the vanilla textures. Any resource pack you download should also contains the folder assets/minecraft/textures/block.
+
+We now want to make a copy of the `block` folder and start deleting the textures for all the blocks we do not wish to include. It is a good idea to delete textures that
+
+- **Are not full blocks**, such as doors, levers, rails, pots, flowers, anvils, etc.
+- **Can never face the side**, such as the tops of ancient debris, crafting tables, beehives, etc.
+- **Can not stay forever**, such as living corals, which will die, water which will flow, frosted ice, which will melt, etc.
+- **Produce light**, such as glowstone, sea lanterns, etc.
+- **Are transparent**, such as glass, ice, etc.
+- **Can not stand on their own**, such as sand, gravel, concrete powder, etc.
+- **May interact with other blocks**, such as lava, redstone, carved pumpkins, TNT, etc.
+- **Produce particles**, such as wet sponges.
+- **Can not be seen from a distance**, such as shulker boxes.
+- **Don't belong to any actual blocks**, such as block breaking textures and debug textures.
+
+After all that work is done, we need to make an index file. The index file is an Excel flavored csv file with the texture's filename on the first column, its corresponding block ID on the second column, and any additional nbt data required for the texture to face the side on the third column. We can generate a template for this file using the following command:
+
+    $ mc-movie index PATH_TO_BLOCK_FOLDER PATH_TO_INDEX_FILE -f
+
+PATH_TO_BLOCK_FOLDER is the path to the folder containing all the block textures we wish to use.
+PATH_TO_INDEX_FILE is the path where we wish to save the index template
+
+this will produce a file that looks something like this:
+
+    acacia_log.png;acacia_log;
+    acacia_log_top.png;acacia_log_top;
+    acacia_planks.png;acacia_planks;
+    ancient_debris_side.png;ancient_debris_side;
+    andesite.png;andesite;
+    [...]
+    yellow_glazed_terracotta.png;yellow_glazed_terracotta;
+    yellow_terracotta.png;yellow_terracotta;
+    yellow_wool.png;yellow_wool;
+
+As you can see, a lot of these lines are already as they should be, but some of them are not. Take for instance the following entry:
+
+    acacia_log_top.png;acacia_log_top;
+
+Minecraft has no block with ID `acacia_log_top`, as the texture in question is merely one of the sides of the acacia log, with id `acacia_log`. So we change the ID and end up up with the following:
+
+    acacia_log.png;acacia_log;
+    acacia_log_top.png;acacia_log;
+    acacia_planks.png;acacia_planks;
+    [...]
+
+However, this is not enough, since we want the texture `acacia_log_top.png` to face the side, we need a way to tell Minecraft that the block should be placed on its side. To do so, we can head into Minecraft and place an acacia log with its top facing **south**, then open the debug menu (default key is `f3`), and point towards the block. On the right, we see information about the block, including its ID and its properties. We are interested in the one that says `axis: z`, since it is the one responsible for the orientation.
+
+![log_1.png](images/log_1.png)
+
+So we add `{'axis': 'z'}` on the third column:
+
+    acacia_log.png;acacia_log;
+    acacia_log_top.png;acacia_log;{'axis': 'z'}
+    acacia_planks.png;acacia_planks;
+    [...]
+
+Something similar happens in the case of blocks such as furnaces
+
+    [...]
+    end_stone_bricks.png;end_stone_bricks;
+    furnace_front.png;furnace_front;
+    furnace_side.png;furnace_side;
+    gold_block.png;gold_block;
+    [...]
+
+In this case, both of the IDs are wrong, it should simply be `frunace`.
+Additionally, for the front to face south, the block should have the property `{'facing': 'south'}` and for the side to face south, the furnace needs to face east, west or north. Pick your poison.
+
+    [...]
+    end_stone_bricks.png;end_stone_bricks;
+    furnace_front.png;furnace;{'facing': 'south'}
+    furnace_side.png;furnace;{'facing': 'north'}
+    gold_block.png;gold_block;
+    [...]
+
+For most blocks, the only two properties we will have to worry about are `axis` and `facing`, although there are a few exceptions such as mushroom blocks, barrels and beehives.
+
+After we are done adding nbt data and fixing incorrect block IDs, we are practically done, all we need to do is tell the program to generate a palette based on this index using the following command
+
+    $ mc-movie palette PATH_TO_BLOCK_FOLDER PATH_TO_PALETTE -i PATH_TO_INDEX
+
+PATH_TO_BLOCK_FOLDER is the path to the folder containing all the block textures. Note that it doesn't matter if this folder contains any extra files, as any file not present in the index will not be considered.
+PATH_TO_PALETTE is the path where we wish to save the generated palette
+PATH_TO_INDEX is the path to the index file we just created.
+
+After a few seconds, the program will have generated a palette file; we are now done. The file can used through the cli's subcommands `all` and `video` using the argument `-i PATH_TO_PALETTE`
+
 ## Complete usage instructions
 
 **the `all` subcommand**
