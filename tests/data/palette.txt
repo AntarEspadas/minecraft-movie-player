@@ -1,158 +1,243 @@
-acacia_planks;168;90;50;
-andesite;136;136;136;
-bedrock;85;85;85;
-birch_planks;192;175;121;
-black_concrete;8;10;15;
-black_concrete_powder;25;26;31;
-black_glazed_terracotta;67;30;32;
-black_terracotta;37;22;16;
-black_wool;20;21;25;
-blue_concrete;44;46;143;
-blue_concrete_powder;70;73;166;
-blue_glazed_terracotta;47;64;139;
-blue_ice;116;167;253;
-blue_terracotta;74;59;91;
-blue_wool;53;57;157;
-bookshelf;117;94;59;
-bricks;150;97;83;
-brown_concrete;96;59;31;
-brown_concrete_powder;125;84;53;
-brown_glazed_terracotta;119;106;85;
-brown_mushroom_block;149;111;81;
-brown_terracotta;77;51;35;
-brown_wool;114;71;40;
-bubble_coral_block;165;26;162;
-chiseled_quartz_block;231;226;218;
-chiseled_red_sandstone;183;96;27;
-chiseled_sandstone;216;202;155;
-chiseled_stone_bricks;119;118;119;
-clay;160;166;179;
-coal_block;16;15;15;
-coal_ore;116;116;116;
-coarse_dirt;119;85;59;
-cobblestone;127;127;127;
-cracked_stone_bricks;118;117;118;
-cut_red_sandstone;189;101;31;
-cut_sandstone;217;206;159;
-cyan_concrete;21;119;136;
-cyan_concrete_powder;36;147;157;
-cyan_glazed_terracotta;52;118;125;
-cyan_terracotta;86;91;91;
-cyan_wool;21;137;145;
-dark_prismarine;51;91;75;
-dead_brain_coral_block;124;117;114;
-dead_bubble_coral_block;131;123;119;
-dead_fire_coral_block;131;123;119;
-dead_horn_coral_block;133;126;122;
-dead_tube_coral_block;130;123;119;
-diamond_block;98;237;228;
-diamond_ore;125;142;141;
-diorite;188;188;188;
-dirt;134;96;67;
-emerald_block;42;203;87;
-emerald_ore;117;136;124;
-end_stone;219;222;158;
-end_stone_bricks;218;224;162;
-fire_coral_block;163;35;46;
-glowstone;171;131;84;
-gold_block;246;208;61;
-gold_ore;143;140;125;
-granite;149;103;85;
-gray_concrete;54;57;61;
-gray_concrete_powder;76;81;84;
-gray_glazed_terracotta;83;90;93;
-gray_terracotta;57;42;35;
-gray_wool;62;68;71;
-green_concrete;73;91;36;
-green_concrete_powder;97;119;44;
-green_glazed_terracotta;117;142;67;
-green_terracotta;76;83;42;
-honeycomb_block;229;148;29;
-horn_coral_block;216;199;66;
-iron_block;220;220;220;
-iron_ore;136;130;127;
-jack_o_lantern;214;152;52;
-jungle_planks;160;115;80;
-lapis_block;30;67;140;
-lapis_ore;99;110;132;
-light_blue_concrete;35;137;198;
-light_blue_concrete_powder;74;180;213;
-light_blue_glazed_terracotta;94;164;208;
-light_blue_terracotta;113;108;137;
-light_blue_wool;58;175;217;
-light_gray_concrete;125;125;115;
-light_gray_concrete_powder;154;154;148;
-light_gray_glazed_terracotta;144;166;167;
-light_gray_terracotta;135;106;97;
-light_gray_wool;142;142;134;
-lime_concrete;94;168;24;
-lime_concrete_powder;125;189;41;
-lime_glazed_terracotta;162;197;55;
-lime_terracotta;103;117;52;
-lime_wool;112;185;25;
-magenta_concrete;169;48;159;
-magenta_concrete_powder;192;83;184;
-magenta_glazed_terracotta;208;100;191;
-magenta_terracotta;149;88;108;
-magenta_wool;189;68;179;
-mossy_cobblestone;110;118;94;
-mossy_stone_bricks;115;121;105;
-netherrack;97;38;38;
-nether_bricks;44;21;26;
-nether_quartz_ore;117;65;62;
-nether_wart_block;114;3;2;
-note_block;88;58;40;
-oak_planks;162;130;78;
-obsidian;15;10;24;
-orange_concrete;224;97;0;
-orange_concrete_powder;227;131;31;
-orange_glazed_terracotta;154;147;91;
-orange_terracotta;161;83;37;
-orange_wool;240;118;19;
-packed_ice;141;180;250;
-pink_concrete;213;101;142;
-pink_concrete_powder;228;153;181;
-pink_glazed_terracotta;235;154;181;
-pink_terracotta;161;78;78;
-pink_wool;237;141;172;
-polished_andesite;132;134;133;
-polished_diorite;192;193;194;
-polished_granite;154;106;89;
-prismarine_bricks;99;171;158;
-purple_concrete;100;31;156;
-purple_concrete_powder;131;55;177;
-purple_glazed_terracotta;109;48;152;
-purple_terracotta;118;70;86;
-purple_wool;121;42;172;
-purpur_block;169;125;169;
-redstone_block;175;24;5;
-redstone_lamp;95;54;30;
-redstone_ore;133;107;107;
-red_concrete;142;32;32;
-red_concrete_powder;168;54;50;
-red_glazed_terracotta;181;59;53;
-red_nether_bricks;69;7;9;
-red_sand;190;102;33;
-red_sandstone;186;99;29;
-red_terracotta;143;61;46;
-red_wool;160;39;34;
-sand;219;207;163;
-sandstone;216;203;155;
-smooth_stone;158;158;158;
-snow_block;249;254;254;
-sponge;195;192;74;
-spruce_planks;114;84;48;
-stone;125;125;125;
-stone_bricks;122;121;122;
-terracotta;152;94;67;
-tube_coral_block;49;87;206;
-white_concrete;207;213;214;
-white_concrete_powder;225;227;227;
-white_glazed_terracotta;188;212;202;
-white_terracotta;209;178;161;
-white_wool;233;236;236;
-yellow_concrete;240;175;21;
-yellow_concrete_powder;232;199;54;
-yellow_glazed_terracotta;234;192;88;
-yellow_terracotta;186;133;35;
-yellow_wool;248;197;39;
+acacia_log;103.25;96.578125;86.91796875;{'axis': 'y'}
+acacia_log;150.90625;88.83984375;55.1640625;{'axis': 'z'}
+acacia_planks;168.1328125;90.37109375;50.2265625;
+ancient_debris;95.72265625;63.7421875;55.8671875;
+andesite;136.15234375;136.26171875;136.77734375;
+barrel;121.78515625;89.8828125;51.78125;{'facing':'north'}
+barrel;107.875;81.3125;50.1640625;{'facing':'up'}
+barrel;134.515625;100.5390625;58.49609375;{'facing':'south'}
+barrel;92.515625;67.5625;34.234375;{'facing':'south', 'open':'true'}
+basalt;73.20703125;72.52734375;77.921875;{'axis': 'y'}
+basalt;80.578125;81.4921875;86.24609375;{'axis': 'z'}
+bedrock;85.1171875;85.1171875;85.1171875;
+beehive;159.23046875;128.07421875;77.58203125;{'facing':'south'}
+beehive;167.38671875;131.62890625;74.02734375;{'facing':'south', 'honey_level:5'}
+beehive;157.22265625;126.36328125;75.8203125;{'facing':'north'}
+bee_nest;183.33984375;141.8515625;76.125;{'facing':'south'}
+bee_nest;194.96875;151.92578125;75.54296875;{'facing':'south', 'honey_level:5'}
+bee_nest;196.2421875;150.80859375;77.359375;{'facing':'north'}
+birch_log;216.55859375;215.0078125;210.296875;{'axis': 'y'}
+birch_log;193.24609375;179.42578125;135.16015625;{'axis': 'z'}
+birch_planks;192.46875;175.29296875;121.2421875;
+blackstone;42.15234375;35.39453125;40.6640625;
+black_concrete;8.40234375;10.40234375;15.40234375;
+black_terracotta;37.21875;22.828125;16.38671875;
+black_wool;20.6015625;21.296875;25.6328125;
+blast_furnace;107.58203125;107.6484375;107.26171875;{'facing':'south'}
+blast_furnace;107.80859375;107.4921875;107.6875;{'facing':'north'}
+blue_concrete;44.5390625;46.5390625;143.421875;
+blue_glazed_terracotta;47.453125;64.64453125;139.37109375;
+blue_ice;116.08984375;167.6484375;253.015625;
+blue_terracotta;74.29296875;59.68359375;91.109375;
+blue_wool;53.0546875;57.25390625;157.4921875;
+bone_block;229.44921875;225.91015625;207.796875;{'axis': 'y'}
+bone_block;209.8203125;206.21484375;179.40234375;{'axis': 'z'}
+bookshelf;117.4296875;94.56640625;59.8203125;
+bricks;150.953125;97.56640625;83.0625;
+brown_concrete;96.44921875;59.546875;31.59765625;
+brown_glazed_terracotta;119.96875;106.24609375;85.9453125;
+brown_mushroom_block;149.3359375;111.7890625;81.45703125;{'south':'true'}
+brown_terracotta;77.234375;51.1796875;35.703125;
+brown_wool;114.234375;71.609375;40.5859375;
+chain_command_block;130.009765625;157.0224609375;145.01171875;{'facing':'north'}
+chain_command_block;129.6015625;161.6611328125;147.2294921875;{'facing':'east', 'conditional':'true'}
+chain_command_block;132.4697265625;165.4189453125;150.623046875;{'facing':'south'}
+chain_command_block;131.13671875;161.0107421875;147.484375;{'facing':'east'}
+chiseled_nether_bricks;47.4375;23.703125;28.19921875;
+chiseled_polished_blackstone;53.9765625;48.6640625;56.8125;
+chiseled_quartz_block;231.86328125;226.86328125;218.00390625;
+chiseled_red_sandstone;183.21484375;96.94140625;27.50390625;
+chiseled_sandstone;216.22265625;202.984375;155.41796875;
+chiseled_stone_bricks;119.78125;118.90625;119.78125;
+clay;160.6796875;166.4609375;179.4453125;
+coal_block;16.0234375;15.91796875;15.91796875;
+coal_ore;116.234375;116.234375;116.234375;
+coarse_dirt;119.4453125;85.6015625;59.3984375;
+cobblestone;127.7890625;127.3046875;127.59765625;
+command_block;173.7900390625;131.2236328125;106.810546875;{'facing':'north'}
+command_block;178.525390625;133.111328125;105.84765625;{'facing':'east', 'conditional':'true'}
+command_block;181.005859375;136.0126953125;108.404296875;{'facing':'south'}
+command_block;177.189453125;133.4287109375;107.572265625;{'facing':'east'}
+cracked_nether_bricks;40.37109375;20.03515625;23.95703125;
+cracked_polished_blackstone_bricks;43.671875;37.59375;43.6796875;
+cracked_stone_bricks;118.32421875;117.66015625;118.32421875;
+crimson_nylium;107.24609375;26.9296875;26.6640625;
+crimson_planks;101.03515625;48.78125;70.56640625;
+crimson_stem;92.79531250000001;25.578125000000004;29.84375;{'axis': 'y'}
+crimson_stem;107.87890625;51.78515625;74.8671875;{'axis': 'z'}
+crying_obsidian;32.5859375;10.08203125;60.4453125;
+cut_red_sandstone;189.30859375;101.7578125;31.76171875;
+cut_sandstone;217.80859375;206.4453125;159.8125;
+cyan_concrete;21.4453125;119.21875;136.1875;
+cyan_glazed_terracotta;52.25;118.71875;125.33203125;
+cyan_terracotta;86.71484375;91.01171875;91.00390625;
+cyan_wool;21.24609375;137.7265625;145.3515625;
+dark_oak_log;60.39453125;46.55859375;26.15625;{'axis': 'y'}
+dark_oak_log;64.59765625;42.8125;21.15625;{'axis': 'z'}
+dark_oak_planks;66.66015625;43.09765625;20.21875;
+dark_prismarine;51.86328125;91.63671875;75.94921875;
+diamond_block;98.1640625;237.13671875;228.12109375;
+diamond_ore;125.22265625;142.609375;141.125;
+diorite;188.71875;188.453125;188.98046875;
+dirt;134.25;96.296875;67.0;
+dispenser;122.25390625;121.76171875;121.76171875;{'facing':'south'}
+dried_kelp_block;38.375;48.87109375;29.54296875;
+dropper;122.4453125;121.953125;121.953125;{'facing':'south'}
+emerald_block;42.37890625;203.44921875;87.80078125;
+emerald_ore;117.3984375;136.98046875;124.1484375;
+end_stone;219.50390625;222.9375;158.33984375;
+end_stone_bricks;218.44921875;224.03515625;162.2109375;
+furnace;91.73046875;91.24609375;91.24609375;{'facing':'south'}
+furnace;120.6171875;120.078125;120.078125;{'facing':'north'}
+gold_block;246.41796875;208.3203125;61.625;
+gold_ore;143.93359375;140.3046875;125.43359375;
+granite;149.4296875;103.2421875;85.97265625;
+gray_concrete;54.6171875;57.6171875;61.6171875;
+gray_glazed_terracotta;83.09765625;90.30859375;93.6484375;
+gray_terracotta;57.78515625;42.4140625;35.5625;
+gray_wool;62.74609375;68.234375;71.5546875;
+green_concrete;73.40625;91.33984375;36.4921875;
+green_glazed_terracotta;117.015625;142.30859375;67.421875;
+green_terracotta;76.0078125;83.2890625;42.3359375;
+green_wool;84.83203125;109.53515625;27.50390625;
+hay_block;166.21484375;136.453125;38.125;{'axis': 'y'}
+hay_block;165.95703125;139.12109375;12.4375;{'axis': 'z'}
+honeycomb_block;229.34765625;148.41015625;29.5390625;
+iron_block;220.1171875;220.0078125;220.0078125;
+iron_ore;136.15234375;130.91796875;127.30859375;
+jukebox;88.7578125;58.94921875;40.7890625;
+jungle_log;85.21484375;67.98046875;25.1796875;{'axis': 'y'}
+jungle_log;149.5625;109.3125;70.64453125;{'axis': 'z'}
+jungle_planks;160.44140625;115.19140625;80.79296875;
+lapis_block;30.6484375;67.37109375;140.109375;
+lapis_ore;99.4765625;110.8984375;132.85546875;
+light_blue_concrete;35.59765625;137.0390625;198.9140625;
+light_blue_glazed_terracotta;94.54296875;164.6171875;208.921875;
+light_blue_terracotta;113.484375;108.53125;137.9921875;
+light_blue_wool;58.0703125;175.046875;217.31640625;
+light_gray_concrete;125.03125;125.03125;115.03125;
+light_gray_glazed_terracotta;144.2578125;166.0625;167.953125;
+light_gray_terracotta;135.25390625;106.8828125;97.5;
+light_gray_wool;142.03125;142.1640625;134.6015625;
+lime_concrete;94.08984375;168.8046875;24.5;
+lime_glazed_terracotta;162.94921875;197.66796875;55.2109375;
+lime_terracotta;103.53515625;117.67578125;52.796875;
+lime_wool;112.2109375;185.1953125;25.796875;
+lodestone;119.42578125;119.88671875;123.0390625;
+loom;148.06640625;118.90625;82.14453125;{'facing':'south'}
+loom;145.92578125;101.28125;72.5;{'facing':'north'}
+magenta_concrete;169.20703125;48.4765625;159.2109375;
+magenta_glazed_terracotta;208.26953125;100.41796875;191.91015625;
+magenta_terracotta;149.66796875;88.1015625;108.6796875;
+magenta_wool;189.54296875;68.765625;179.91796875;
+magma_block;142.73307291666666;63.48567708333333;31.592447916666668;
+melon;114.3515625;146.19140625;30.21875;
+mossy_cobblestone;110.109375;118.5;94.9375;
+mossy_stone_bricks;115.43359375;121.125;105.140625;
+brown_mushroom_block;201.625;170.1640625;120.18359375;{'south':'false'}
+mushroom_stem;203.19921875;196.640625;185.6015625;
+netherite_block;66.51953125;61.49609375;63.87890625;
+netherrack;97.58203125;38.4140625;38.4140625;
+nether_bricks;44.29296875;21.87109375;26.09765625;
+nether_gold_ore;115.375;54.9609375;42.05078125;
+nether_quartz_ore;117.828125;65.6640625;62.390625;
+nether_wart_block;114.80859375;2.921875;2.15625;
+note_block;88.7578125;58.94921875;40.7890625;
+oak_log;109.09375;85.125;50.6875;{'axis': 'y'}
+oak_log;151.43359375;121.6484375;73.015625;{'axis': 'z'}
+oak_planks;162.203125;130.8203125;78.62890625;
+obsidian;15.13671875;10.6171875;24.55078125;
+orange_concrete;224.34375;97.13671875;0.6328125;
+orange_glazed_terracotta;154.77734375;147.48828125;91.96484375;
+orange_terracotta;161.59765625;83.87109375;37.671875;
+orange_wool;240.65234375;118.078125;19.51171875;
+packed_ice;141.57421875;180.01171875;250.4921875;
+pink_concrete;213.5;101.01171875;142.8671875;
+pink_glazed_terracotta;235.15625;154.984375;181.5625;
+pink_terracotta;161.92578125;78.27734375;78.66796875;
+pink_wool;237.9140625;141.37890625;172.3515625;
+piston;97.0859375;96.6015625;96.6015625;{'facing':'north'}
+piston;110.4453125;104.97265625;96.93359375;{'facing':'east'}
+piston;154.00390625;127.71875;87.78515625;{'facing':'south'}
+sticky_piston;122.859375;149.67578125;92.83984375;{'facing':'south'}
+podzol;122.50390625;87.6953125;57.015625;
+polished_andesite;132.2578125;134.75390625;133.99609375;
+polished_basalt;88.51953125;88.24609375;91.51953125;{'axis': 'y'}
+polished_basalt;99.39453125;98.56640625;100.6875;{'axis': 'z'}
+polished_blackstone;53.2265625;48.6328125;56.74609375;
+polished_blackstone_bricks;46.87890625;41.16796875;48.2734375;
+polished_diorite;192.98046875;193.078125;194.55078125;
+polished_granite;154.1015625;106.84765625;89.2265625;
+prismarine;99.439453125;156.189453125;151.0751953125;
+prismarine_bricks;99.25;171.625;158.4296875;
+pumpkin;195.5390625;114.82421875;24.17578125;
+purple_concrete;100.4140625;31.62109375;156.3828125;
+purple_glazed_terracotta;109.87109375;48.0859375;152.4921875;
+purple_terracotta;118.4453125;70.26953125;86.08984375;
+purple_wool;121.875;42.2109375;172.5078125;
+purpur_block;169.91796875;125.91796875;169.6796875;
+purpur_pillar;171.76953125;129.5;171.578125;{'axis': 'y'}
+purpur_pillar;171.80078125;128.36328125;171.4921875;{'axis': 'z'}
+quartz_block;235.78125;229.90234375;222.95703125;
+quartz_bricks;234.7109375;229.17578125;221.76171875;
+quartz_pillar;235.5;230.6875;224.0;{'axis': 'y'}
+quartz_pillar;235.11328125;229.8125;222.953125;{'axis': 'z'}
+redstone_lamp;95.21484375;54.61328125;30.0625;
+redstone_ore;133.26953125;107.84765625;107.84765625;
+red_concrete;142.3828125;32.8125;32.8125;
+red_glazed_terracotta;181.99609375;59.58203125;53.015625;
+red_mushroom_block;200.19140625;46.92578125;45.01953125;{'south':'true'}
+red_nether_bricks;69.546875;7.0390625;9.0078125;
+red_sandstone;186.73046875;99.34375;29.18359375;
+red_terracotta;143.109375;61.01953125;46.90625;
+red_wool;160.96875;39.3203125;34.640625;
+repeating_command_block;128.015625;109.5712890625;166.8681640625;{'facing':'north'}
+repeating_command_block;127.3134765625;109.140625;171.546875;{'facing':'east', 'conditional':'true'}
+repeating_command_block;129.3876953125;111.015625;176.1435546875;{'facing':'south'}
+repeating_command_block;128.650390625;110.3359375;170.95703125;{'facing':'east'}
+respawn_anchor;39.546875;23.8671875;62.76953125;
+sandstone;216.43359375;203.2578125;155.8359375;
+smoker;87.953125;75.37890625;57.99609375;{'facing':'south'}
+smoker;102.671875;91.67578125;75.95703125;{'facing':'north'}
+smooth_stone;158.6796875;158.6796875;158.6796875;
+smooth_stone_slab;167.546875;167.546875;167.546875;{'type':double}
+snow_block;249.01953125;254.22265625;254.22265625;
+soul_sand;81.38671875;62.16015625;50.703125;
+soul_soil;75.77734375;57.53515625;46.640625;
+sponge;195.8515625;192.14453125;74.609375;
+spruce_log;58.83203125;37.6640625;16.91015625;{'axis': 'y'}
+spruce_log;108.80859375;80.37890625;46.828125;{'axis': 'z'}
+spruce_planks;114.91015625;84.8359375;48.56640625;
+stone;125.546875;125.546875;125.546875;
+stone_bricks;122.45703125;121.81640625;122.45703125;
+stripped_acacia_log;174.7421875;92.93359375;59.77734375;{'axis': 'y'}
+stripped_acacia_log;166.12890625;91.00390625;51.62890625;{'axis': 'z'}
+stripped_birch_log;196.9921875;176.015625;118.37109375;{'axis': 'y'}
+stripped_birch_log;191.16015625;171.78125;116.390625;{'axis': 'z'}
+stripped_crimson_stem;137.3203125;57.3203125;90.05078125;{'axis': 'y'}
+stripped_crimson_stem;121.73828125;56.3125;82.5859375;{'axis': 'z'}
+stripped_dark_oak_log;96.6953125;76.03515625;49.53125;{'axis': 'y'}
+stripped_dark_oak_log;65.890625;44.22265625;22.76171875;{'axis': 'z'}
+stripped_jungle_log;171.48828125;132.8359375;84.58203125;{'axis': 'y'}
+stripped_jungle_log;165.86328125;122.984375;81.85546875;{'axis': 'z'}
+stripped_oak_log;177.45703125;144.1015625;86.05078125;{'axis': 'y'}
+stripped_oak_log;160.0859375;129.6875;77.15234375;{'axis': 'z'}
+stripped_spruce_log;115.6484375;89.96484375;52.44140625;{'axis': 'y'}
+stripped_spruce_log;105.875;80.2578125;46.56640625;{'axis': 'z'}
+stripped_warped_stem;57.5703125;150.92578125;147.77734375;{'axis': 'y'}
+stripped_warped_stem;52.1015625;128.9375;124.46484375;{'axis': 'z'}
+target;229.2109375;176.2265625;168.0625;
+terracotta;152.1328125;94.015625;67.71875;
+warped_nylium;72.60546875;61.94140625;59.51953125;
+warped_planks;43.05078125;104.87109375;99.140625;
+warped_stem;58.085156250000004;58.83828125000001;77.52499999999999;{'axis': 'y'}
+warped_stem;57.28515625;103.92578125;103.69140625;{'axis': 'z'}
+warped_wart_block;22.80078125;119.9453125;121.10546875;
+white_concrete;207.109375;213.078125;214.07421875;
+white_glazed_terracotta;188.5;212.49609375;202.89453125;
+white_terracotta;209.63671875;178.03515625;161.34765625;
+white_wool;233.58984375;236.296875;236.7734375;
+yellow_concrete;240.98828125;175.41015625;21.44921875;
+yellow_glazed_terracotta;234.34765625;192.3203125;88.7109375;
+yellow_terracotta;186.26953125;133.140625;35.36328125;
+yellow_wool;248.78125;197.9609375;39.6328125;
