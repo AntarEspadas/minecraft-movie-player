@@ -30,13 +30,14 @@ def filename(value):
                 raise ValueError(f"The name '{value}' contains invalida characters")
     return value
 
-def mfilename(max_chars):
-    def validate(value):
-        fvalue = filename(value)
-        if len(fvalue) > max_chars:
-            raise ValueError(f"the name {value} is {len(value)} characters long, should be at most {max_chars}")
-        return fvalue
-    return validate
+def datapack(value):
+    if len(value) > 13:
+        raise ValueError(f"The name '{value}' is longer than the allowed 13 characters")
+    legal_characters = "abcdefghijklmnopqrstuvwxyz0123456789-_."
+    for letter in value:
+        if letter not in legal_characters:
+            raise ValueError(f"The name '{value}' contains an illegal character, '{letter}'")
+    return value
 
 def mint(minimum, nullable: bool = False):
     def validate(value):
@@ -102,15 +103,15 @@ def functions_playback_control(output_folder: str, datapack_name: str, control_a
     from . import player_functions as pf
     pf.generate_playback_control_functions(output_folder, datapack_name, control_audio)
 
-def make(containing_folder: str, subflder_name: str):
+def make(containing_folder: str, subflder_name: str, datapack_name: str):
     from . import player_maker as pm
-    pm.make(containing_folder, subflder_name)
+    pm.make(containing_folder, subflder_name, datapack_name)
 
 def index(path_to_block_folder: str, destination_file: str, filename_is_id: bool):
     from . import palette_generator as pg
     pg.generate_index_template(path_to_block_folder, destination_file, filename_is_id)
 
-def palette(path_to_block_folder: str, destination_file: str, path_to_index: str):
+def get_palette(path_to_block_folder: str, destination_file: str, path_to_index: str):
     from . import palette_generator as pg
     pg.generate_palette(path_to_block_folder, destination_file, path_to_index)
 
@@ -162,7 +163,7 @@ def generate_all(path_to_video: str, path_to_output_folder: str, datapack_name: 
         progress["current_step"] = "_generate_structure_functions"
         _write_json()
         from . import player_functions as pf
-        pf.generate_structure_functions(path_to_output_folder, datapack_name, vid_preifx, 0, progress["last_frame"] - 1)
+        pf.generate_structure_functions(path_to_output_folder, datapack_name, vid_preifx, 0, progress["last_frame"] - 1, ticks_per_frame=ticks_per_frame)
         _generate_audio()
 
     def _generate_audio():

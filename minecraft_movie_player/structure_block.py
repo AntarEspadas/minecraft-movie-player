@@ -51,7 +51,10 @@ class StructureBlock():
             compound = nbt.Compound()
             compound["Name"] = nbt.String(block_identifier[0])
             if block_identifier[1] is not None:
-                compound["Properties"] = nbt.parse_nbt(block_identifier[1])
+                try:
+                    compound["Properties"] = nbt.parse_nbt(block_identifier[1])
+                except Exception as err:
+                    raise ValueError(f"The following error occurred when parsing the nbt literal {block_identifier[1]}: {err}")
             values[index] = compound
         palette = nbt.List[nbt.Compound](values)
         return palette
