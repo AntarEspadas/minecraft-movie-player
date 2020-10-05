@@ -206,8 +206,8 @@ def _get_image_size(image: numpy.ndarray, width: int = None, height: int = None,
     return int(width), int(height)
 
 def _get_palette(path_to_palette):
-    palette_file = open(path_to_palette,newline="")
-    palette_reader = csv.reader(palette_file,delimiter=";",quotechar='"')
+    palette_file = open(path_to_palette, newline="")
+    palette_reader = csv.reader(palette_file, dialect="excel", delimiter=";", quotechar='"')
     blocks = [_Block(tuple([int(i) for i in block[1:4]]),block[0], block[4] or None) for block in palette_reader]
     palette = kdtree.create(blocks)
     palette_file.close()

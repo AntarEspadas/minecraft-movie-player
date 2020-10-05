@@ -13,10 +13,10 @@ def __get_average_color(image: numpy.ndarray) -> list:
 
 def __generate_palette_from_index(source_directory: str, destination_file: str, index_file: str):
     with open(destination_file, "w+", newline="") as palette_file:
-        writer = csv.writer(palette_file, delimiter=";", quotechar='"')
+        writer = csv.writer(palette_file, dialect="excel", delimiter=";", quotechar='"')
         index = open(index_file, newline="")
         i = 0
-        for row in csv.reader(index, delimiter=";", quotechar='"'):
+        for row in csv.reader(index, dialect="excel", delimiter=";", quotechar='"'):
             i += 1
             if len(row) < 2:
                 print(f"Not enough values in row {i}")
@@ -37,7 +37,7 @@ def generate_palette(source_directory: str, destination_file: str, index_file: s
         return
 
     with open(destination_file, "w+", newline="") as palette_file:
-        writer = csv.writer(palette_file, delimiter=";", quotechar='"')
+        writer = csv.writer(palette_file, dialect="excel", delimiter=";", quotechar='"')
         files = __get_all_files(source_directory)
         for file in files:
             image = cv2.imread(os.path.join(source_directory,file))
@@ -52,7 +52,7 @@ def generate_palette(source_directory: str, destination_file: str, index_file: s
 
 def generate_index_template(source_directory: str, destination_file: str, filename_is_id: bool = True):
     with open(destination_file,"w+", newline="") as f:
-        writer = csv.writer(f, delimiter=";", quotechar='"')
+        writer = csv.writer(f, dialect="excel", delimiter=";", quotechar='"')
         for image in __get_all_files(source_directory):
             filename, extension = os.path.splitext(image)
             if extension[1:].lower() == "png":
