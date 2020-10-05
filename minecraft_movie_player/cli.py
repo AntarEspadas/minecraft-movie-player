@@ -1,5 +1,5 @@
 
-from . import controller
+from . import controller, __version__
 import argparse
 import os
 
@@ -25,6 +25,9 @@ mfloat = lambda minimum, nullable=False: wrap(controller.mfloat(minimum, nullabl
 
 def _get_parsers():
     parser = argparse.ArgumentParser()
+
+    parser.add_argument("-v", "--version", dest="version", action="store_true", default=False, help="display the version number")
+
     parsers = parser.add_subparsers(help="commands", dest="command")
 
 
@@ -123,7 +126,10 @@ def main():
 
     args = parser.parse_args()
 
-    if args.command is None:
+    if args.version:
+        print(f"minecraft-movie-player {__version__}")
+
+    elif args.command is None:
         parser.print_usage()
 
     elif args.command == "video":
