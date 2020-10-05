@@ -44,7 +44,7 @@ def generate_palette(source_directory: str, destination_file: str, index_file: s
             if image is not None:
                 try:
                     color = __get_average_color(image)
-                    writer.writerow([file] + [round(v) for v in color]) 
+                    writer.writerow([os.path.splitext(file)[0]] + [round(v) for v in color]) 
                 except Exception:
                     print(f"An unknown error ocurred reading file {file}")
             else:
