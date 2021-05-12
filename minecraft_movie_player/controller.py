@@ -211,8 +211,13 @@ def generate_all(path_to_video: str, path_to_output_folder: str, datapack_name: 
             pass
 
     def _write_json():
-        with open(progress_path, "w") as f:
-            json.dump(progress, f)
+        while True:
+            try:
+                with open(progress_path, "w") as f:
+                    json.dump(progress, f)
+                break;
+            except:
+                continue;
 
     def _on_progress(key):
         def on_progress(value):
