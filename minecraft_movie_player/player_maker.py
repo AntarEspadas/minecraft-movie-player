@@ -21,7 +21,10 @@ def make(containing_folder: str, resourcepack_subfolder: str = None, datapack_na
     if os.path.isfile(os.path.join(containing_folder, "sounds.json")):
         shutil.move(os.path.join(containing_folder, "sounds.json"), os.path.join(containing_folder, "resources", "assets", "minecraft", "sounds.json"))
 
-    shutil.make_archive(os.path.join(containing_folder,"resources"), "zip", os.path.join(containing_folder, "resources"))
+    try:
+        shutil.make_archive(os.path.join(containing_folder,"resources"), "zip", os.path.join(containing_folder, "resources"))
+    except OSError:
+        pass
 
     try:
         shutil.rmtree(os.path.join(containing_folder,"resources"))
